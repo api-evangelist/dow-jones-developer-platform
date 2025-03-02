@@ -1,27 +1,37 @@
 aid: dow-jones-developer-platform
-name: Dow Jones Developer Platform
-description: 'Welcome to a new era of the News '
-type: Index
-position: Consumer
-access: 3rd-Party
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-tags:
-  - API
-created: '2025-03-01'
-modified: '2025-03-01'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/dow-jones-developer-platform/refs/heads/main/apis.yml
-specificationVersion: '0.19'
 apis:
   - aid: dow-jones-developer-platform:dow-jones-developer-platform
     name: Dow Jones Developer Platform
-    description: 'Welcome to a new era of the News '
-    humanURL: https://developer.dowjones.com/
     tags:
       - API
+    humanURL: https://developer.dowjones.com/
     properties:
-      - type: Documentation
-        url: https://developer.dowjones.com/
+      - url: https://developer.dowjones.com/
+        type: Documentation
+    description: >-
+      The Dow Jones Developer Platform provides developers with access to a wide
+      range of financial and business data, as well as tools and resources to
+      help them build innovative applications and solutions. Through this
+      platform, developers can access real-time market data, company
+      information, economic indicators, and news articles from Dow Jones' vast
+      network of trusted sources. The platform also offers advanced analytics
+      and visualization tools to help developers analyze and interpret the data
+      they retrieve. With the Dow Jones Developer Platform, developers can
+      create customized solutions to meet their specific needs and enhance their
+      financial and business applications.
+name: Dow Jones
+tags:
+  - API
+type: Contract
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+created: '2025-03-01'
+modified: '2025-03-02'
+position: Consuming
+description: 'Welcome to a new era of the News '
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
+specificationVersion: '0.19'
