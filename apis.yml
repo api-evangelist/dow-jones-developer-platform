@@ -20,9 +20,7 @@ apis:
       information, economic indicators, and news articles from Dow Jones' vast
       network of trusted sources. The platform also offers advanced analytics
       and visualization tools to help developers analyze and interpret the data
-      they retrieve. With the Dow Jones Developer Platform, developers can
-      create customized solutions to meet their specific needs and enhance their
-      financial and business applications.
+      they retrieve. 
 name: Dow Jones
 tags:
   - Financial
