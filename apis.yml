@@ -23,7 +23,9 @@ apis:
       financial and business applications.
 name: Dow Jones
 tags:
-  - API
+  - Financial
+  - Business Data
+  - Market Data
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
