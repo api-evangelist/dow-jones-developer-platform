@@ -5,7 +5,9 @@ apis:
   - aid: dow-jones-developer-platform:dow-jones-developer-platform
     name: Dow Jones Developer Platform
     tags:
-      - API
+      - Financial
+      - Business Data
+      - Market Data
     humanURL: https://developer.dowjones.com/
     properties:
       - url: https://developer.dowjones.com/
