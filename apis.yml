@@ -32,7 +32,14 @@ access: 3rd-Party
 created: '2025-03-01'
 modified: '2025-03-02'
 position: Consuming
-description: 'Welcome to a new era of the News '
+description: >-
+  Dow Jones &amp; Company is a financial news and information provider that
+  publishes The Wall Street Journal, a renowned business publication. They also
+  operate a number of other financial news websites and offer a wide range of
+  products and services, including market data, analysis, and research tools for
+  investors and financial professionals. Additionally, Dow Jones provides
+  licensing and syndication services for its content and offers custom research
+  and consulting services for businesses. 
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
