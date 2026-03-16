@@ -30,7 +30,7 @@ type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-03-01'
-modified: '2025-03-02'
+modified: '2026-03-16'
 position: Consuming
 description: >-
   Dow Jones &amp; Company is a financial news and information provider that
@@ -42,5 +42,5 @@ description: >-
   and consulting services for businesses. 
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
 specificationVersion: '0.19'
