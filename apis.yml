@@ -5,8 +5,8 @@ apis:
   - aid: dow-jones-developer-platform:dow-jones-developer-platform
     name: Dow Jones Developer Platform
     tags:
-      - Financial
       - Business Data
+      - Financial
       - Market Data
     humanURL: https://developer.dowjones.com/
     properties:
@@ -20,8 +20,8 @@ apis:
       and news articles from Dow Jones' vast network of trusted sources.
 name: Dow Jones
 tags:
-  - Financial
   - Business Data
+  - Financial
   - Market Data
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
