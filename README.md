@@ -1,42 +1,54 @@
-# Dow Jones (dow-jones-developer-platform)
-Dow Jones &amp; Company is a financial news and information provider that publishes The Wall Street Journal, a renowned business publication. They also operate a number of other financial news websites and offer a wide range of products and services, including market data, analysis, and research tools for investors and financial professionals. Additionally, Dow Jones provides licensing and syndication services for its content and offers custom research and consulting services for businesses. 
+# Dow Jones Developer Platform (dow-jones-developer-platform)
+
+Dow Jones is a financial news and information provider that publishes The Wall Street Journal, Barron's, MarketWatch, and Financial News, and operates a portfolio of professional information services including Factiva, Dow Jones Newswires, and Dow Jones Risk and Compliance. The Dow Jones Developer Platform exposes APIs and data services that give developers programmatic access to Dow Jones content, market data, company and people intelligence, and risk and compliance datasets.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/dow-jones-developer-platform/refs/heads/main/apis.yml)
 
 ## Scope
 
-- **Type:** Contract 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
 
-## Tags:
+## Tags
 
- - Financial, Business Data, Market Data
+- Business Data
+- Financial
+- Market Data
+- News
+- Risk and Compliance
 
 ## Timestamps
 
-- **Created:** 2025-03-01 
-- **Modified:** 2025-03-02 
+- **Created:** 2025-03-01
+- **Modified:** 2026-04-28
 
 ## APIs
 
 ### Dow Jones Developer Platform
-The Dow Jones Developer Platform provides developers with access to a wide range of financial and business data, as well as tools and resources to help them build innovative applications and solutions. Through this platform, developers can access real-time market data, company information, economic indicators, and news articles from Dow Jones' vast network of trusted sources. The platform also offers advanced analytics and visualization tools to help developers analyze and interpret the data they retrieve. 
+
+The Dow Jones Developer Platform provides developers with access to Dow Jones' news, business intelligence, and market data through a catalog of APIs and data feeds. It supports use cases across newsroom and content workflows, financial research, risk and compliance screening, and enterprise data integration drawn from Dow Jones' trusted publications and data assets.
 
 **Human URL:** [https://developer.dowjones.com/](https://developer.dowjones.com/)
 
+#### Tags
 
-#### Tags:
-
- - Financial, Business Data, Market Data
+- Business Data
+- Financial
+- Market Data
+- News
 
 #### Properties
 
 - [Documentation](https://developer.dowjones.com/)
 
+## Common Properties
+
+- [Website](https://www.dowjones.com)
+- [Developer](https://developer.dowjones.com/)
+
 ## Maintainers
 
 **FN:** Kin Lane
 
-**Email:** info@apievangelist.com
-
+**Email:** kin@apievangelist.com
