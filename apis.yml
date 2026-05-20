@@ -38,6 +38,8 @@ apis:
       - type: Documentation
         url: https://developer.dowjones.com/
 common:
+  - type: GitHubOrganization
+    url: https://github.com/dowjones
   - type: Website
     url: https://www.dowjones.com
   - type: Developer
