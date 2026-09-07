@@ -1,0 +1,120 @@
+generated: '2026-09-07'
+method: searched
+source: https://github.com/dowjones + registry.npmjs.org / pypi.org metadata endpoints, probed 2026-09-07
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+note: First-party client libraries published by the Dow Jones GitHub organization. Every Python package
+  is on PyPI under the dowjones org; the JavaScript siblings are GitHub-only — dj-dna-streaming-javascript
+  was published to npm in 2017 and UNPUBLISHED the same day, and @factiva/core and @factiva/news have
+  never been published to npm at all. Latest PyPI releases date from 2022 against APIs Dow Jones has revised
+  through 2026 (Streams 3.1, March 2026), which is a first-party abandonment signal, not a gap in this
+  probe.
+packages:
+- name: factiva-analytics
+  registry: pypi
+  language: python
+  official: true
+  url: https://pypi.org/project/factiva-analytics/
+  repository: https://github.com/dowjones/factiva-analytics-python
+  version: 0.3.0
+  published: '2022-11-29'
+  covers:
+  - Factiva Analytics APIs — Snapshots, Streams, Article Retrieval, Taxonomy
+  note: Only release on PyPI. Repository still receives commits (last push 2026-03-26) but no newer release
+    has been published.
+- name: factiva-news
+  registry: pypi
+  language: python
+  official: true
+  url: https://pypi.org/project/factiva-news/
+  repository: https://github.com/dowjones/factiva-news-python
+  version: 0.2.5
+  published: '2022-12-02'
+  covers:
+  - Factiva news-related APIs
+  note: Superseded in practice by factiva-analytics; no release since 2022.
+- name: factiva-core
+  registry: pypi
+  language: python
+  official: true
+  url: https://pypi.org/project/factiva-core/
+  repository: https://github.com/dowjones/factiva-core-python
+  version: 0.2.5
+  published: '2022-08-31'
+  covers:
+  - Root definitions and dictionaries shared by the factiva-* packages
+  note: Support library for the other factiva-* packages.
+- name: factiva-pipelines
+  registry: pypi
+  language: python
+  official: true
+  url: https://pypi.org/project/factiva-pipelines/
+  repository: https://github.com/dowjones/factiva-pipelines-python
+  version: 0.0.1
+  published: '2020-05-29'
+  covers:
+  - Read/transform/enrich/load news data
+  note: Repository is ARCHIVED on GitHub; single 0.0.1 release.
+- name: dj-dna-streams-python
+  registry: github
+  language: python
+  official: true
+  url: https://github.com/dowjones/dj-dna-streams-python
+  repository: https://github.com/dowjones/dj-dna-streams-python
+  version: null
+  published: null
+  covers:
+  - Factiva/DNA Streams API client
+  note: 'Checked PyPI for dj-dna-streams and djdna-streams on 2026-09-07: both 404. Distributed from GitHub
+    source only, so consumers cannot pin a released version.'
+- name: dj-dna-streaming-javascript
+  registry: npm
+  language: javascript
+  official: true
+  url: https://github.com/dowjones/dj-dna-streams-javascript
+  repository: https://github.com/dowjones/dj-dna-streams-javascript
+  version: null
+  published: null
+  note: 'registry.npmjs.org returns the package document with no dist-tags: version 0.1.9 was published
+    2017-04-11 and unpublished the same day. package.json in the repo declares 1.4.0, which has never
+    reached npm.'
+- name: '@factiva/core'
+  registry: npm
+  language: javascript
+  official: true
+  url: https://github.com/dowjones/factiva-core-javascript
+  repository: https://github.com/dowjones/factiva-core-javascript
+  version: null
+  published: null
+  note: registry.npmjs.org/@factiva%2Fcore returns 404 — package.json declares 1.0.0 but it was never
+    published.
+- name: '@factiva/news'
+  registry: npm
+  language: javascript
+  official: true
+  url: https://github.com/dowjones/factiva-news-javascript
+  repository: https://github.com/dowjones/factiva-news-javascript
+  version: null
+  published: null
+  note: registry.npmjs.org/@factiva%2Fnews returns 404 — package.json declares 1.0.0 but it was never
+    published.
+registries_checked:
+- pypi.org
+- registry.npmjs.org
+- search.maven.org (no Dow Jones client libraries found)
+- api.nuget.org (none)
+- crates.io (none)
+- proxy.golang.org (none)
+- rubygems.org (none)
+- packagist.org (none)
+notebooks:
+  note: Dow Jones also publishes Jupyter notebooks and downloadable Python files rather than packages.
+  source: https://developer.dowjones.com/documents/site-docs-getting_started-postman_collections_and_python_notebooks-python_notebooks
+  repositories:
+  - https://github.com/dowjones/factiva-sample-notebooks
+  - https://github.com/dowjones/factiva-retrievalapi-demo
+  - https://github.com/dowjones/factiva-sentiment-signals-notebooks
+  - https://github.com/dowjones/djdna-snapshot2elasticsearch
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

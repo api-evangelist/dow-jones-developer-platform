@@ -1,0 +1,58 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Dow Jones Newswires Content API (single article retrieval)
+  version: 1.0.0
+  description: Additive overlay recording what API Evangelist learned about this contract from the Dow
+    Jones developer portal. It never alters paths, schemas or servers; the harvested document in openapi/_original/
+    remains verbatim.
+extends: openapi/dow-jones-developer-platform-newswires-content-api-openapi.yml
+x-generated: '2026-09-07'
+x-method: generated
+x-source: derived from the Dow Jones developer portal documentation corpus fetched 2026-09-07
+actions:
+- target: $.info
+  description: Record where API Evangelist harvested this contract and on what date.
+  update:
+    x-apievangelist-source: https://developer.dowjones.com/swagger/ -> https://developer.dowjones.com/wp-json/swagger/v1/api/
+      (harvested 2026-09-07)
+    x-apievangelist-harvested: '2026-09-07'
+    x-apievangelist-provider: dow-jones-developer-platform
+- target: $.info
+  description: Point at the human documentation Dow Jones publishes for this API.
+  update:
+    x-documentation: https://developer.dowjones.com/documents/site-docs-getting_started
+- target: $.info
+  description: Record the versioning and deprecation semantics Dow Jones documents platform-wide but does
+    not encode in the contract.
+  update:
+    x-versioning:
+      style: Accept custom media type application/vnd.dowjones.dna[.resource][.v_X.Y]+json
+      response_header: X-DJ-Media-Type
+      unsupported_version_status: 406
+      docs: https://developer.dowjones.com/documents/site-docs-getting_started-versioning-api_versioning
+    x-deprecation:
+      headers:
+      - Deprecation
+      - Sunset
+      - Link rel="deprecation"
+      rfc: RFC 8594
+      docs: https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies
+- target: $.info
+  description: 'Record the authentication flow the contract omits: a two-step OAuth exchange, not a single
+    token grant.'
+  update:
+    x-authentication:
+      token_endpoint: https://accounts.dowjones.com/oauth2/v1/token
+      exchange: refresh_token -> intermediate token -> jwt-bearer assertion with scope "openid pib" ->
+        bearer token
+      bearer_lifetime_seconds: 3600
+      docs: https://developer.dowjones.com/documents/site-docs-newswires_apis-oauth-migration-guide
+- target: $.info
+  description: Record the absence of replay protection and of any documented reversal path, which the
+    contract does not state.
+  update:
+    x-idempotency:
+      coverage: none
+    x-reversibility:
+      grade: na
+      note: This contract exposes no write operation; reversibility does not apply.

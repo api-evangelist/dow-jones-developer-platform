@@ -1,0 +1,74 @@
+generated: '2026-09-07'
+method: searched
+source: https://developer.dowjones.com/documents/site-docs-getting_started-whats-new (200), https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_analytics_apis-factiva_streams_api-factiva_streams_3_0
+  (200), https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies-factiva_deprecation_schedule
+  (200)
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+changelog_url: https://developer.dowjones.com/documents/site-docs-getting_started-whats-new
+scheme: per-API revision-history tables plus a portal-wide "What's New" page; no single dated feed, no
+  RSS
+note: Dow Jones has no consolidated dated changelog. "What's New" is a portal page and each API carries
+  its own "API Revision History" table inside its reference document. The dated entries below are the
+  ones stated in those tables and the deprecation schedule; anything not dated by Dow Jones is not dated
+  here.
+entries:
+- version: Factiva Streams 3.1
+  date: 2026-03
+  breaking: false
+  additions:
+  - includesList and excludesList parameters when creating a Stream, filtering content by code fields
+    from a stream-type list
+  source: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_analytics_apis-factiva_streams_api-factiva_streams_3_0
+- version: Factiva Streams 3.0
+  date: 2025-07
+  breaking: false
+  additions:
+  - a new parameter on the stream-information request (Streams Extended Status)
+  source: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_analytics_apis-factiva_streams_api-factiva_streams_3_0
+- version: Factiva Streams 3.0
+  date: 2024-01
+  breaking: true
+  highlights:
+  - new endpoint paths without the /alpha/ prefix
+  - X-API-VERSION header required on all POST requests to access 3.0 behaviour
+  - select clause valid in a streaming-instance creation query
+  source: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_analytics_apis-factiva_streams_api-factiva_streams_3_0
+- version: Risk & Compliance Profiles API v1.0
+  date: '2025-11-10'
+  breaking: true
+  highlights:
+  - sunset; migrate to v2.7 or greater
+  source: https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies-risk_and_compliance_apis_deprecation_schedule
+- version: Risk & Compliance Search API v1.1
+  date: '2025-11-10'
+  breaking: true
+  highlights:
+  - sunset; migrate to v2.5 or greater
+  source: https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies-risk_and_compliance_apis_deprecation_schedule
+- version: Risk & Compliance Search API v1.0
+  date: '2025-07-31'
+  breaking: true
+  highlights:
+  - sunset; migrate to v2.5 or greater
+  source: https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies-risk_and_compliance_apis_deprecation_schedule
+- version: Widgets Web Library
+  date: '2025-03-16'
+  breaking: true
+  highlights:
+  - sunset (deprecated 2025-01-16)
+  source: https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies-factiva_deprecation_schedule
+contract_versions_observed:
+  note: Versions read from info.version of the nine harvested contracts on 2026-09-07.
+  values:
+    Calendar Live API: 1.1.9
+    Dow Jones Newswires Real-time API: 2.0.0
+    Content API Endpoint to Retrieve Article: 2.0.0
+    Top Stories API: '1.0'
+    DJ Factiva Newsletters API: 1.0.0
+    Factiva Content API: 1.0.0
+    API for Search realtime Content resource (Company News Radar): 2.0.0
+    RiskCenter Third Party Platform API: v0.1-beta and v0.2-beta
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

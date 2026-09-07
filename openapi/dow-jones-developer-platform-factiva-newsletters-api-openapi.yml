@@ -1,0 +1,1893 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: DJ Factiva Newsletters API
+servers:
+- url: https://api.dowjones.com
+paths:
+  /newsletters:
+    get:
+      tags:
+      - Newsletters
+      summary: Gets a list of Newsletters
+      description: Gets a list of newsletters
+      operationId: NewslettersRead
+      parameters:
+      - name: id
+        in: query
+        description: Get all newsletters for ID comma separated list (no spaces) in filter criteria. id=15,16,17
+        required: false
+        schema:
+          type: string
+      - name: filter[shared_status]
+        in: query
+        description: Get all newsletters for a shared status in filter criteria.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - User
+            - Account
+      - name: page[offset]
+        description: Starting index into lists
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: page[limit]
+        description: Max number of newsletters to return
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: sort
+        description: Sort by CreatedDate, LastModified, Name; use '-' for descending
+        in: query
+        schema:
+          type: string
+      - name: max_editions
+        description: Max number of editions to return
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: max_deliveries
+        description: Max number of delivery to return
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: parts
+        description: Parts to retrieve
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ExtendedDetails
+            - Editions
+            - Sections
+            - DeliveryInfo
+            - UpdateStatus
+      - name: is_view_newsletter
+        description: Returns View Newsletter List
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: external_reader_id
+        description: External reader ID (it is applied only if 'is_view_newsletter' is true )
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/newsletters_list'
+        '400':
+          description: Bad Request - Incorrect Parameters
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        '500':
+          description: Internal Server Error - Server encountered an unexpected condition
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        '503':
+          $ref: '#/components/schemas/503'
+      security:
+      - bearerAuth: []
+  /newsletters/{id}:
+    get:
+      tags:
+      - Newsletters
+      summary: Reading a Newsletter by ID
+      description: Get newsletter by id
+      operationId: NewsletterReadById
+      parameters:
+      - name: id
+        description: Newsletter ID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: tkn
+        description: Encrypted identity
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: max_editions
+        description: Max number of editions to return
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: max_deliveries
+        description: Max number of delivery to return
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: parts
+        description: Parts to retrieve
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ExtendedDetails
+            - Editions
+            - Sections
+            - DeliveryInfo
+            - IncludeContent
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/newsletter'
+        '400':
+          description: Bad Request - Incorrect Parameters
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        '404':
+          $ref: '#/components/schemas/404'
+        '500':
+          description: Internal Server Error - Server encountered an unexpected condition
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        '503':
+          $ref: '#/components/schemas/503'
+      security:
+      - bearerAuth: []
+  /newsletters/{id}/editions:
+    get:
+      tags:
+      - Editions
+      summary: Get all Newsletter Editions
+      description: Get all newsletter editions
+      operationId: EditionsRead
+      parameters:
+      - name: id
+        description: Newsletter ID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: tkn
+        description: Encrypted Newsletter identity
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort
+        description: Sort by CreatedDate, LastModified, Name; use '-' for descending
+        in: query
+        schema:
+          type: string
+      - name: page[offset]
+        description: Starting index into lists
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: page[limit]
+        description: Max number of editions to return
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: parts
+        description: Parts to retrieve
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ExtendedDetails
+            - Sections
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/newsletter_editions_list'
+        '400':
+          description: Bad Request - Incorrect Parameters
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        '500':
+          description: Internal Server Error - Server encountered an unexpected condition
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        '503':
+          $ref: '#/components/schemas/503'
+      security:
+      - bearerAuth: []
+  /newsletters/{id}/editions/{editionId}:
+    get:
+      tags:
+      - Editions
+      summary: Get a Newsletter's Edition by ID
+      description: Get newsletter edition by id
+      operationId: EditionReadById
+      parameters:
+      - name: id
+        description: Newsletter ID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: editionId
+        description: Newsletter's Edition ID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: tkn
+        description: Encrypted Newsletter identity
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: parts
+        description: Parts to retrieve
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - IncludeContent
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/newsletter_editions_item'
+        '400':
+          description: Bad Request - Incorrect Parameters
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        '404':
+          $ref: '#/components/schemas/404'
+        '500':
+          description: Internal Server Error - Server encountered an unexpected condition
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        '503':
+          $ref: '#/components/schemas/503'
+      security:
+      - bearerAuth: []
+components:
+  schemas:
+    newsletters_list:
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            oneOf:
+            - properties:
+                id:
+                  $ref: '#/components/schemas/common_id'
+                type:
+                  $ref: '#/components/schemas/newsletter_type'
+                attributes:
+                  $ref: '#/components/schemas/newsletter_attributes'
+                relationships:
+                  $ref: '#/components/schemas/newsletter_list_relationships'
+                links:
+                  $ref: '#/components/schemas/self_link'
+            - properties:
+                id:
+                  type: string
+                  example: id_number_not_exists
+                type:
+                  $ref: '#/components/schemas/newsletter_type'
+                attributes:
+                  $ref: '#/components/schemas/error_response'
+        included:
+          $ref: '#/components/schemas/newsletter_included_list'
+        meta:
+          $ref: '#/components/schemas/newsletter_list_meta'
+        links:
+          $ref: '#/components/schemas/list_links'
+    newsletter_included_list:
+      type: array
+      items:
+        type: object
+        anyOf:
+        - properties:
+            id:
+              $ref: '#/components/schemas/common_id'
+            type:
+              $ref: '#/components/schemas/newsletter_edition_type'
+            attributes:
+              $ref: '#/components/schemas/resource_edition_item'
+            links:
+              $ref: '#/components/schemas/self_editions_link'
+        - properties:
+            id:
+              $ref: '#/components/schemas/common_id'
+            type:
+              $ref: '#/components/schemas/newsletter_delivery_type'
+            attributes:
+              $ref: '#/components/schemas/delivery_info'
+            links:
+              $ref: '#/components/schemas/self_deliveries_link'
+    newsletter_included:
+      type: array
+      items:
+        type: object
+        anyOf:
+        - properties:
+            id:
+              $ref: '#/components/schemas/common_id'
+            type:
+              $ref: '#/components/schemas/newsletter_edition_type'
+            attributes:
+              $ref: '#/components/schemas/resource_edition_item'
+            links:
+              $ref: '#/components/schemas/self_editions_link'
+        - properties:
+            id:
+              $ref: '#/components/schemas/common_id'
+            type:
+              $ref: '#/components/schemas/newsletter_delivery_type'
+            attributes:
+              $ref: '#/components/schemas/delivery_info'
+            links:
+              $ref: '#/components/schemas/self_deliveries_link'
+        - $ref: '#/components/schemas/content_item'
+    edition_included:
+      type: array
+      items:
+        $ref: '#/components/schemas/content_item'
+    links:
+      type: object
+      properties:
+        self:
+          type: string
+    content_item:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          example: content
+        links:
+          $ref: '#/components/schemas/links'
+        meta:
+          $ref: '#/components/schemas/content_item_meta'
+        attributes:
+          $ref: '#/components/schemas/content_item_attribute'
+    content_item_meta:
+      type: object
+      properties:
+        alternate_document_id:
+          type: string
+        alternate_document_ref:
+          type: string
+        count:
+          type: number
+        context:
+          type: string
+        code_sets:
+          $ref: '#/components/schemas/content_item_meta_code_sets'
+        edition:
+          type: object
+          properties:
+            name:
+              type: string
+            print:
+              type: object
+              properties:
+                value:
+                  type: string
+                page:
+                  type: string
+                headlline:
+                  type: string
+                section:
+                  type: string
+                date:
+                  type: string
+        emphasis:
+          type: object
+          properties:
+            hot:
+              type: boolean
+            dominant:
+              type: boolean
+            analysis:
+              type: boolean
+        geo_relevance:
+          type: array
+          items:
+            type: object
+            properties:
+              latitude:
+                type: number
+              longitude:
+                type: number
+        is_translation_allowed:
+          type: boolean
+        keywords:
+          type: array
+          items:
+            type: string
+        language:
+          type: object
+          properties:
+            code:
+              type: string
+              example: en
+            descriptor:
+              type: string
+        metrics:
+          type: object
+          properties:
+            character_count:
+              type: number
+              example: 1024
+            word_count:
+              type: number
+              example: 256
+            image_count:
+              type: number
+              example: 4
+            chart_count:
+              type: number
+              example: 2
+        original_doc_id:
+          type: string
+        source:
+          type: object
+          properties:
+            code:
+              type: string
+            name:
+              type: string
+            logo:
+              type: object
+              properties:
+                alternate_text:
+                  type: string
+                alt_images:
+                  $ref: '#/components/schemas/content_alt_images'
+                caption:
+                  $ref: '#/components/schemas/content_text_base'
+                credit:
+                  type: string
+                media_type:
+                  type: string
+                name:
+                  type: string
+                uri:
+                  type: string
+                slug:
+                  type: string
+                width:
+                  type: number
+                height:
+                  type: number
+                type:
+                  type: string
+        bill_data:
+          type: string
+    content_item_meta_code_sets:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          type:
+            type: string
+          codes:
+            type: array
+            items:
+              $ref: '#/components/schemas/content_item_meta_code_sets_code'
+    content_item_meta_code_sets_code:
+      type: object
+      properties:
+        code:
+          type: string
+        code_scheme:
+          type: string
+        chartingsymbol:
+          type: string
+        symbol:
+          type: string
+        significance:
+          type: string
+        descriptor:
+          type: string
+    content_item_attribute:
+      type: object
+      properties:
+        content_type:
+          type: string
+          example: Article
+        art:
+          $ref: '#/components/schemas/content_text_base'
+        associations:
+          type: object
+          properties:
+            root_id:
+              type: string
+            parent_id:
+              type: string
+            parent_id_ref:
+              type: string
+        authors:
+          type: array
+          items:
+            type: object
+            properties:
+              full_name:
+                type: string
+              topic_id:
+                type: string
+        best_date:
+          type: string
+        best_time:
+          type: string
+        body:
+          $ref: '#/components/schemas/content_body'
+        byline:
+          $ref: '#/components/schemas/content_text_base'
+        column_name:
+          type: string
+        contact:
+          $ref: '#/components/schemas/content_text_base'
+        content_status:
+          type: string
+        copyright:
+          $ref: '#/components/schemas/content_text_base'
+        corrections:
+          type: array
+          items:
+            type: object
+            properties:
+              text:
+                type: string
+              content:
+                $ref: '#/components/schemas/content_list'
+        credit:
+          $ref: '#/components/schemas/content_text_base'
+        headline:
+          $ref: '#/components/schemas/content_headline'
+        live_date:
+          type: string
+        live_time:
+          type: string
+        load_date:
+          type: string
+        load_time:
+          type: string
+        modification_date:
+          type: string
+        modification_time:
+          type: string
+        notes:
+          $ref: '#/components/schemas/content_text_base'
+        page:
+          type: string
+        publication_date:
+          type: string
+        publication_time:
+          type: string
+        publisher:
+          type: object
+          properties:
+            code:
+              type: string
+            name:
+              type: string
+            group_code:
+              type: string
+            group_name:
+              type: string
+        section_name:
+          $ref: '#/components/schemas/content_text_base'
+        seo_id:
+          type: string
+        snippet:
+          type: object
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/content_text_base'
+        summary:
+          type: object
+          properties:
+            destination_type:
+              type: string
+            byline:
+              $ref: '#/components/schemas/content_text_base'
+            headline:
+              $ref: '#/components/schemas/content_headline'
+            body:
+              $ref: '#/components/schemas/content_body'
+            pages:
+              type: array
+              items:
+                type: string
+            related_links:
+              type: array
+              items:
+                type: object
+                properties:
+                  text:
+                    type: string
+                  content:
+                    $ref: '#/components/schemas/content_list'
+            variant:
+              type: string
+        upstream_origin:
+          type: string
+        upstream_origin_id:
+          type: string
+        volume:
+          type: string
+        bytes:
+          type: number
+        external:
+          type: boolean
+        height:
+          type: number
+        width:
+          type: number
+        id_ref:
+          type: string
+        size_code:
+          type: string
+        is_responsive:
+          type: boolean
+        mime_type:
+          type: string
+        slug:
+          type: string
+        sub_type:
+          type: string
+    content_text_base:
+      type: object
+      properties:
+        text:
+          type: string
+    content_alt_images:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          width:
+            type: number
+          height:
+            type: number
+          size_code:
+            type: string
+    content_headline:
+      type: object
+      properties:
+        flashline:
+          $ref: '#/components/schemas/content_text_base'
+        main:
+          $ref: '#/components/schemas/content_text_base'
+        deck:
+          $ref: '#/components/schemas/content_text_base'
+    content_body:
+      type: array
+      items:
+        type: object
+        properties:
+          type:
+            type: string
+          display:
+            type: string
+          paragraph_type:
+            type: string
+          text:
+            type: string
+          content:
+            $ref: '#/components/schemas/content_list'
+          sub_type:
+            type: string
+          fragment_id:
+            type: string
+          alternate_text:
+            type: string
+          alt_images:
+            $ref: '#/components/schemas/content_alt_images'
+          caption:
+            $ref: '#/components/schemas/content_text_base'
+          credit:
+            type: string
+          media_type:
+            type: string
+          name:
+            type: string
+          uri:
+            type: string
+          slug:
+            type: string
+          width:
+            type: number
+          height:
+            type: number
+          format:
+            type: string
+          inset_type:
+            type: string
+          ref:
+            type: string
+          ordered:
+            type: boolean
+          content_encoding:
+            type: string
+          value:
+            type: string
+    content_list:
+      type: array
+      items:
+        $ref: '#/components/schemas/content'
+    content:
+      type: object
+      properties:
+        type:
+          type: string
+        colspan:
+          type: number
+        display:
+          type: string
+        paragraph_type:
+          type: string
+        text:
+          type: string
+        ordered:
+          type: boolean
+        alternate_text:
+          type: string
+        alt_images:
+          $ref: '#/components/schemas/content_alt_images'
+        caption:
+          $ref: '#/components/schemas/content_text_base'
+        credit:
+          type: string
+        media_type:
+          type: string
+        name:
+          type: string
+        uri:
+          type: string
+        slug:
+          type: string
+        width:
+          type: number
+        height:
+          type: number
+        api:
+          type: string
+        sub_type:
+          type: string
+        fragment_id:
+          type: string
+        icon:
+          type: string
+        link_type:
+          type: string
+        external:
+          type: boolean
+        ref:
+          type: string
+        entity_type:
+          type: string
+        background_info:
+          type: string
+        code:
+          type: string
+        code_scheme:
+          type: string
+        significance:
+          type: string
+        ticker:
+          type: string
+        emphasis_type:
+          type: string
+    resource_edition_item:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name
+        parent_workspace_id:
+          type: number
+          example: 1234
+        last_modified_date:
+          type: string
+          description: Last Modified Date
+          example: '1997-07-16T19:20:30+00:00'
+        email_sent_date:
+          type: string
+          description: Email Sent Date
+          example: '1997-07-16T19:20:30+00:00'
+        document_date:
+          type: string
+          example: '1997-07-16T19:20:30+00:00'
+        is_sent:
+          type: boolean
+      description: Edition
+    newsletter_list_relationships:
+      type: object
+      properties:
+        editions:
+          type: object
+          properties:
+            links:
+              $ref: '#/components/schemas/edition_relationship_link'
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Type
+                    example: editions
+                  id:
+                    $ref: '#/components/schemas/common_id'
+        deliveries:
+          type: object
+          properties:
+            links:
+              $ref: '#/components/schemas/delivery_relationship_link'
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Type
+                    example: deliveries
+                  id:
+                    $ref: '#/components/schemas/common_id'
+    newsletter_relationships:
+      type: object
+      properties:
+        editions:
+          type: object
+          properties:
+            links:
+              $ref: '#/components/schemas/edition_relationship_link'
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Type
+                    example: editions
+                  id:
+                    $ref: '#/components/schemas/common_id'
+        deliveries:
+          type: object
+          properties:
+            links:
+              $ref: '#/components/schemas/delivery_relationship_link'
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Type
+                    example: deliveries
+                  id:
+                    $ref: '#/components/schemas/common_id'
+        content:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: content
+                  id:
+                    $ref: '#/components/schemas/common_id'
+    edition_relationship_link:
+      type: object
+      properties:
+        related:
+          type: string
+          description: link to the edition relationship
+          example: https://localhost:8080/assets/newsletters/1234567890/editions
+    edition_relationships:
+      type: object
+      properties:
+        content:
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                related:
+                  type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: content
+                  id:
+                    type: string
+    delivery_relationship_link:
+      type: object
+      properties:
+        related:
+          type: string
+          description: link to the delivery relationship
+          example: https://localhost:8080/assets/newsletters/1234567890/deliveries
+    newsletter_editions_list:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/common_id'
+              type:
+                $ref: '#/components/schemas/newsletter_edition_type'
+              attributes:
+                $ref: '#/components/schemas/edition_item'
+              links:
+                $ref: '#/components/schemas/self_editions_link'
+        meta:
+          $ref: '#/components/schemas/newsletter_list_meta'
+        links:
+          $ref: '#/components/schemas/list_edition_links'
+    newsletter_editions_item:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/common_id'
+            type:
+              $ref: '#/components/schemas/newsletter_edition_type'
+            attributes:
+              $ref: '#/components/schemas/edition_item'
+            relationships:
+              $ref: '#/components/schemas/edition_relationships'
+        included:
+          $ref: '#/components/schemas/edition_included'
+        links:
+          $ref: '#/components/schemas/self_editions_link'
+    newsletter:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/common_id'
+            type:
+              $ref: '#/components/schemas/newsletter_type'
+            attributes:
+              $ref: '#/components/schemas/newsletter_attributes'
+            relationships:
+              $ref: '#/components/schemas/newsletter_relationships'
+        included:
+          $ref: '#/components/schemas/newsletter_included'
+        links:
+          $ref: '#/components/schemas/self_link'
+    newsletter_list_meta:
+      type: object
+      properties:
+        count:
+          description: Count
+          type: integer
+          format: int32
+        total_count:
+          description: Total Count
+          type: integer
+          format: int32
+        total_pages:
+          description: Total Pages Count
+          type: integer
+          format: int32
+        paging:
+          type: object
+          properties:
+            offset:
+              type: object
+              properties:
+                first:
+                  type: integer
+                  format: int32
+                prev:
+                  type: integer
+                  format: int32
+                next:
+                  type: integer
+                  format: int32
+                last:
+                  type: integer
+                  format: int32
+                current:
+                  type: integer
+                  format: int32
+    newsletter_type:
+      type: string
+      description: Resource type
+      example: newsletters
+    newsletter_edition_type:
+      type: string
+      description: Resource type
+      example: editions
+    newsletter_attributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name
+        token:
+          type: string
+          description: Token
+        shared_status:
+          type: string
+          enum:
+          - User
+          - Account
+          - Factiva
+          description: Share Status
+        access_scope:
+          type: string
+          enum:
+          - Personal
+          - Account
+        is_owner:
+          type: boolean
+        is_online_view_group_assignment:
+          type: boolean
+          description: Online View Group Assignment
+        total_editions:
+          type: number
+        user_type:
+          type: string
+          enum:
+          - Account
+          - Group
+          - User
+        details:
+          $ref: '#/components/schemas/newsletter_details'
+        current_update_status:
+          $ref: '#/components/schemas/update_status'
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/section'
+          description: Sections
+    common_id:
+      type: string
+      example: '1234'
+    newsletter_delivery_type:
+      type: string
+      description: Resource type
+      example: deliveries
+    self_link:
+      type: object
+      properties:
+        self:
+          type: string
+          description: link to this single resourceType (self)
+          example: https://localhost:8080/assets/newsletters/1234567890
+    self_editions_link:
+      type: object
+      properties:
+        self:
+          type: string
+          description: link to this single resourceType (self)
+          example: https://localhost:8080/assets/newsletters/9876/editions/1234
+    self_deliveries_link:
+      type: object
+      properties:
+        self:
+          type: string
+          description: link to this single resourceType (self)
+          example: https://localhost:8080/assets/newsletters/9876/deliveries/1234
+    list_links:
+      type: object
+      properties:
+        self:
+          type: string
+          example: https://localhost:8080/assets/newsletters/
+        first:
+          type: string
+          example: https://localhost:8080/assets/newsletters/?page[offset]=0&page[limit]=20
+        prev:
+          type: string
+          example: https://localhost:8080/assets/newsletters/?page[offset]=0&page[limit]=20
+        next:
+          type: string
+          example: https://localhost:8080/assets/newsletters/?page[offset]=40&page[limit]=20
+        last:
+          type: string
+          example: https://localhost:8080/assets/newsletters/?page[offset]=210
+    list_edition_links:
+      type: object
+      properties:
+        self:
+          type: string
+          example: https://localhost:8080/assets/newsletters/9876/editions
+        first:
+          type: string
+          example: https://localhost:8080/assets/newsletters/9876/editions/?page[offset]=0&page[limit]=10
+        prev:
+          type: string
+          example: https://localhost:8080/assets/newsletters/9876/editions/?page[offset]=0&page[limit]=10
+        next:
+          type: string
+          example: https://localhost:8080/assets/newsletters/9876/editions/?page[offset]=20&page[limit]=20
+        last:
+          type: string
+          example: https://localhost:8080/assets/newsletters/9876/editions/?page[offset]=40&page[limit]=20
+    error:
+      type: object
+      required:
+      - code
+      - title
+      - status
+      properties:
+        code:
+          type: string
+          description: Error code
+        title:
+          type: string
+          description: error class summary message
+        status:
+          type: integer
+          format: int32
+          description: HTTP status code
+        detail:
+          type: string
+          description: error detail about this instance of error
+        meta:
+          type: string
+          description: Meta object
+    error_response:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/error'
+    '404':
+      description: Newsletter Not Found
+    '503':
+      description: Service Unavailable - Server is currently unable to handle the request
+    newsletter_details:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title
+        summary:
+          type: string
+          description: Summary
+        is_table_of_contents_shown:
+          type: boolean
+          description: Show Table Of Contents
+        has_articles_included:
+          type: boolean
+          description: Include Articles
+        has_included_source_names:
+          type: boolean
+          description: Include Source Names
+        is_date_displayed:
+          type: boolean
+          description: Display Date
+        is_snippet_included:
+          type: boolean
+          description: Include Snippet
+        is_published_date_default:
+          type: boolean
+          description: Is Published Date Default
+        additional_dateline_text:
+          type: string
+          description: Dateline
+        publication_date:
+          type: string
+          description: Publication Date
+          example: '1997-07-16'
+        additional_information:
+          type: string
+          description: Additional Information
+        footer:
+          type: string
+          description: Footer Information
+        created_by:
+          type: string
+          description: Created By
+        created_by_namespace:
+          type: string
+        created_by_account_id:
+          type: string
+        created_by_is_active:
+          type: boolean
+        created_date_time:
+          type: string
+          description: Created Date
+          example: '1997-07-16T19:20:30+00:00'
+        last_modified_by:
+          type: string
+          description: Last Modified by
+        last_modified_by_namespace:
+          type: string
+        last_modified_by_account_id:
+          type: string
+        last_modified_by_is_active:
+          type: boolean
+        last_modified_date_time:
+          type: string
+          description: Last Modified Date
+          example: '1997-07-16T19:20:30+00:00'
+        large_masthead:
+          type: string
+          description: Large Masthead
+        small_masthead:
+          type: string
+          description: Small Masthead
+        is_edition_archive_view_enabled:
+          type: boolean
+          description: Enable Edition Archive View
+        is_subscribe_link_included:
+          type: boolean
+          description: Include Subscribe Link
+        is_newsletter_image_enabled:
+          type: boolean
+          description: Enable Newsletter Image
+        is_full_text_enabled:
+          type: boolean
+          description: Enable Full Text
+        is_auto_prune_enabled:
+          type: boolean
+          description: Auto Prune
+        is_web_redirect_enabled:
+          type: boolean
+          description: Web Redirect Enabled
+        is_rss_active:
+          type: boolean
+        has_rss_feed:
+          type: boolean
+        is_widget_active:
+          type: boolean
+        has_widget:
+          type: boolean
+        online_distribution:
+          type: string
+          enum:
+          - 'Off'
+          - 'On'
+          - Suspended
+        audience:
+          $ref: '#/components/schemas/audience'
+        document_date:
+          type: string
+          example: '1997-07-16T19:20:30+00:00'
+        email_sent_date:
+          type: string
+          example: '1997-07-16T19:20:30+00:00'
+        rss_sent_date:
+          type: string
+          example: '1997-07-16T19:20:30+00:00'
+        widget_sent_date:
+          type: string
+          example: '1997-07-16T19:20:30+00:00'
+        image:
+          $ref: '#/components/schemas/image'
+    update_status:
+      type: object
+      properties:
+        is_updating:
+          type: boolean
+          description: Is Updating
+        start_date_time:
+          type: string
+          description: Update Start Date Time
+          example: '1997-07-16T19:20:30+00:00'
+      description: Update Status
+    edition_item:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name
+        parent_workspace_id:
+          type: number
+          example: 1234
+        creation_date:
+          type: string
+          description: Creation Date
+          example: '1997-07-16T19:20:30+00:00'
+        last_modified_date:
+          type: string
+          description: Last Modified Date
+          example: '1997-07-16T19:20:30+00:00'
+        email_sent_date:
+          type: string
+          description: Email Sent Date
+          example: '1997-07-16T19:20:30+00:00'
+        email_job_id:
+          type: string
+          description: Email Job Id
+        document_date:
+          type: string
+          example: '1997-07-16T19:20:30+00:00'
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/section'
+          description: Sections
+        details:
+          type: object
+          properties:
+            has_snippet_included:
+              type: boolean
+              description: Include Snippet
+            free_text:
+              type: string
+              description: Free Text
+            title:
+              type: string
+              description: Title
+            summary:
+              type: string
+              description: Description
+            has_table_of_contents:
+              type: boolean
+              description: Show Table of Contents
+            has_fulltext_enabled:
+              type: boolean
+              description: Enable Full Text
+            large_masthead:
+              type: string
+              description: Large Masthead
+            small_masthead:
+              type: string
+              description: Small Masthead
+            footer:
+              type: string
+              description: Small Masthead
+            additional_dateline_text:
+              type: string
+              description: Small Masthead
+            image:
+              $ref: '#/components/schemas/image'
+      description: Edition
+    section:
+      type: object
+      description: Section
+      properties:
+        name:
+          type: string
+          description: Name
+        position:
+          type: integer
+          format: int32
+          description: Position
+        items:
+          type: array
+          items:
+            type: object
+            anyOf:
+            - $ref: '#/components/schemas/article_details'
+            - $ref: '#/components/schemas/link_details'
+            - $ref: '#/components/schemas/rss_details'
+            - $ref: '#/components/schemas/chart_details'
+          description: Items
+        subsections:
+          type: array
+          items:
+            $ref: '#/components/schemas/subsection'
+          description: Subsections
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/image'
+          description: Elements
+    subsection:
+      type: object
+      description: Section
+      properties:
+        name:
+          type: string
+          description: Name
+        position:
+          type: integer
+          format: int32
+          description: Position
+        items:
+          type: array
+          items:
+            type: object
+            anyOf:
+            - $ref: '#/components/schemas/article_details'
+            - $ref: '#/components/schemas/link_details'
+            - $ref: '#/components/schemas/rss_details'
+            - $ref: '#/components/schemas/chart_details'
+          description: Items
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/image'
+          description: Elements
+    image:
+      type: object
+      properties:
+        image_id:
+          type: string
+          description: Image id
+        image_type:
+          type: string
+          enum:
+          - Internal
+          - External
+          description: Image type
+        position:
+          type: integer
+          format: int32
+          description: Position
+        drn:
+          type: string
+          description: DRN
+        original_doc_id:
+          type: string
+          description: Original Document Id (ex. accession_number)
+        image_url:
+          type: string
+          description: URL to binary service
+    rss_details:
+      type: object
+      properties:
+        item_id:
+          type: number
+          example: 12345
+          description: Item identity
+        item_type:
+          type: string
+          description: Item Type
+          example: RSS
+        title:
+          type: string
+          description: Title
+        description:
+          type: string
+          description: Description
+        flag:
+          type: string
+          enum:
+          - Unspecified
+          - Hot
+          - MustRead
+          - New
+          description: Flag
+        comments:
+          type: string
+          description: Comments
+        url:
+          type: string
+          description: URL
+        source_name:
+          type: string
+          description: Source Name
+        author:
+          type: string
+          description: Author
+        publication_date:
+          type: string
+          description: Publication Date
+          example: '1997-07-16'
+        language:
+          type: string
+          description: Language
+          example: en
+        body:
+          type: string
+          description: Body
+        position:
+          type: integer
+          format: int32
+          description: Position
+          example: 2
+    link_details:
+      type: object
+      properties:
+        item_id:
+          type: number
+          example: 12345
+          description: Item identity
+        item_type:
+          type: string
+          description: Item Type
+          example: Link
+        title:
+          type: string
+          description: Title
+        description:
+          type: string
+          description: Description
+        flag:
+          type: string
+          enum:
+          - Unspecified
+          - Hot
+          - MustRead
+          - New
+          description: Flag
+        comments:
+          type: string
+          description: Comments
+        url:
+          type: string
+          description: URL
+        source_name:
+          type: string
+          description: Source Name
+        author:
+          type: string
+          description: Author
+        publication_date:
+          type: string
+          description: Publication Date
+          example: '1997-07-16'
+        language:
+          type: string
+          description: Language
+          example: en
+        body:
+          type: string
+          description: Body
+        position:
+          type: integer
+          format: int32
+          description: Position
+          example: 1
+        type:
+          type: string
+          enum:
+          - Url
+          - DocUrl
+          - RssHeadlineUrl
+    article_details:
+      type: object
+      properties:
+        item_id:
+          type: number
+          example: 12345
+          description: Item identity
+        item_type:
+          type: string
+          description: Item Type
+          example: Article
+        drn:
+          type: string
+          description: DRN
+        original_doc_id:
+          type: string
+          description: Original Document Id (ex. accession_number)
+        flag:
+          type: string
+          enum:
+          - Unspecified
+          - Hot
+          - MustRead
+          - New
+          description: Flag
+        comments:
+          type: string
+          description: Comments
+        content_category:
+          type: string
+          enum:
+          - Unspecified
+          - External
+          - Publication
+          - Website
+          - Picture
+          - Multimedia
+          - Blog
+          - Board
+          - Internal
+          - Summary
+          - CustomerDoc
+          description: Content Category
+        related_article_drn:
+          type: string
+          description: DRN
+        related_article_original_doc_id:
+          type: string
+          description: Original Document Id (ex. accession_number)
+        position:
+          type: integer
+          format: int32
+          description: Position
+          example: 0
+      description: Article Details
+    chart_details:
+      type: object
+      properties:
+        item_id:
+          type: number
+          example: 12345
+          description: Item identity
+        item_type:
+          type: string
+          description: Item Type
+          example: Chart
+        title:
+          type: string
+          description: Title
+        flag:
+          type: string
+          enum:
+          - Unspecified
+          - Hot
+          - MustRead
+          - New
+          description: Flag
+        comments:
+          type: string
+          description: Comments
+        description:
+          type: string
+          description: Description
+        chart_image_id:
+          type: integer
+          format: int64
+          description: Chart Image Item ID
+        graph_type:
+          type: string
+          enum:
+          - Line
+          - Pie
+          - HorizontalBar
+          - VerticalBar
+          - StackedBar
+          - Overlay
+          - Tagcloud
+          description: Graph Type
+        date_range:
+          $ref: '#/components/schemas/chart_dates'
+        position:
+          type: integer
+          format: int32
+          description: Position
+          example: 3
+        image_url:
+          type: string
+          description: URL to binary service
+      description: Chart Details
+    chart_dates:
+      type: object
+      properties:
+        from:
+          type: string
+          description: Start Date
+          example: '1997-07-16'
+        to:
+          type: string
+          description: End Date
+          example: '1997-07-16'
+      description: Chart Dates
+    delivery_info:
+      type: object
+      description: Delivery Info
+      properties:
+        subject:
+          type: string
+          description: Delivery Subject
+        message:
+          type: string
+          description: Delivery Message
+        output_format:
+          type: string
+          enum:
+          - None
+          - HtmlEmailBody
+          - PlainTextEmailBody
+          - HtmlAttachmentOnly
+          - RtfAttachmentOnly
+          - PdfAttachmendOnly
+          - DocxAttachmentOnly
+          - Feed
+          description: Output Format
+        attachment_type:
+          type: string
+          enum:
+          - None
+          - Pdf
+          - Docx
+          - Rtf
+          - Html
+          description: Attachment Type
+        attachment_template_id:
+          type: integer
+          format: int64
+          description: Attachment Template Id
+        has_newsletter_attachment:
+          type: boolean
+          description: Add Newsletter Attachment
+        has_date_to_subject_appended:
+          type: boolean
+          description: Append Date To Subject
+        recipient:
+          $ref: '#/components/schemas/recipient'
+    recipient:
+      type: object
+      properties:
+        date_format:
+          type: string
+          description: Date Format
+        date_language:
+          type: string
+          description: Date Language
+          example: en
+        email_format:
+          type: string
+          description: Email Format
+        to:
+          type: array
+          items:
+            type: string
+          description: To List
+        cc:
+          type: array
+          items:
+            type: string
+          description: Cc List
+        bcc:
+          type: array
+          items:
+            type: string
+          description: Bcc List
+        reply_to:
+          type: object
+          properties:
+            email_address:
+              type: string
+            display_name:
+              type: string
+    audience:
+      type: object
+      properties:
+        audience_options:
+          type: string
+          enum:
+          - InternalAccount
+          - OutsideAccount
+          - TimeToLive_Proxy
+          - ExternalReader
+          - ExternalAccount
+          - ERPlusExternalAccount
+          - TTLPlusExternalAccount
+        proxy_credentials:
+          type: object
+          properties:
+            authentication_scheme:
+              type: string
+              enum:
+              - UserId
+              - Email
+            user_id:
+              type: string
+            email_id:
+              type: string
+            namespace:
+              type: string
+            password:
+              type: string
+            encrypted_token:
+              type: string
+        profile_id:
+          type: string
+        external_account_credentials:
+          $ref: '#/components/schemas/external_account_credentials'
+    external_account_credentials:
+      type: object
+      properties:
+        account_id:
+          type: string
+        namespace:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

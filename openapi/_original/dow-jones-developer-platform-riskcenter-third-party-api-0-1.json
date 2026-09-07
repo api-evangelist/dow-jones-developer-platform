@@ -1,0 +1,2491 @@
+{
+ "openapi": "3.0.1",
+ "info": {
+  "title": "RiskCenter Third Party Platform API 0.1",
+  "version": "v0.1-beta"
+ },
+ "servers": [
+  {
+   "url": "https://api-thirdparty.riskcenter.dowjones.com/"
+  }
+ ],
+ "paths": {
+  "/business-units": {
+   "get": {
+    "tags": [
+     "BusinessUnit"
+    ],
+    "summary": "Retrieves all business units",
+    "operationId": "GetBusinessUnits",
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseBusinessUnit"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/third-parties/properties/fields": {
+   "get": {
+    "tags": [
+     "Field"
+    ],
+    "summary": "Retrieves all fields (optional filter)",
+    "operationId": "GetFields",
+    "parameters": [
+     {
+      "name": "filter[name]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     },
+     {
+      "name": "filter[is_key_risk]",
+      "in": "query",
+      "schema": {
+       "type": "boolean",
+       "nullable": true
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseField"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/groups": {
+   "get": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Retrieves all groups (optional paging)",
+    "operationId": "GetGroups",
+    "parameters": [
+     {
+      "name": "page[limit]",
+      "in": "query",
+      "schema": {
+       "type": "integer",
+       "format": "int32",
+       "nullable": true
+      }
+     },
+     {
+      "name": "page[context]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseGroup"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/lists": {
+   "get": {
+    "tags": [
+     "List"
+    ],
+    "summary": "Retrieves all lists",
+    "operationId": "GetLists",
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseLists"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/lists/{id}": {
+   "get": {
+    "tags": [
+     "List"
+    ],
+    "summary": "Retrieves a list by id",
+    "operationId": "GetList",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     },
+     {
+      "name": "language",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "default": "en-us",
+       "nullable": true
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseList"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/third-parties/processes": {
+   "get": {
+    "tags": [
+     "Process"
+    ],
+    "summary": "Retrieves all processes (optional paging)",
+    "operationId": "GetProcesses",
+    "parameters": [
+     {
+      "name": "page[limit]",
+      "in": "query",
+      "schema": {
+       "type": "integer",
+       "format": "int32",
+       "nullable": true
+      }
+     },
+     {
+      "name": "page[context]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseProcess"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/third-parties": {
+   "post": {
+    "tags": [
+     "ThirdParty"
+    ],
+    "summary": "Creates a new third party",
+    "operationId": "PostThirdParty",
+    "requestBody": {
+     "content": {
+      "application/json-patch+json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdParty"
+       }
+      },
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdParty"
+       }
+      },
+      "text/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdParty"
+       }
+      },
+      "application/*+json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdParty"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseThirdParty"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   },
+   "get": {
+    "tags": [
+     "ThirdParty"
+    ],
+    "summary": "Retrieves all third-parties (optional filter)",
+    "operationId": "GetThirdParties",
+    "parameters": [
+     {
+      "name": "filter[name]",
+      "in": "query",
+      "description": "Case insensitive name filter.",
+      "schema": {
+       "type": "string",
+       "description": "Case insensitive name filter.",
+       "nullable": true
+      }
+     },
+     {
+      "name": "filter[business_unit]",
+      "in": "query",
+      "description": "Business unit id filter",
+      "schema": {
+       "type": "string",
+       "description": "Business unit id filter",
+       "nullable": true
+      }
+     },
+     {
+      "name": "filter[is_active]",
+      "in": "query",
+      "description": "Active status filter",
+      "schema": {
+       "type": "boolean",
+       "description": "Active status filter",
+       "nullable": true
+      }
+     },
+     {
+      "name": "filter[tags]",
+      "in": "query",
+      "description": "Case sensitive tag filter.",
+      "schema": {
+       "type": "string",
+       "description": "Case sensitive tag filter.",
+       "nullable": true
+      }
+     },
+     {
+      "name": "filter[risk_level]",
+      "in": "query",
+      "description": "Case sensitive risk level filter.",
+      "schema": {
+       "type": "string",
+       "description": "Case sensitive risk level filter.",
+       "nullable": true
+      }
+     },
+     {
+      "name": "filter[risk_status]",
+      "in": "query",
+      "description": "Case sensitive risk status filter",
+      "schema": {
+       "type": "string",
+       "description": "Case sensitive risk status filter",
+       "nullable": true
+      }
+     },
+     {
+      "name": "filter[internal_reference]",
+      "in": "query",
+      "description": "Case insensitive internal reference filter.",
+      "schema": {
+       "type": "string",
+       "description": "Case insensitive internal reference filter.",
+       "nullable": true
+      }
+     },
+     {
+      "name": "page[limit]",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "integer",
+       "description": "",
+       "format": "int32",
+       "nullable": true
+      }
+     },
+     {
+      "name": "page[context]",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string",
+       "description": "",
+       "nullable": true
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseThirdParties"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/third-parties/{id}": {
+   "patch": {
+    "tags": [
+     "ThirdParty"
+    ],
+    "summary": "Updates an existing third party",
+    "operationId": "PatchThirdParty",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json-patch+json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdPartyPatch"
+       }
+      },
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdPartyPatch"
+       }
+      },
+      "text/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdPartyPatch"
+       }
+      },
+      "application/*+json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdPartyPatch"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseThirdParty"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   },
+   "delete": {
+    "tags": [
+     "ThirdParty"
+    ],
+    "summary": "Deletes a third party",
+    "operationId": "DeleteThirdParty",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success"
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   },
+   "get": {
+    "tags": [
+     "ThirdParty"
+    ],
+    "summary": "Retrieves a third party by id",
+    "operationId": "GetThirdParty",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseThirdParty"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/third-parties/{thirdpartyid}/properties": {
+   "get": {
+    "tags": [
+     "ThirdPartyProperties"
+    ],
+    "summary": "Retrieves all properties for a third party (optional filter)",
+    "operationId": "GetThirdPartyProperties",
+    "parameters": [
+     {
+      "name": "thirdpartyid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     },
+     {
+      "name": "filter[field_name]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseProperties"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/third-parties/{thirdpartyid}/properties/{id}": {
+   "put": {
+    "tags": [
+     "ThirdPartyProperties"
+    ],
+    "summary": "Updates a property",
+    "operationId": "PutThirdPartyProperties",
+    "parameters": [
+     {
+      "name": "thirdpartyid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     },
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json-patch+json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestPropertyUpdate"
+       }
+      },
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestPropertyUpdate"
+       }
+      },
+      "text/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestPropertyUpdate"
+       }
+      },
+      "application/*+json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestPropertyUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseProperty"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/third-parties/{thirdpartyid}/properties/batch-update": {
+   "put": {
+    "tags": [
+     "ThirdPartyProperties"
+    ],
+    "summary": "Updates multiple properties",
+    "operationId": "PutBatchThirdPartyProperties",
+    "parameters": [
+     {
+      "name": "thirdpartyid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json-patch+json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestPropertyBatchUpdate"
+       }
+      },
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestPropertyBatchUpdate"
+       }
+      },
+      "text/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestPropertyBatchUpdate"
+       }
+      },
+      "application/*+json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestPropertyBatchUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseProperties"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     },
+     "409": {
+      "description": "Conflict",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/third-parties/{thirdpartyid}/monitored-entities": {
+   "get": {
+    "tags": [
+     "ThirdPartyScreening"
+    ],
+    "summary": "Retrieves all monitored entities for the given third party (optional paging)",
+    "operationId": "GetMonitoredEntities",
+    "parameters": [
+     {
+      "name": "thirdpartyid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     },
+     {
+      "name": "page[limit]",
+      "in": "query",
+      "schema": {
+       "type": "integer",
+       "format": "int32",
+       "nullable": true
+      }
+     },
+     {
+      "name": "page[context]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseThirdPartyScreeningEntities"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   },
+   "post": {
+    "tags": [
+     "ThirdPartyScreening"
+    ],
+    "summary": "Adds a new monitored entity",
+    "operationId": "PostMonitoredEntities",
+    "parameters": [
+     {
+      "name": "thirdpartyid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json-patch+json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdPartyScreeningCreate"
+       }
+      },
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdPartyScreeningCreate"
+       }
+      },
+      "text/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdPartyScreeningCreate"
+       }
+      },
+      "application/*+json": {
+       "schema": {
+        "$ref": "#/components/schemas/RequestThirdPartyScreeningCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseThirdPartyScreeningEntity"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ErrorResponseModel"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/third-parties/{thirdpartyid}/monitored-entities/{id}": {
+   "delete": {
+    "tags": [
+     "ThirdPartyScreening"
+    ],
+    "summary": "Removes a monitored entity",
+    "operationId": "DeleteMonitoredEntities",
+    "parameters": [
+     {
+      "name": "thirdpartyid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     },
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "nullable": true
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success"
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/third-parties/monitored-entities/id-types": {
+   "get": {
+    "tags": [
+     "ThirdPartyScreeningTypes"
+    ],
+    "summary": "Retrieves all monitored entity id types",
+    "operationId": "GetMonitoredEntitiesIdTypes",
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseScreeningIdType"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  },
+  "/third-parties/monitored-entities/types": {
+   "get": {
+    "tags": [
+     "ThirdPartyScreeningTypes"
+    ],
+    "summary": "Retrieves all monitored entity types",
+    "operationId": "GetMonitoredEntitiesEntityTypes",
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ResponseScreeningType"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json": {
+        "schema": {
+         "$ref": "#/components/schemas/ProblemDetails"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "oauth2": []
+     }
+    ]
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "BusinessUnit": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": ""
+     },
+     "parent_id": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataBusinessUnit": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/BusinessUnit"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseLinks": {
+    "type": "object",
+    "properties": {
+     "next": {
+      "type": "string",
+      "description": ""
+     },
+     "self": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "PagingMeta": {
+    "type": "object",
+    "properties": {
+     "context": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseMeta": {
+    "type": "object",
+    "properties": {
+     "paging": {
+      "$ref": "#/components/schemas/PagingMeta"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseBusinessUnit": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ResponseDataBusinessUnit"
+      },
+      "description": ""
+     },
+     "links": {
+      "$ref": "#/components/schemas/ResponseLinks"
+     },
+     "meta": {
+      "$ref": "#/components/schemas/ResponseMeta"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ProblemDetails": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string",
+      "nullable": true
+     },
+     "title": {
+      "type": "string",
+      "nullable": true
+     },
+     "status": {
+      "type": "integer",
+      "format": "int32",
+      "nullable": true
+     },
+     "detail": {
+      "type": "string",
+      "nullable": true
+     },
+     "instance": {
+      "type": "string",
+      "nullable": true
+     },
+     "extensions": {
+      "type": "object",
+      "additionalProperties": {
+       "type": "object",
+       "additionalProperties": false
+      },
+      "nullable": true,
+      "readOnly": true
+     }
+    },
+    "additionalProperties": false
+   },
+   "FieldListItem": {
+    "type": "object",
+    "properties": {
+     "value": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": ""
+     },
+     "text": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "FieldList": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "value_column": {
+      "type": "integer",
+      "description": "",
+      "format": "int32",
+      "nullable": true
+     },
+     "items": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/FieldListItem"
+      },
+      "description": "Adhoc list items.",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "Field": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": ""
+     },
+     "category": {
+      "type": "string",
+      "description": ""
+     },
+     "description": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "is_key_risk": {
+      "type": "boolean",
+      "description": ""
+     },
+     "is_red_flag": {
+      "type": "boolean",
+      "description": ""
+     },
+     "is_scored": {
+      "type": "boolean",
+      "description": ""
+     },
+     "is_read_only": {
+      "type": "boolean",
+      "description": ""
+     },
+     "schema": {
+      "type": "string",
+      "description": ""
+     },
+     "list": {
+      "$ref": "#/components/schemas/FieldList"
+     },
+     "regex": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "input_mask": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataField": {
+    "type": "object",
+    "properties": {
+     "attributes": {
+      "$ref": "#/components/schemas/Field"
+     },
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseField": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ResponseDataField"
+      },
+      "description": ""
+     },
+     "links": {
+      "$ref": "#/components/schemas/ResponseLinks"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "Group": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataGroup": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/Group"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseGroup": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ResponseDataGroup"
+      },
+      "description": ""
+     },
+     "links": {
+      "$ref": "#/components/schemas/ResponseLinks"
+     },
+     "meta": {
+      "$ref": "#/components/schemas/ResponseMeta"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ListName": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataLists": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/ListName"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseLists": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ResponseDataLists"
+      },
+      "description": ""
+     },
+     "links": {
+      "$ref": "#/components/schemas/ResponseLinks"
+     },
+     "meta": {
+      "$ref": "#/components/schemas/ResponseMeta"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ListRow": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "data": {
+      "type": "array",
+      "items": {},
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "List": {
+    "type": "object",
+    "properties": {
+     "rows": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ListRow"
+      },
+      "description": ""
+     },
+     "columns": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataList": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/List"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseList": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/ResponseDataList"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "Process": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataProcess": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/Process"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseProcess": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ResponseDataProcess"
+      },
+      "description": ""
+     },
+     "links": {
+      "$ref": "#/components/schemas/ResponseLinks"
+     },
+     "meta": {
+      "$ref": "#/components/schemas/ResponseMeta"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ThirdParty": {
+    "type": "object",
+    "properties": {
+     "process_id": {
+      "type": "string",
+      "description": ""
+     },
+     "name": {
+      "type": "string",
+      "description": ""
+     },
+     "business_unit_id": {
+      "type": "string",
+      "description": ""
+     },
+     "owner_group_id": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "owner_employee_email": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "tags": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "description": "",
+      "nullable": true
+     },
+     "is_active": {
+      "type": "boolean",
+      "description": ""
+     },
+     "internal_reference": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "RequestDataThirdParty": {
+    "required": [
+     "attributes"
+    ],
+    "type": "object",
+    "properties": {
+     "attributes": {
+      "$ref": "#/components/schemas/ThirdParty"
+     },
+     "type": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "RequestThirdParty": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/RequestDataThirdParty"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataThirdParty": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/ThirdParty"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseThirdParty": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/ResponseDataThirdParty"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ErrorModel": {
+    "type": "object",
+    "properties": {
+     "title": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "status": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "code": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "detail": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ErrorResponseModel": {
+    "type": "object",
+    "properties": {
+     "errors": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ErrorModel"
+      },
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataThirdParties": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/ThirdParty"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseThirdParties": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ResponseDataThirdParties"
+      },
+      "description": ""
+     },
+     "links": {
+      "$ref": "#/components/schemas/ResponseLinks"
+     },
+     "meta": {
+      "$ref": "#/components/schemas/ResponseMeta"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ThirdPartyPatch": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "business_unit_id": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "owner_group_id": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "owner_employee_email": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "tags": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "description": "",
+      "nullable": true
+     },
+     "is_active": {
+      "type": "boolean",
+      "description": ""
+     },
+     "internal_reference": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "RequestDataThirdPartyPatch": {
+    "required": [
+     "attributes"
+    ],
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/ThirdPartyPatch"
+     },
+     "type": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "RequestThirdPartyPatch": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/RequestDataThirdPartyPatch"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ThirdPartyProperty": {
+    "type": "object",
+    "properties": {
+     "field_id": {
+      "type": "string",
+      "description": ""
+     },
+     "value": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataProperties": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/ThirdPartyProperty"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseProperties": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ResponseDataProperties"
+      },
+      "description": ""
+     },
+     "links": {
+      "$ref": "#/components/schemas/ResponseLinks"
+     },
+     "meta": {
+      "$ref": "#/components/schemas/ResponseMeta"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ThirdPartyPropertyUpdate": {
+    "type": "object",
+    "properties": {
+     "field_id": {
+      "type": "string",
+      "description": ""
+     },
+     "value": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "RequestDataPropertyUpdate": {
+    "required": [
+     "attributes"
+    ],
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/ThirdPartyPropertyUpdate"
+     },
+     "type": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "RequestPropertyUpdate": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/RequestDataPropertyUpdate"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataProperty": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/ThirdPartyProperty"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseProperty": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/ResponseDataProperty"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "RequestDataPropertyBatchUpdate": {
+    "required": [
+     "attributes"
+    ],
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/ThirdPartyPropertyUpdate"
+     },
+     "type": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "RequestPropertyBatchUpdate": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/RequestDataPropertyBatchUpdate"
+      },
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ScreeningMatchResults": {
+    "type": "object",
+    "properties": {
+     "pending_review": {
+      "type": "integer",
+      "description": "",
+      "format": "int32"
+     },
+     "confirmed_match": {
+      "type": "integer",
+      "description": "",
+      "format": "int32"
+     },
+     "under_investigation": {
+      "type": "integer",
+      "description": "",
+      "format": "int32"
+     },
+     "cleared_with_updates": {
+      "type": "integer",
+      "description": "",
+      "format": "int32"
+     },
+     "cleared_without_updates": {
+      "type": "integer",
+      "description": "",
+      "format": "int32"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ScreeningIdentificationDetails": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "integer",
+      "description": "",
+      "format": "int32"
+     },
+     "value": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ThirdPartyScreeningEntity": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": ""
+     },
+     "categories": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "description": "",
+      "nullable": true
+     },
+     "record_type": {
+      "type": "string",
+      "description": ""
+     },
+     "monitored_entity_type_id": {
+      "type": "string",
+      "description": ""
+     },
+     "added": {
+      "type": "string",
+      "description": "",
+      "format": "date-time"
+     },
+     "updated": {
+      "type": "string",
+      "description": "",
+      "format": "date-time"
+     },
+     "match_results": {
+      "$ref": "#/components/schemas/ScreeningMatchResults"
+     },
+     "status": {
+      "type": "string",
+      "description": ""
+     },
+     "identification_details": {
+      "$ref": "#/components/schemas/ScreeningIdentificationDetails"
+     },
+     "year_of_birth": {
+      "type": "integer",
+      "description": "",
+      "format": "int32",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataThirdPartyScreeningEntities": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/ThirdPartyScreeningEntity"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseThirdPartyScreeningEntities": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ResponseDataThirdPartyScreeningEntities"
+      },
+      "description": ""
+     },
+     "links": {
+      "$ref": "#/components/schemas/ResponseLinks"
+     },
+     "meta": {
+      "$ref": "#/components/schemas/ResponseMeta"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ThirdPartyScreeningEntityCreate": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": ""
+     },
+     "country": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     },
+     "record_type": {
+      "type": "string",
+      "description": ""
+     },
+     "monitored_entity_type_id": {
+      "type": "string",
+      "description": ""
+     },
+     "identification_details": {
+      "$ref": "#/components/schemas/ScreeningIdentificationDetails"
+     },
+     "year_of_birth": {
+      "type": "integer",
+      "description": "",
+      "format": "int32",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "RequestDataThirdPartyScreeningCreate": {
+    "required": [
+     "attributes"
+    ],
+    "type": "object",
+    "properties": {
+     "attributes": {
+      "$ref": "#/components/schemas/ThirdPartyScreeningEntityCreate"
+     },
+     "type": {
+      "type": "string",
+      "description": "",
+      "nullable": true
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "RequestThirdPartyScreeningCreate": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/RequestDataThirdPartyScreeningCreate"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataThirdPartyScreeningEntity": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/ThirdPartyScreeningEntity"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseThirdPartyScreeningEntity": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/ResponseDataThirdPartyScreeningEntity"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "IdType": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataScreeningIdType": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/IdType"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseScreeningIdType": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ResponseDataScreeningIdType"
+      },
+      "description": ""
+     },
+     "links": {
+      "$ref": "#/components/schemas/ResponseLinks"
+     },
+     "meta": {
+      "$ref": "#/components/schemas/ResponseMeta"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "Type": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseDataScreeningType": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": ""
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/Type"
+     },
+     "type": {
+      "type": "string",
+      "description": ""
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   },
+   "ResponseScreeningType": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/ResponseDataScreeningType"
+      },
+      "description": ""
+     },
+     "links": {
+      "$ref": "#/components/schemas/ResponseLinks"
+     },
+     "meta": {
+      "$ref": "#/components/schemas/ResponseMeta"
+     }
+    },
+    "additionalProperties": false,
+    "description": ""
+   }
+  },
+  "securitySchemes": {
+   "oauth2": {
+    "type": "apiKey",
+    "description": "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+    "name": "Authorization",
+    "in": "header"
+   }
+  }
+ }
+}

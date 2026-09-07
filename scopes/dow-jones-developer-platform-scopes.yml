@@ -1,0 +1,43 @@
+generated: '2026-09-07'
+method: probed
+source: https://accounts.dowjones.com/.well-known/openid-configuration (200) for scopes_supported; https://developer.dowjones.com/documents/site-docs-newswires_apis-oauth-migration-guide
+  (200) for the scope value the token exchange requires
+docs: https://developer.dowjones.com/documents/site-docs-getting_started-sessions_and_authentication
+note: Dow Jones publishes OIDC scopes on its identity service but does NOT publish per-API authorization
+  scopes. The scope string the documented token exchange sends is "openid pib" for every Dow Jones API;
+  entitlement to a given product is carried by the account, not by an OAuth scope. Nothing here is a per-resource
+  permission model.
+issuer: https://sso.accounts.dowjones.com/
+scopes:
+- name: openid
+  description: OpenID Connect — request an ID token. Required by the documented jwt-bearer exchange.
+  source: openid-configuration + OAuth Migration Guide
+- name: pib
+  description: Dow Jones Professional Information Business audience. Paired with openid in the documented
+    token exchange that yields the bearer token api.dowjones.com accepts.
+  source: OAuth Migration Guide
+- name: profile
+  description: Standard OIDC profile claims.
+  source: openid-configuration scopes_supported
+- name: offline_access
+  description: Issue a refresh token — the credential step 1 of the documented two-step exchange consumes.
+  source: openid-configuration scopes_supported
+- name: email
+  description: Standard OIDC email claim.
+  source: openid-configuration scopes_supported
+- name: email_verified
+  description: Standard OIDC email_verified claim.
+  source: openid-configuration scopes_supported
+- name: given_name
+  description: Standard OIDC given_name claim.
+  source: openid-configuration scopes_supported
+- name: family_name
+  description: Standard OIDC family_name claim.
+  source: openid-configuration scopes_supported
+per_api_scopes:
+  published: false
+  note: No Dow Jones OpenAPI in openapi/ declares an oauth2 securityScheme, so no per-operation scope
+    requirements exist to derive.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

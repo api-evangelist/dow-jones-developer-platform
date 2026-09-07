@@ -1,0 +1,2526 @@
+﻿<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:intf="urn:factiva:developer:v3_16:parsers:intf" targetNamespace="urn:factiva:developer:v3_16:parsers:bind" xmlns="http://schemas.xmlsoap.org/wsdl/">
+	<import namespace="urn:factiva:developer:v3_16:parsers:intf" location="fdkparsers_interfaces.wsdl" />
+	<binding name="CompanyProfileSoap" type="intf:CompanyProfileSoap">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="PerformCompanyScreening">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanyScreening" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanyScreeningEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanyScreeningEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="SortCompanyProfiles">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/SortCompanyProfiles" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="SortCompanyProfilesEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/SortCompanyProfilesEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyProfiles">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyProfiles" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyProfilesEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyProfilesEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyProfilesEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyProfilesEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanyComparison">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanyComparison" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanyPeerComparison">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanyPeerComparison" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanyPeerComparisonEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanyPeerComparisonEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetailsList">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetailsList" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetailsListEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetailsListEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetailsListEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetailsListEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetailsListEx3">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetailsListEx3" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetailsListEx4">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetailsListEx4" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetailsListEx5">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetailsListEx5" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetailsListEx6">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetailsListEx6" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetails">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetails" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetailsEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetailsEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetailsEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetailsEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetailsEx3">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetailsEx3" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyDetailsEx4">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyDetailsEx4" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetIndustryAverages">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetIndustryAverages" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanyNewsBriefsSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanyNewsBriefsSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanyNewsBriefsSearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanyNewsBriefsSearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueCompanyNewsBriefsSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueCompanyNewsBriefsSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformIndustryNewsBriefsSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformIndustryNewsBriefsSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformIndustryNewsBriefsSearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformIndustryNewsBriefsSearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueIndustryNewsBriefsSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueIndustryNewsBriefsSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformPublishedCompanyReportsSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformPublishedCompanyReportsSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformPublishedIndustryReportsSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformPublishedIndustryReportsSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanyKeyDevelopmentsSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanyKeyDevelopmentsSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanyKeyDevelopmentsSearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanyKeyDevelopmentsSearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReport">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReport" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReportEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReportEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReportEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReportEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReportEx3">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReportEx3" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReportEx4">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReportEx4" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReportEx5">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReportEx5" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReportWithFinancialStatements">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReportWithFinancialStatements" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReportWithFinancialStatementsEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReportWithFinancialStatementsEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReportWithFinancialStatementsEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReportWithFinancialStatementsEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReportWithFinancialStatementsEx3">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReportWithFinancialStatementsEx3" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReportWithFinancialStatementsEx4">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReportWithFinancialStatementsEx4" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyReportWithFinancialStatementsEx5">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyReportWithFinancialStatementsEx5" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetRatioComparisonReport">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetRatioComparisonReport" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetRatioComparisonReportEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetRatioComparisonReportEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetRatioComparisonReportEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetRatioComparisonReportEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetRatioComparisonReportEx3">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetRatioComparisonReportEx3" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetRatioComparisonReportEx4">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetRatioComparisonReportEx4" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetRatioComparisonReportEx5">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetRatioComparisonReportEx5" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanySnapshot">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanySnapshot" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanySnapshotEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanySnapshotEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanySnapshotEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanySnapshotEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanySnapshotEx3">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanySnapshotEx3" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformIndustrySnapshot">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformIndustrySnapshot" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformExecutiveScreening">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformExecutiveScreening" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformExecutiveScreeningEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformExecutiveScreeningEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformExecutiveScreeningEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformExecutiveScreeningEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformExecutiveSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformExecutiveSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformExecutiveSearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformExecutiveSearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformExecutiveSearchEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformExecutiveSearchEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformExecutiveSearchEx3">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformExecutiveSearchEx3" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformExecutiveSearchEx4">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformExecutiveSearchEx4" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueExecutiveSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueExecutiveSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueExecutiveSearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueExecutiveSearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueExecutiveSearchEx4">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueExecutiveSearchEx4" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="SortExecutiveProfiles">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/SortExecutiveProfiles" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetExecutiveProfiles">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetExecutiveProfiles" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetExecutiveProfilesEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetExecutiveProfilesEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetExecutiveProfilesEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetExecutiveProfilesEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetExecutiveDetails">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetExecutiveDetails" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetExecutiveDetailsEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetExecutiveDetailsEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetExecutiveDetailsEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetExecutiveDetailsEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetExecutiveDetailsEx3">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetExecutiveDetailsEx3" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformExecutiveNewsBriefsSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformExecutiveNewsBriefsSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformExecutiveNewsBriefsSearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformExecutiveNewsBriefsSearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueExecutiveNewsBriefsSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueExecutiveNewsBriefsSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetDNBCompanyProfile">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetDNBCompanyProfile" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetDNBCompanyChildren">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetDNBCompanyChildren" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetDNBCompanyBranchLocations">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetDNBCompanyBranchLocations" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetDNBCompanyGlobalUltimate">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetDNBCompanyGlobalUltimate" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetDNBCompanyTree">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetDNBCompanyTree" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetUSGovernmentOrganizations">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetUSGovernmentOrganizations" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetUSGovernmentOrganizationSnapshot">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetUSGovernmentOrganizationSnapshot" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformUSGovernmentExecutiveSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformUSGovernmentExecutiveSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetUSGovernmentExecutiveSnapshot">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetUSGovernmentExecutiveSnapshot" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+	</binding>
+	<binding name="MarketDataSoap" type="intf:MarketDataSoap">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="GetQuote">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetQuote" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+	</binding>
+	<binding name="MembershipSoap" type="intf:MembershipSoap">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="PerformLogin">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformLogin" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformEncryptedIDLogin">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformEncryptedIDLogin" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformEmailAddressLogin">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformEmailAddressLogin" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformLogout">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformLogout" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetEncryptedID">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetEncryptedID" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetAccountInfo">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetAccountInfo" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetClientCode">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetClientCode" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="SetClientCode">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/SetClientCode" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+	</binding>
+	<binding name="NewsstandSoap" type="intf:NewsstandSoap">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="GetNewsstandSources">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetNewsstandSources" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetNewsstandSections">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetNewsstandSections" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetNewsstandHeadlines">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetNewsstandHeadlines" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetNewsstandHeadlinesWithFDT">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetNewsstandHeadlinesWithFDT" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueNewsstandHeadlinesWithFDT">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueNewsstandHeadlinesWithFDT" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+	</binding>
+	<binding name="RegistrationSoap" type="intf:RegistrationSoap">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="GetUserData">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetUserData" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetUserDataEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetUserDataEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<!--<operation name="PerformUserRegistration">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformUserRegistration" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>-->
+		<!--<operation name="PerformUserRegistrationEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformUserRegistrationEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>-->
+		<operation name="UpdateUserData">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/UpdateUserData" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="UpdateUserDataEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/UpdateUserDataEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<!--<operation name="UpdateUserPassword">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/UpdateUserPassword" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>-->
+		<!--<operation name="ResetUserPassword">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ResetUserPassword" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>-->
+		<!--<operation name="PerformSimplifiedEmailAddressRegistration">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformSimplifiedEmailAddressRegistration" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>-->
+		<!--<operation name="UpdateLoginEmailAddress">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/UpdateLoginEmailAddress" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>-->
+		<!--<operation name="EnableEmailAddressForLogin">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/EnableEmailAddressForLogin" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>-->
+		<!--<operation name="SetupUserForEmailAddressLogin">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/SetupUserForEmailAddressLogin" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>-->
+		<!--<operation name="PerformEmailAddressRegistration">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformEmailAddressRegistration" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>-->
+		<!--<operation name="PerformEmailAddressRegistrationEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformEmailAddressRegistrationEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>-->
+		<!--<operation name="GetExternalReaderProfiles">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetExternalReaderProfiles" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>-->
+	</binding>
+	<binding name="RetrievalSoap" type="intf:RetrievalSoap">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="GetArticle">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetArticle" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetArticleEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetArticleEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetHTML">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetHTML" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetPicture">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetPicture" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetPDF">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetPDF" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetExternalURL">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetExternalURL" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetContent">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetContent" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+	</binding>
+	<binding name="SearchSoap" type="intf:SearchSoap">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="PerformContentSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformContentSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueContentSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueContentSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformContentSearchWithFDT">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformContentSearchWithFDT" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformContentSearchWithFDTDedup">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformContentSearchWithFDTDedup" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformContentSearchWithFDTDedupEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformContentSearchWithFDTDedupEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformContentSearchWithFDTEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformContentSearchWithFDTEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetMaxNavigatorElements">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetMaxNavigatorElements" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetMaxNavigatorElementsEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetMaxNavigatorElementsEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueContentSearchWithFDT">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueContentSearchWithFDT" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueContentSearchWithFDTDedup">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueContentSearchWithFDTDedup" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueContentSearchWithFDTDedupEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueContentSearchWithFDTDedupEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformSourceSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformSourceSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformSourceSearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformSourceSearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueSourceSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueSourceSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueSourceSearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueSourceSearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformSourceGroupSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformSourceGroupSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformSourceGroupSearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformSourceGroupSearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueSourceGroupSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueSourceGroupSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueSourceGroupSearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueSourceGroupSearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetSourcesByCategory">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetSourcesByCategory" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetSourcesByCategoryEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetSourcesByCategoryEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetSourcesByTitle">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetSourcesByTitle" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetSourcesByTitleEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetSourcesByTitleEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetSourcesByCode">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetSourcesByCode" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetSourceGroupsByCode">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetSourceGroupsByCode" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+	</binding>
+	<binding name="TaxonomySoap" type="intf:TaxonomySoap">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="PerformCompanySearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanySearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanySearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanySearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformCompanySearchEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformCompanySearchEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueCompanySearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueCompanySearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueCompanySearchEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueCompanySearchEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueCompanySearchEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueCompanySearchEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyByCode">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyByCode" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyByCodeEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyByCodeEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCompanyByCodeEx2">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCompanyByCodeEx2" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformInstrumentSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformInstrumentSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueInstrumentSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueInstrumentSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetInstrumentByCode">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetInstrumentByCode" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformExchangeSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformExchangeSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetExchangeByCode">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetExchangeByCode" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetExchangeList">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetExchangeList" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformIndustrySearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformIndustrySearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetIndustryByCode">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetIndustryByCode" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetIndustryChildren">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetIndustryChildren" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetIndustryList">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetIndustryList" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformRegionSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformRegionSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetRegionByCode">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetRegionByCode" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetRegionChildren">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetRegionChildren" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetRegionList">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetRegionList" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformNewsSubjectSearch">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformNewsSubjectSearch" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetNewsSubjectByCode">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetNewsSubjectByCode" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetNewsSubjectChildren">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetNewsSubjectChildren" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetNewsSubjectList">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetNewsSubjectList" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetJobFunctionList">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetJobFunctionList" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetAuditorList">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetAuditorList" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetDegreeList">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetDegreeList" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetDepartmentList">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetDepartmentList" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCurrencyList">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCurrencyList" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetCurrencyByCode">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetCurrencyByCode" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetIndexList">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetIndexList" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetListInfo">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetListInfo" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+	</binding>
+	<binding name="TrackSoap" type="intf:TrackSoap">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="GetFolderInfo">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetFolderInfo" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetFolderInfoByID">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetFolderInfoByID" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetFolderHeadlines">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetFolderHeadlines" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetFolderHeadlinesEx">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetFolderHeadlinesEx" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetFolderHeadlinesWithFDTDedup">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetFolderHeadlinesWithFDTDedup" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetNewFolderHeadlines">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetNewFolderHeadlines" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetNewFolderHeadlinesWithFDTDedup">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetNewFolderHeadlinesWithFDTDedup" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformSearchWithinFolderHeadlines">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformSearchWithinFolderHeadlines" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PerformSearchWithinFolderHeadlinesWithFDTDedup">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PerformSearchWithinFolderHeadlinesWithFDTDedup" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ContinueFolderHeadlinesWithFDTDedup">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ContinueFolderHeadlinesWithFDTDedup" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="CreateFolder">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/CreateFolder" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ReviseFolder">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ReviseFolder" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="DeleteFolder">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/DeleteFolder" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetFolder">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetFolder" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="PostContent">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/PostContent" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="UnpostContent">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/UnpostContent" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="DeleteContent">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/DeleteContent" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="AddEditorComment">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/AddEditorComment" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ReviseEditorComment">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ReviseEditorComment" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetEditorComment">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetEditorComment" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="DeleteEditorComment">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/DeleteEditorComment" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="AddInternalContent">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/AddInternalContent" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="ReviseInternalContent">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/ReviseInternalContent" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="GetInternalContent">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/GetInternalContent" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+		<operation name="DeleteInternalContent">
+			<soap:operation soapAction="urn:factiva:developer:v3_0/DeleteInternalContent" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="Fault">
+				<soap:fault name="Fault" use="literal" />
+			</fault>
+		</operation>
+	</binding>
+</definitions>

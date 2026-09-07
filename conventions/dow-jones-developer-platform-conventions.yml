@@ -1,0 +1,146 @@
+generated: '2026-09-07'
+method: searched
+source: https://developer.dowjones.com/documents/site-docs-getting_started-api_essentials and its three
+  child pages (200), https://developer.dowjones.com/documents/site-docs-getting_started-versioning-api_versioning
+  (200), https://developer.dowjones.com/documents/site-docs-newswires_apis-certification_process (200),
+  plus the nine OpenAPI documents in openapi/
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+auth:
+  style: OAuth 2.0 bearer token in the Authorization header; a legacy user-key header on Factiva Analytics
+    endpoints
+  see: authentication/dow-jones-developer-platform-authentication.yml
+versioning:
+  style: Accept header custom media type (application/vnd.dowjones.dna[.resource][.v_X.Y]+json)
+  response_header: X-DJ-Media-Type
+  unsupported: HTTP 406 Not Acceptable
+  see: lifecycle/dow-jones-developer-platform-lifecycle.yml
+pagination:
+  style: offset/limit query parameters, with a JSON:API-shaped meta and links envelope
+  params:
+  - offset — zero-based index of results to skip
+  - limit — results per page
+  - records — number of records returned, used where meta/links are absent
+  bracket_form: page[limit] and page[offset] on the Calendar and taxonomy endpoints
+  response_fields:
+    meta: pagination totals
+    links:
+    - self
+    - prev
+    - next
+    - first
+    - last
+  post_body_variant: Screening requests carry the same parameters inside a paging object in the POST body
+  docs: https://developer.dowjones.com/documents/site-docs-getting_started-api_essentials-pagination_and_caching
+caching:
+  signal: Cache-Control response headers
+  guidance: 'Dow Jones documents a scheduled cache strategy for Top Stories: poll GET /content-collections
+    no more than once every 15 minutes, compare updated_datetime_utc, then fetch only changed collections;
+    cache article full text on first view.'
+  docs: https://developer.dowjones.com/documents/site-docs-newswires_apis-certification_process
+error_envelope:
+  primary: JSON:API-style {"errors":[{"code","title","status","detail","meta":{"id","type"}}]}
+  riskcenter_0_1: RFC 7807/9457 ProblemDetails {type,title,status,detail,instance,extensions} alongside
+    an ErrorResponseModel errors[] array
+  see: errors/dow-jones-developer-platform-problem-types.yml
+media_types:
+- application/json
+- application/vnd.api+json
+- application/vnd.dowjones.dna+json
+- application/vnd.dowjones.dna.content.v_1.0+json
+- application/vnd.dowjones.dna.risk-third-parties.v_0.1-beta+json
+- application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json
+request_id_tracing:
+  documented: false
+  note: No request-id or correlation-id header is documented, and none appears in the nine harvested specs.
+rate_limit_signaling:
+  headers_documented: false
+  note: Limits are published as prose call frequencies, not as response headers. No X-RateLimit-*, RateLimit-*
+    or Retry-After header appears in any harvested spec or in the docs, so a client cannot read remaining
+    budget at runtime.
+  see: rate-limits/dow-jones-developer-platform-rate-limits.yml
+field_expansion:
+  mechanism: parts query parameter on taxonomy endpoints; a select clause in Factiva Streams/Snapshots
+    queries
+  note: Not a general sparse-fieldset mechanism across the platform.
+idempotency:
+  coverage: none
+  mechanism: null
+  header: null
+  note: No Idempotency-Key header, no replay-protection parameter, and no idempotency language appears
+    anywhere in the Dow Jones developer documentation or in any of the nine harvested OpenAPI documents.
+    The mutating surface is the RiskCenter Third Party Platform API (POST/PATCH/PUT/DELETE on /third-parties,
+    /third-parties/{id}/monitored-entities and POST /files) plus POST /files upload; a retried create
+    there will create a second third party.
+  evidence:
+  - check: grep -ri idempoten across openapi/ and the fetched developer.dowjones.com documentation corpus
+    result: no match
+reversibility:
+  grade: undocumented
+  note: Dow Jones publishes destructive operations with no documented reversal path and no window. DELETE
+    /third-parties/{id} and DELETE /third-parties/{thirdpartyid}/monitored-entities/{id} carry the summaries
+    "Deletes a third party" and "Removes a monitored entity" and nothing else — no restore, undelete,
+    archive or retention window is described in the spec or in the third-party-management documentation.
+    No window is asserted here because none is published.
+  write_surfaces:
+  - api: RiskCenter Third Party Platform API 0.2
+    operation: DeleteThirdParty
+    method: DELETE
+    path: /third-parties/{id}
+    reversal_operation: null
+    window: null
+    grade: undocumented
+  - api: RiskCenter Third Party Platform API 0.2
+    operation: DeleteMonitoredEntities
+    method: DELETE
+    path: /third-parties/{thirdpartyid}/monitored-entities/{id}
+    reversal_operation: null
+    window: null
+    grade: undocumented
+  - api: RiskCenter Third Party Platform API 0.2
+    operation: PostThirdParty
+    method: POST
+    path: /third-parties
+    reversal_operation: DeleteThirdParty
+    window: null
+    grade: documented
+    note: A created third party can be deleted, so the create is reversible; no window is stated because
+      deletion is unconditional.
+  - api: RiskCenter Third Party Platform API 0.2
+    operation: PostMonitoredEntities
+    method: POST
+    path: /third-parties/{thirdpartyid}/monitored-entities
+    reversal_operation: DeleteMonitoredEntities
+    window: null
+    grade: documented
+  - api: RiskCenter Third Party Platform API 0.2
+    operation: file upload
+    method: POST
+    path: /files
+    reversal_operation: null
+    window: null
+    grade: undocumented
+  read_only_apis:
+  - Calendar Live API
+  - Factiva Content API
+  - Factiva Newsletters API
+  - Newswires Real-Time API
+  - Newswires Content API
+  - Newswires Top Stories API
+  - Company News Radar API
+  read_only_note: Seven of the nine harvested contracts expose no write operation at all; reversibility
+    is na for those.
+dry_run_mode:
+  available: false
+  note: No dry-run, preview or validate-only parameter is documented. Dow Jones instead requires certification
+    against a beta platform (http://developer.beta.factiva.com for the Factiva Developer Kit) before production
+    use — a separate environment rather than a per-call rehearsal.
+  see: sandbox/dow-jones-developer-platform-sandbox.yml
+cross_links:
+- errors/dow-jones-developer-platform-problem-types.yml
+- lifecycle/dow-jones-developer-platform-lifecycle.yml
+- authentication/dow-jones-developer-platform-authentication.yml
+- rate-limits/dow-jones-developer-platform-rate-limits.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

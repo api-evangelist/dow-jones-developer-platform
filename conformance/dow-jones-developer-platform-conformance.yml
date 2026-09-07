@@ -1,0 +1,113 @@
+generated: '2026-09-07'
+method: searched
+source: https://accounts.dowjones.com/.well-known/openid-configuration (200), https://developer.dowjones.com/documents/site-docs-getting_started-versioning-deprecated_apis
+  (200), https://developer.dowjones.com/documents/site-docs-getting_started-api_essentials-pagination_and_caching
+  (200), https://www.dowjones.com/iso-certification/ (200), https://www.dowjones.com/dow-jones-risk-compliance-quality-reports/
+  (200), plus the nine OpenAPI documents in openapi/_original/
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+conformance:
+- id: oauth2
+  conforms: true
+  evidence: https://accounts.dowjones.com/oauth2/v1/token — documented refresh_token and urn:ietf:params:oauth:grant-type:jwt-bearer
+    flows; https://developer.dowjones.com/documents/site-docs-newswires_apis-oauth-migration-guide
+- id: oidc
+  conforms: true
+  evidence: https://accounts.dowjones.com/.well-known/openid-configuration returns 200 with issuer https://sso.accounts.dowjones.com/,
+    jwks_uri, userinfo_endpoint and scopes_supported
+- id: rfc8414
+  conforms: true
+  evidence: https://sso.accounts.dowjones.com/.well-known/oauth-authorization-server returns 200 with
+    the OAuth 2.0 authorization server metadata document
+- id: rfc7636
+  conforms: true
+  evidence: 'code_challenge_methods_supported: ["plain","S256"] in the openid-configuration document —
+    PKCE is supported'
+- id: rfc7591
+  conforms: true
+  evidence: registration_endpoint https://sso.accounts.dowjones.com/register present in the openid-configuration
+    document (dynamic client registration endpoint advertised)
+- id: rfc8594
+  conforms: true
+  evidence: https://developer.dowjones.com/documents/site-docs-getting_started-versioning-deprecated_apis
+    — Dow Jones documents returning Sunset, Deprecation and Link rel="deprecation" headers on deprecated
+    resource representations
+- id: rfc9457
+  conforms: true
+  evidence: ProblemDetails schema (type/title/status/detail/instance/extensions) in openapi/_original/dow-jones-developer-platform-riskcenter-third-party-api-0-1.json
+  note: Schema shape only — the responses are typed as the vendor media type, not application/problem+json,
+    so this is partial adoption.
+- id: json:api
+  conforms: true
+  evidence: application/vnd.api+json response media type on all four operations of openapi/_original/dow-jones-developer-platform-factiva-newsletters-api.json;
+    JSON:API-shaped errors[] and page[limit]/page[offset] pagination across the DNA contracts
+- id: pagination
+  conforms: true
+  evidence: https://developer.dowjones.com/documents/site-docs-getting_started-api_essentials-pagination_and_caching
+    — offset/limit with meta and links (self/prev/next/first/last)
+- id: idempotency
+  conforms: false
+  evidence: 'No Idempotency-Key header or replay-protection mechanism in any harvested spec or documentation
+    page (grep -ri idempoten: no match)'
+- id: openapi-3.0
+  conforms: true
+  evidence: Seven of the nine harvested documents declare openapi 3.0.1/3.0.2
+- id: swagger-2.0
+  conforms: true
+  evidence: openapi/_original/dow-jones-developer-platform-factiva-content-api.json declares swagger 2.0
+- id: soap-1.1
+  conforms: true
+  evidence: https://developer.factiva.com/3.16/wsdl/FDKObjects.wsdl (200, text/xml) — WSDL 1.1 with nine
+    SOAP ports and 208 operations
+- id: iso-27001
+  conforms: true
+  evidence: https://www.dowjones.com/iso-certification/ — Dow Jones Inc. ISMS certified to ISO 27001 covering
+    Risk & Compliance, Factiva and Newsplus
+- id: isae-3000
+  conforms: true
+  evidence: https://www.dowjones.com/dow-jones-risk-compliance-quality-reports/ — annual PwC ISAE 3000
+    sanctions assurance opinion, available to customers on request
+- id: iso-3166
+  conforms: true
+  evidence: Country codes as capitalised ISO-3166 alpha-2 digraphs across the Calendar Live taxonomy endpoints
+    and the Risk & Compliance data model
+- id: fapi
+  conforms: false
+  evidence: No FAPI profile claimed or implemented; Dow Jones is a market-data and screening provider,
+    not an account-holding financial institution
+- id: scim
+  conforms: false
+  evidence: No SCIM schema URN in any harvested contract
+- id: odata
+  conforms: false
+  evidence: No $metadata surface
+- id: fhir
+  conforms: false
+  evidence: Not a healthcare provider
+domain_standard:
+  sector: Securities & market data / financial-crime compliance
+  declared_in_contract: false
+  note: 'Reward-only check, and the honest answer here is no. Nothing in the nine harvested contracts
+    declares a market standard for its own domain: no ISO 20022 message type, no FIX/FIXML payload, no
+    LEI/ISIN identifier scheme declared as such, no OpenRTB or SDMX shape. Dow Jones uses its OWN taxonomies
+    as the interchange vocabulary — DJN codes, DRN resource names, Factiva news-subject and company codes,
+    the Dow Jones Watchlist list-reference mapper — which is a proprietary scheme, not a published domain
+    standard. ISINs and tickers appear as SEARCH VALUES inside DJN taxonomy expressions (djn:djnabout:us6703461052),
+    not as a declared identifier scheme in any schema. Recorded as absent rather than stretched to fit.'
+  proprietary_vocabularies:
+  - Dow Jones Newswires (DJN) taxonomy codes
+  - Dow Jones Resource Names (DRN)
+  - Factiva news-subject, industry, region and company codes
+  - Dow Jones Watchlist list reference mapper
+not_assessed:
+- id: labyrinth-screening-api
+  note: The Advanced Screening and Monitoring (ASAM) contract Dow Jones publishes at https://developer.dowjones.com/swagger/advanced-screening-and-monitoring-api
+    is an OpenAPI 3.1.0 titled "Labyrinth Screening API" whose info.contact is Ripjar Ltd (support@ripjar.com),
+    whose licence reads "Commercial in Confidence" and whose only server is the placeholder string API_INSTANCE.
+    Dow Jones own documentation never names Ripjar, so the STEP 0c ownership test cannot be satisfied
+    and neither the contract nor anything derived from it is recorded here.
+  url: https://developer.dowjones.com/wp-json/swagger/v1/api/47700
+  status: 200
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

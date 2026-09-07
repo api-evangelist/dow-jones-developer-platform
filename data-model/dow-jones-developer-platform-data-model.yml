@@ -1,0 +1,1580 @@
+generated: '2026-09-07'
+method: derived
+source: $ref graph and identifier fields of the nine OpenAPI documents in openapi/_original/, computed
+  2026-09-07
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+note: Derived entity-relationship graph, one block per harvested contract. Relationships are $ref edges
+  between component schemas; identifier_fields are the properties that name a resource by id/ref/code.
+  Dow Jones publishes no object reference page outside the login wall, so id-prefix semantics below are
+  read from the contracts themselves.
+identifier_schemes:
+- name: DRN — Dow Jones Resource Name
+  form: drn:<namespace>.<type>.<origin>.<id>
+  example: drn:consumer.contentcollection.originid.FP_US_LEAD_1
+  used_by:
+  - Newswires Top Stories API
+  - Newswires Content API
+  - Factiva Content API
+  note: The universal content reference across the Newswires and Factiva content surfaces.
+- name: DJN taxonomy code
+  form: djn=<path> / djn:<facet>:<code>
+  example: djn=p/pmdm ; djn:sig:nue ; djn:djnabout:us6703461052
+  used_by:
+  - Newswires Real-Time API
+  - Company News Radar API
+  note: Search vocabulary, not a schema field. Carries tickers and ISINs as VALUES inside a proprietary
+    expression grammar.
+- name: Factiva codes
+  form: company / news-subject / industry / region codes
+  example: TSLAIB, PRGML, MCROST
+  used_by:
+  - Factiva Content API
+  - Factiva Streams
+  - Factiva Snapshots
+- name: Stream / subscription id
+  form: dj-synhub-stream-<hash>-<suffix>
+  used_by:
+  - Factiva Streams
+- name: Third-party id
+  form: GUID path parameter on /third-parties/{id}
+  used_by:
+  - RiskCenter Third Party Platform API
+apis:
+- api: calendar-live-api
+  schema_count: 27
+  entities:
+  - name: postParams
+    properties: 1
+    identifier_fields: null
+    relationships:
+    - target: options
+      type: has_one
+    - target: pagingCriteria
+      type: has_one
+    - target: searchCriteria
+      type: has_one
+  - name: eventDataModel
+    properties: 4
+    identifier_fields:
+    - id
+    relationships:
+    - target: ecoinfo
+      type: has_one
+    - target: eventDetailModel
+      type: has_one
+  - name: ipoPostParams
+    properties: 1
+    identifier_fields: null
+    relationships:
+    - target: ipoSearchCriteria
+      type: has_one
+    - target: pagingCriteria
+      type: has_one
+  - name: eventFilterModel
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: error
+      type: has_one
+    - target: eventFilterDataModel
+      type: has_many
+  - name: eventFilterCountryModel
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: error
+      type: has_one
+    - target: eventFilterCountryDataModel
+      type: has_many
+  - name: eventFilterExchangeModel
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: error
+      type: has_one
+    - target: eventFilterExchangeDataModel
+      type: has_many
+  - name: eventFilterRegionModel
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: error
+      type: has_one
+    - target: eventFilterRegionDataModel
+      type: has_many
+  - name: eventsModel
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: eventDataModel
+      type: has_one
+  - name: ipoEventsModel
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: ipoEventDataModel
+      type: has_one
+  - name: eventDetailModel
+    properties: 9
+    identifier_fields:
+    - id
+    relationships:
+    - target: detailDataValueModel
+      type: has_one
+  - name: eventFilterDataModel
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: eventFilterDataFilterItemModel
+      type: has_one
+  - name: eventFilterCountryDataModel
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: eventFilterCountryDataFilterItemModel
+      type: has_one
+  - name: eventFilterExchangeDataModel
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: eventFilterExchangeDataFilterItemModel
+      type: has_one
+  - name: eventFilterRegionDataModel
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: eventFilterRegionDataFilterItemModel
+      type: has_one
+  - name: eventFilterDataFilterItemModel
+    properties: 6
+    identifier_fields:
+    - code
+    - event_code
+    relationships:
+    - target: ecoinfo
+      type: has_one
+  - name: eventFilterRegionDataFilterItemModel
+    properties: 3
+    identifier_fields:
+    - code
+    relationships:
+    - target: eventFilterCountryDataFilterItemModel
+      type: has_many
+  - name: eventsPostParams
+    properties: 1
+    identifier_fields: null
+    relationships:
+    - target: options
+      type: has_one
+  - name: ipoEventDataModel
+    properties: 4
+    identifier_fields:
+    - id
+    relationships: null
+- api: company-news-radar-api
+  schema_count: 53
+  entities:
+  - name: contentAttributes
+    properties: 37
+    identifier_fields:
+    - seo_id
+    - upstream_origin_id
+    relationships:
+    - target: associations
+      type: has_one
+    - target: author
+      type: has_many
+    - target: binaryItem
+      type: has_many
+    - target: blockquoteItem
+      type: has_many
+    - target: contentItem
+      type: has_one
+    - target: contentType
+      type: has_one
+    - target: datelineItem
+      type: has_many
+    - target: headingItem
+      type: has_many
+    - target: headline
+      type: has_one
+    - target: imageItem
+      type: has_many
+    - target: insetItem
+      type: has_many
+    - target: linkItem
+      type: has_one
+  - name: insetItem
+    properties: 4
+    identifier_fields:
+    - ref
+    relationships:
+    - target: blockquoteItem
+      type: has_many
+    - target: headingItem
+      type: has_many
+    - target: imageItem
+      type: has_many
+    - target: listItem
+      type: has_many
+    - target: mediaItem
+      type: has_many
+    - target: paragraphItem
+      type: has_many
+    - target: taglineItem
+      type: has_many
+    - target: videoItem
+      type: has_many
+  - name: contentItems
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: breakItem
+      type: has_one
+    - target: emphasisItem
+      type: has_one
+    - target: entityItem
+      type: has_one
+    - target: imageItem
+      type: has_one
+    - target: linkItem
+      type: has_one
+    - target: tableItem
+      type: has_one
+    - target: textItem
+      type: has_one
+  - name: contentData
+    properties: 6
+    identifier_fields:
+    - id
+    relationships:
+    - target: contentAttributes
+      type: has_one
+    - target: errors
+      type: has_one
+    - target: relatedResources
+      type: has_one
+    - target: resourceLinks
+      type: has_one
+    - target: resourceMeta
+      type: has_one
+  - name: MyResponseType
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: articleResponse
+      type: has_one
+    - target: articlesResponse
+      type: has_one
+    - target: errors
+      type: has_one
+    - target: headlinesResponse
+      type: has_one
+    - target: imageResponse
+      type: has_one
+  - name: articleResponse
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: contentData
+      type: has_one
+    - target: includedResources
+      type: has_one
+    - target: topLevelLinks
+      type: has_one
+    - target: topLevelMeta
+      type: has_one
+  - name: articlesResponse
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: contentData
+      type: has_many
+    - target: includedResources
+      type: has_one
+    - target: topLevelLinks
+      type: has_one
+    - target: topLevelMeta
+      type: has_one
+  - name: headlinesResponse
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: contentData
+      type: has_many
+    - target: headlinesTopLevelLinks
+      type: has_one
+    - target: headlinesTopLevelMeta
+      type: has_one
+    - target: includedResource
+      type: has_many
+  - name: resourceMeta
+    properties: 18
+    identifier_fields:
+    - alternate_document_id
+    - original_doc_id
+    relationships:
+    - target: codeSet
+      type: has_many
+    - target: imageItem
+      type: has_one
+    - target: printEdition
+      type: has_one
+  - name: performContentSearchRequest
+    properties: 1
+    identifier_fields: null
+    relationships:
+    - target: performContentSearchDateCustom
+      type: has_one
+    - target: performContentSearchDateDaysRange
+      type: has_one
+  - name: contentItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItems
+      type: has_one
+    - target: textItem
+      type: has_one
+  - name: imageResponse
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: imageData
+      type: has_one
+    - target: topLevelLinks
+      type: has_one
+  - name: imageData
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: error
+      type: has_one
+    - target: imageAttributes
+      type: has_one
+  - name: mediaBaseItem
+    properties: 11
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+    - target: mediaTypes
+      type: has_one
+  - name: blockquoteItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: breakItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: datelineItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: entityItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+- api: factiva-content-api
+  schema_count: 66
+  entities:
+  - name: articleAttributes
+    properties: 42
+    identifier_fields:
+    - parent_id
+    - seo_id
+    - upstream_origin_id
+    relationships: null
+  - name: author
+    properties: 5
+    identifier_fields:
+    - id
+    relationships: null
+  - name: codeSet
+    properties: 3
+    identifier_fields:
+    - id
+    relationships: null
+  - name: paragraph
+    properties: 5
+    identifier_fields:
+    - field_id
+    relationships: null
+  - name: error
+    properties: 4
+    identifier_fields:
+    - code
+    relationships: null
+  - name: articleHeadline
+    properties: 6
+    identifier_fields:
+    - id
+    relationships: null
+  - name: discoveryCodeData
+    properties: 4
+    identifier_fields:
+    - code
+    - ref
+    relationships: null
+  - name: discoveryTimeData
+    properties: 3
+    identifier_fields:
+    - ref
+    relationships: null
+  - name: discoveryKeywordData
+    properties: 3
+    identifier_fields:
+    - ref
+    relationships: null
+  - name: discoveryCategoryData
+    properties: 3
+    identifier_fields:
+    - ref
+    relationships: null
+  - name: emergingSearchRequestData
+    properties: 3
+    identifier_fields:
+    - id
+    relationships: null
+  - name: emergingSearchResponseDiscoveryGroup
+    properties: 3
+    identifier_fields:
+    - id
+    relationships: null
+  - name: emergingSearchResponseDiscoveryGroupItem
+    properties: 4
+    identifier_fields:
+    - code
+    relationships: null
+- api: factiva-newsletters-api
+  schema_count: 55
+  entities:
+  - name: newsletters_list
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: common_id
+      type: has_many
+    - target: error_response
+      type: has_many
+    - target: list_links
+      type: has_one
+    - target: newsletter_attributes
+      type: has_many
+    - target: newsletter_included_list
+      type: has_one
+    - target: newsletter_list_meta
+      type: has_one
+    - target: newsletter_list_relationships
+      type: has_many
+    - target: newsletter_type
+      type: has_many
+    - target: self_link
+      type: has_many
+  - name: newsletter_included
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: common_id
+      type: has_one
+    - target: content_item
+      type: has_one
+    - target: delivery_info
+      type: has_one
+    - target: newsletter_delivery_type
+      type: has_one
+    - target: newsletter_edition_type
+      type: has_one
+    - target: resource_edition_item
+      type: has_one
+    - target: self_deliveries_link
+      type: has_one
+    - target: self_editions_link
+      type: has_one
+  - name: newsletter_included_list
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: common_id
+      type: has_one
+    - target: delivery_info
+      type: has_one
+    - target: newsletter_delivery_type
+      type: has_one
+    - target: newsletter_edition_type
+      type: has_one
+    - target: resource_edition_item
+      type: has_one
+    - target: self_deliveries_link
+      type: has_one
+    - target: self_editions_link
+      type: has_one
+  - name: newsletter_editions_list
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: common_id
+      type: has_many
+    - target: edition_item
+      type: has_many
+    - target: list_edition_links
+      type: has_one
+    - target: newsletter_edition_type
+      type: has_many
+    - target: newsletter_list_meta
+      type: has_one
+    - target: self_editions_link
+      type: has_many
+  - name: newsletter_editions_item
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: common_id
+      type: has_one
+    - target: edition_included
+      type: has_one
+    - target: edition_item
+      type: has_one
+    - target: edition_relationships
+      type: has_one
+    - target: newsletter_edition_type
+      type: has_one
+    - target: self_editions_link
+      type: has_one
+  - name: newsletter
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: common_id
+      type: has_one
+    - target: newsletter_attributes
+      type: has_one
+    - target: newsletter_included
+      type: has_one
+    - target: newsletter_relationships
+      type: has_one
+    - target: newsletter_type
+      type: has_one
+    - target: self_link
+      type: has_one
+  - name: section
+    properties: 5
+    identifier_fields: null
+    relationships:
+    - target: article_details
+      type: has_many
+    - target: chart_details
+      type: has_many
+    - target: image
+      type: has_many
+    - target: link_details
+      type: has_many
+    - target: rss_details
+      type: has_many
+    - target: subsection
+      type: has_many
+  - name: subsection
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: article_details
+      type: has_many
+    - target: chart_details
+      type: has_many
+    - target: image
+      type: has_many
+    - target: link_details
+      type: has_many
+    - target: rss_details
+      type: has_many
+  - name: content_item_attribute
+    properties: 43
+    identifier_fields:
+    - seo_id
+    - size_code
+    - upstream_origin_id
+    relationships:
+    - target: content_body
+      type: has_one
+    - target: content_headline
+      type: has_one
+    - target: content_list
+      type: has_many
+    - target: content_text_base
+      type: has_one
+  - name: content_item
+    properties: 5
+    identifier_fields:
+    - id
+    relationships:
+    - target: content_item_attribute
+      type: has_one
+    - target: content_item_meta
+      type: has_one
+    - target: links
+      type: has_one
+  - name: content_item_meta
+    properties: 15
+    identifier_fields:
+    - alternate_document_id
+    - original_doc_id
+    relationships:
+    - target: content_alt_images
+      type: has_one
+    - target: content_item_meta_code_sets
+      type: has_one
+    - target: content_text_base
+      type: has_one
+  - name: content_body
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: content_alt_images
+      type: has_one
+    - target: content_list
+      type: has_one
+    - target: content_text_base
+      type: has_one
+  - name: newsletter_list_relationships
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: common_id
+      type: has_one
+    - target: delivery_relationship_link
+      type: has_one
+    - target: edition_relationship_link
+      type: has_one
+  - name: newsletter_relationships
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: common_id
+      type: has_one
+    - target: delivery_relationship_link
+      type: has_one
+    - target: edition_relationship_link
+      type: has_one
+  - name: newsletter_attributes
+    properties: 11
+    identifier_fields: null
+    relationships:
+    - target: newsletter_details
+      type: has_one
+    - target: section
+      type: has_many
+    - target: update_status
+      type: has_one
+  - name: content
+    properties: 30
+    identifier_fields:
+    - code
+    - fragment_id
+    - ref
+    relationships:
+    - target: content_alt_images
+      type: has_one
+    - target: content_text_base
+      type: has_one
+  - name: newsletter_details
+    properties: 41
+    identifier_fields:
+    - created_by_account_id
+    - last_modified_by_account_id
+    relationships:
+    - target: audience
+      type: has_one
+    - target: image
+      type: has_one
+  - name: edition_item
+    properties: 9
+    identifier_fields:
+    - email_job_id
+    - parent_workspace_id
+    relationships:
+    - target: image
+      type: has_one
+    - target: section
+      type: has_many
+- api: newswires-content-api
+  schema_count: 40
+  entities:
+  - name: articleAttributes
+    properties: 34
+    identifier_fields:
+    - seo_id
+    - upstream_origin_id
+    relationships:
+    - target: associations
+      type: has_one
+    - target: author
+      type: has_many
+    - target: binaryItem
+      type: has_many
+    - target: blockquoteItem
+      type: has_many
+    - target: contentItem
+      type: has_one
+    - target: contentType
+      type: has_one
+    - target: datelineItem
+      type: has_many
+    - target: headingItem
+      type: has_many
+    - target: headline
+      type: has_one
+    - target: imageItem
+      type: has_many
+    - target: insetItem
+      type: has_many
+    - target: linkItem
+      type: has_one
+  - name: insetItem
+    properties: 4
+    identifier_fields:
+    - ref
+    relationships:
+    - target: blockquoteItem
+      type: has_many
+    - target: headingItem
+      type: has_many
+    - target: imageItem
+      type: has_many
+    - target: listItem
+      type: has_many
+    - target: mediaItem
+      type: has_many
+    - target: paragraphItem
+      type: has_many
+    - target: taglineItem
+      type: has_many
+    - target: videoItem
+      type: has_many
+  - name: contentItems
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: breakItem
+      type: has_one
+    - target: emphasisItem
+      type: has_one
+    - target: entityItem
+      type: has_one
+    - target: imageItem
+      type: has_one
+    - target: linkItem
+      type: has_one
+    - target: tableItem
+      type: has_one
+    - target: textItem
+      type: has_one
+  - name: articleData
+    properties: 6
+    identifier_fields:
+    - id
+    relationships:
+    - target: articleAttributes
+      type: has_one
+    - target: errors
+      type: has_one
+    - target: relatedResources
+      type: has_one
+    - target: resourceLinks
+      type: has_one
+    - target: resourceMeta
+      type: has_one
+  - name: articles
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: articleData
+      type: has_many
+    - target: includedResources
+      type: has_one
+    - target: topLevelLinks
+      type: has_one
+    - target: topLevelMeta
+      type: has_one
+  - name: resourceMeta
+    properties: 11
+    identifier_fields:
+    - original_doc_id
+    relationships:
+    - target: codeSet
+      type: has_many
+    - target: imageItem
+      type: has_one
+    - target: printEdition
+      type: has_one
+  - name: contentItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItems
+      type: has_one
+    - target: textItem
+      type: has_one
+  - name: mediaBaseItem
+    properties: 10
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+    - target: mediaTypes
+      type: has_one
+  - name: blockquoteItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: breakItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: datelineItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: entityItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: emphasisItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: errors
+    properties: 1
+    identifier_fields: null
+    relationships:
+    - target: error
+      type: has_many
+  - name: headline
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: headingItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: imageItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: mediaBaseItem
+      type: has_one
+  - name: includedResources
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: mediaTypes
+      type: has_one
+- api: newswires-real-time-api
+  schema_count: 53
+  entities:
+  - name: contentAttributes
+    properties: 37
+    identifier_fields:
+    - seo_id
+    - upstream_origin_id
+    relationships:
+    - target: associations
+      type: has_one
+    - target: author
+      type: has_many
+    - target: binaryItem
+      type: has_many
+    - target: blockquoteItem
+      type: has_many
+    - target: contentItem
+      type: has_one
+    - target: contentType
+      type: has_one
+    - target: datelineItem
+      type: has_many
+    - target: headingItem
+      type: has_many
+    - target: headline
+      type: has_one
+    - target: imageItem
+      type: has_many
+    - target: insetItem
+      type: has_many
+    - target: linkItem
+      type: has_one
+  - name: insetItem
+    properties: 4
+    identifier_fields:
+    - ref
+    relationships:
+    - target: blockquoteItem
+      type: has_many
+    - target: headingItem
+      type: has_many
+    - target: imageItem
+      type: has_many
+    - target: listItem
+      type: has_many
+    - target: mediaItem
+      type: has_many
+    - target: paragraphItem
+      type: has_many
+    - target: taglineItem
+      type: has_many
+    - target: videoItem
+      type: has_many
+  - name: contentItems
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: breakItem
+      type: has_one
+    - target: emphasisItem
+      type: has_one
+    - target: entityItem
+      type: has_one
+    - target: imageItem
+      type: has_one
+    - target: linkItem
+      type: has_one
+    - target: tableItem
+      type: has_one
+    - target: textItem
+      type: has_one
+  - name: contentData
+    properties: 6
+    identifier_fields:
+    - id
+    relationships:
+    - target: contentAttributes
+      type: has_one
+    - target: errors
+      type: has_one
+    - target: relatedResources
+      type: has_one
+    - target: resourceLinks
+      type: has_one
+    - target: resourceMeta
+      type: has_one
+  - name: MyResponseType
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: articleResponse
+      type: has_one
+    - target: articlesResponse
+      type: has_one
+    - target: errors
+      type: has_one
+    - target: headlinesResponse
+      type: has_one
+    - target: imageResponse
+      type: has_one
+  - name: articleResponse
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: contentData
+      type: has_one
+    - target: includedResources
+      type: has_one
+    - target: topLevelLinks
+      type: has_one
+    - target: topLevelMeta
+      type: has_one
+  - name: articlesResponse
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: contentData
+      type: has_many
+    - target: includedResources
+      type: has_one
+    - target: topLevelLinks
+      type: has_one
+    - target: topLevelMeta
+      type: has_one
+  - name: headlinesResponse
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: contentData
+      type: has_many
+    - target: headlinesTopLevelLinks
+      type: has_one
+    - target: headlinesTopLevelMeta
+      type: has_one
+    - target: includedResource
+      type: has_many
+  - name: resourceMeta
+    properties: 18
+    identifier_fields:
+    - alternate_document_id
+    - original_doc_id
+    relationships:
+    - target: codeSet
+      type: has_many
+    - target: imageItem
+      type: has_one
+    - target: printEdition
+      type: has_one
+  - name: performContentSearchRequest
+    properties: 1
+    identifier_fields: null
+    relationships:
+    - target: performContentSearchDateCustom
+      type: has_one
+    - target: performContentSearchDateDaysRange
+      type: has_one
+  - name: contentItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItems
+      type: has_one
+    - target: textItem
+      type: has_one
+  - name: imageResponse
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: imageData
+      type: has_one
+    - target: topLevelLinks
+      type: has_one
+  - name: imageData
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: error
+      type: has_one
+    - target: imageAttributes
+      type: has_one
+  - name: mediaBaseItem
+    properties: 10
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+    - target: mediaTypes
+      type: has_one
+  - name: blockquoteItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: breakItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: datelineItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+  - name: entityItem
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: contentItem
+      type: has_one
+- api: newswires-top-stories-api
+  schema_count: 38
+  entities:
+  - name: DnaArticleData
+    properties: 37
+    identifier_fields:
+    - id
+    - seo_id
+    relationships:
+    - target: AssociatedResource
+      type: has_many
+    - target: Associations
+      type: has_one
+    - target: Author
+      type: has_many
+    - target: BaseContent
+      type: has_many
+    - target: Headline
+      type: has_one
+    - target: JsonApiError
+      type: has_many
+    - target: Links
+      type: has_one
+    - target: Meta
+      type: has_one
+    - target: Publisher
+      type: has_one
+    - target: Summary
+      type: has_one
+  - name: DnaContentCollectionExample
+    properties: 6
+    identifier_fields: null
+    relationships:
+    - target: ArticlesMeta
+      type: has_one
+    - target: JsonApiError
+      type: has_many
+    - target: JsonApiHeader
+      type: has_one
+    - target: JsonApiResourceObject_DnaArticleData_
+      type: has_many
+    - target: JsonApiResourceObject_DnaContentCollection_
+      type: has_one
+  - name: ArticleMeta
+    properties: 8
+    identifier_fields:
+    - original_doc_id
+    relationships:
+    - target: CodeMeta
+      type: has_one
+    - target: Problem
+      type: has_many
+    - target: Source
+      type: has_one
+    - target: Version
+      type: has_one
+  - name: DnaArticleExample
+    properties: 5
+    identifier_fields: null
+    relationships:
+    - target: ArticleMeta
+      type: has_one
+    - target: JsonApiError
+      type: has_many
+    - target: JsonApiHeader
+      type: has_one
+    - target: JsonApiResourceObject_DnaArticleData_
+      type: has_one
+  - name: DnaArticleListExample
+    properties: 5
+    identifier_fields:
+    - id
+    relationships:
+    - target: ArticlesMeta
+      type: has_one
+    - target: JsonApiHeader
+      type: has_one
+    - target: JsonApiResourceObject_DnaArticleData_
+      type: has_many
+  - name: Summary
+    properties: 7
+    identifier_fields: null
+    relationships:
+    - target: BaseContent
+      type: has_many
+    - target: Headline
+      type: has_one
+  - name: Links
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: Related
+      type: has_one
+  - name: Related
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: Meta
+      type: has_one
+  - name: JsonApiResourceObject_DnaArticleData_
+    properties: 5
+    identifier_fields:
+    - id
+    relationships:
+    - target: DnaArticleData
+      type: has_one
+  - name: JsonApiResourceObject_DnaContentCollection_
+    properties: 4
+    identifier_fields:
+    - id
+    relationships:
+    - target: DnaContentCollectionRelationships
+      type: has_one
+  - name: DnaContentCollectionRelationships
+    properties: 4
+    identifier_fields: null
+    relationships:
+    - target: ArticlesRelationshipsData
+      type: has_one
+  - name: ArticlesRelationshipsData
+    properties: 0
+    identifier_fields: null
+    relationships:
+    - target: ArticlesRelationshipsDataElements
+      type: has_one
+  - name: Headline
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: BaseContent
+      type: has_one
+  - name: ArticlesMeta
+    properties: 1
+    identifier_fields: null
+    relationships:
+    - target: ArticlesMetric
+      type: has_one
+  - name: JsonApiError
+    properties: 5
+    identifier_fields:
+    - code
+    - id
+    relationships: null
+  - name: JsonApiResourceObject
+    properties: 5
+    identifier_fields:
+    - id
+    relationships: null
+  - name: Problem
+    properties: 4
+    identifier_fields:
+    - origin_id
+    relationships: null
+  - name: CodeMeta
+    properties: 2
+    identifier_fields:
+    - code
+    relationships: null
+- api: riskcenter-third-party-api-0-1
+  schema_count: 63
+  entities:
+  - name: ResponseBusinessUnit
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataBusinessUnit
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseGroup
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataGroup
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseLists
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataLists
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseProcess
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataProcess
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseThirdParties
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataThirdParties
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseProperties
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataProperties
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseThirdPartyScreeningEntities
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataThirdPartyScreeningEntities
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseScreeningIdType
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataScreeningIdType
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseScreeningType
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataScreeningType
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseField
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataField
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+  - name: ThirdPartyScreeningEntity
+    properties: 10
+    identifier_fields:
+    - monitored_entity_type_id
+    relationships:
+    - target: ScreeningIdentificationDetails
+      type: has_one
+    - target: ScreeningMatchResults
+      type: has_one
+  - name: ResponseDataBusinessUnit
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: BusinessUnit
+      type: has_one
+  - name: ResponseMeta
+    properties: 1
+    identifier_fields: null
+    relationships:
+    - target: PagingMeta
+      type: has_one
+  - name: FieldList
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: FieldListItem
+      type: has_many
+  - name: Field
+    properties: 11
+    identifier_fields: null
+    relationships:
+    - target: FieldList
+      type: has_one
+  - name: ResponseDataField
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: Field
+      type: has_one
+  - name: ResponseDataGroup
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: Group
+      type: has_one
+  - name: ResponseDataLists
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: ListName
+      type: has_one
+- api: riskcenter-third-party-api-0-2
+  schema_count: 71
+  entities:
+  - name: ResponseGroup
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataGroup
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseLists
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataLists
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseProcess
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataProcess
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseThirdParties
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataThirdParties
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: ResponseThirdPartyScreeningEntities
+    properties: 3
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataThirdPartyScreeningEntities
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+    - target: ResponseMeta
+      type: has_one
+  - name: Field
+    properties: 12
+    identifier_fields: null
+    relationships:
+    - target: FieldList
+      type: has_one
+    - target: TableDefinition
+      type: has_one
+  - name: ReponseRelationship
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: RelationshipData
+      type: has_one
+    - target: RelationshipLinks
+      type: has_one
+  - name: ResponseDataField
+    properties: 4
+    identifier_fields:
+    - id
+    relationships:
+    - target: Field
+      type: has_one
+    - target: ResonseDataFieldRelationships
+      type: has_one
+  - name: ResponseField
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: ResponseDataField
+      type: has_many
+    - target: ResponseLinks
+      type: has_one
+  - name: ThirdPartyScreeningEntity
+    properties: 10
+    identifier_fields:
+    - monitored_entity_type_id
+    relationships:
+    - target: ScreeningIdentificationDetails
+      type: has_one
+    - target: ScreeningMatchResults
+      type: has_one
+  - name: Column
+    properties: 7
+    identifier_fields: null
+    relationships:
+    - target: FieldList
+      type: has_one
+  - name: ErrorResponseModelV2
+    properties: 1
+    identifier_fields: null
+    relationships:
+    - target: ErrorModelV2
+      type: has_many
+  - name: FieldList
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: FieldListItem
+      type: has_many
+  - name: List
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: ListRow
+      type: has_many
+  - name: RequestDataPropertyBatchUpdate
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: ThirdPartyPropertyUpdate
+      type: has_one
+  - name: RequestDataPropertyUpdate
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: ThirdPartyPropertyUpdate
+      type: has_one
+  - name: RequestDataThirdParty
+    properties: 2
+    identifier_fields: null
+    relationships:
+    - target: ThirdParty
+      type: has_one
+  - name: RequestDataThirdPartyPatch
+    properties: 3
+    identifier_fields:
+    - id
+    relationships:
+    - target: ThirdPartyPatch
+      type: has_one
+render:
+  subway: null
+  note: No subway/ diagram exists in this repo yet.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

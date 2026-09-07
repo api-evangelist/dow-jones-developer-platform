@@ -1,0 +1,511 @@
+generated: '2026-09-07'
+method: derived
+source: probed https://api.dowjones.com/mcp (404), https://developer.dowjones.com/mcp (404, HTML), mcp.dowjones.com
+  (DNS NXDOMAIN); searched the developer portal, the dowjones GitHub organization (91 repos) and the Postman
+  workspaces — no Model Context Protocol server of any kind. Tool list below is DERIVED from the nine
+  harvested OpenAPI documents.
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+status: candidate
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: oauth
+  verified: probed
+note: Dow Jones ships NO MCP server, remote or stdio. This is a derived candidate tool surface only —
+  nothing here is callable as MCP today. Any real server would authenticate with the Dow Jones Identity
+  Service bearer token described in authentication/, and would inherit the certification and licence restrictions
+  Dow Jones places on API-derived content, including its explicit prohibition on using Factiva Analytics
+  results to train or refine large language models.
+licence_constraint:
+  statement: Users must not use the results and content from the Factiva Analytics endpoints to train
+    or refine large language models.
+  source: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_analytics_apis-factiva_usage_guidelines
+tool_count: 96
+tools:
+- name: get_calendar_events_id
+  api: calendar-live-api
+  method: GET
+  path: /calendar-events/{id}
+  description: Searches for a single event by its unique identifier.
+- name: get_calendar_events_search
+  api: calendar-live-api
+  method: GET
+  path: /calendar-events/search
+  description: Searches for specific events based on the given filter.
+- name: post_calendar_events_search
+  api: calendar-live-api
+  method: POST
+  path: /calendar-events/search
+  description: Searches for specific events based on the given filters.
+- name: get_taxonomy_calendar_events_countries
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/countries
+  description: Retrieves the list of available country codes.
+- name: get_taxonomy_calendar_events_countries_code
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/countries/{code}
+  description: Searches for the data of an individual country by its ISO code.
+- name: get_taxonomy_calendar_events_regions
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/regions
+  description: Retrieves the list of available region codes and the countries each clusters.
+- name: get_taxonomy_calendar_events_regions_code
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/regions/{code}
+  description: Searches for the data of an individual region by its code.
+- name: get_taxonomy_calendar_events_languages
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/languages
+  description: Retrieves the list of available language codes.
+- name: get_taxonomy_calendar_events_languages_code
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/languages/{code}
+  description: Searches for the data of an individual language by its code.
+- name: get_taxonomy_calendar_events_eventcodes
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/eventcodes
+  description: Retrieves the list of available event type codes.
+- name: get_taxonomy_calendar_events_eventcodes_code
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/eventcodes/{code}
+  description: Searches for the data of an individual event type by its code.
+- name: get_taxonomy_calendar_events_seriescodes
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/seriescodes
+  description: Retrieves the list of available event series codes.
+- name: get_taxonomy_calendar_events_seriescodes_code
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/seriescodes/{code}
+  description: Searches for the data of an individual event series by its code.
+- name: get_taxonomy_calendar_events_eventclass
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/eventclass
+  description: Retrieves the list of available event class codes (subclassification of events).
+- name: get_taxonomy_calendar_events_eventclass_code
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/eventclass/{code}
+  description: Searches for the data of an individual event class by its code.
+- name: get_taxonomy_calendar_events_eventclass_eventcode_eventcode
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/eventclass/eventcode/{eventcode}
+  description: Searches for the list of event classes by event type code.
+- name: get_taxonomy_calendar_events_currency
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/currency
+  description: Retrieves the list of available currency codes.
+- name: get_taxonomy_calendar_events_currency_code
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-events/currency/{code}
+  description: Searches for the data of an individual currency by its code.
+- name: get_calendar_events_
+  api: calendar-live-api
+  method: GET
+  path: /calendar-events/
+  description: Searches for requested events with options for updated events.
+- name: post_calendar_events_
+  api: calendar-live-api
+  method: POST
+  path: /calendar-events/
+  description: Searches for requested events with options for updated events.
+- name: get_calendar_events
+  api: calendar-live-api
+  method: GET
+  path: /calendar-events
+  description: Searches for requested events with options for updated events.
+- name: post_calendar_events
+  api: calendar-live-api
+  method: POST
+  path: /calendar-events
+  description: Searches for requested events with options for updated events
+- name: get_calendar_ipo_events_ids
+  api: calendar-live-api
+  method: GET
+  path: /calendar-ipo-events/{ids}
+  description: Searches for IPO events given a comma-separated list of unique identifiers.
+- name: get_calendar_ipo_events_search
+  api: calendar-live-api
+  method: GET
+  path: /calendar-ipo-events/search
+  description: Searches for specific IPO events based on the given filter.
+- name: post_calendar_ipo_events_search
+  api: calendar-live-api
+  method: POST
+  path: /calendar-ipo-events/search
+  description: Searches for specific IPO events based on the given filters.
+- name: get_taxonomy_calendar_ipo_events_countries
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-ipo-events/countries
+  description: Retrieves the list of available country codes.
+- name: get_taxonomy_calendar_ipo_events_countries_code
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-ipo-events/countries/{code}
+  description: Searches for the data of an individual country by its ISO code.
+- name: get_taxonomy_calendar_ipo_events_exchanges
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-ipo-events/exchanges
+  description: Retrieves the list of available exchanges.
+- name: get_taxonomy_calendar_ipo_events_exchanges_code
+  api: calendar-live-api
+  method: GET
+  path: /taxonomy/calendar-ipo-events/exchanges/{code}
+  description: Searches for the data of an exchange by its ISO code (MIC).
+- name: post_content_realtime_search
+  api: company-news-radar-api
+  method: POST
+  path: /content/realtime/search
+  description: Performs a full search of the PIB search system.
+- name: get_alerts_id
+  api: factiva-content-api
+  method: GET
+  path: /alerts/{id}
+  description: null
+- name: get_refs_ref
+  api: factiva-content-api
+  method: GET
+  path: /refs/{ref}
+  description: null
+- name: get_refs
+  api: factiva-content-api
+  method: GET
+  path: /refs
+  description: null
+- name: get_refs_ref_redirect
+  api: factiva-content-api
+  method: GET
+  path: /refs/{ref}/redirect
+  description: null
+- name: get_refs_ref_binary
+  api: factiva-content-api
+  method: GET
+  path: /refs/{ref}/binary
+  description: null
+- name: Collection_Get
+  api: factiva-content-api
+  method: GET
+  path: /newsletter/editions/{id}
+  description: null
+- name: Collection_Get
+  api: factiva-content-api
+  method: GET
+  path: /newsplus/collections/{code}
+  description: null
+- name: Search_Get
+  api: factiva-content-api
+  method: GET
+  path: /search
+  description: null
+- name: Search_Post
+  api: factiva-content-api
+  method: POST
+  path: /search
+  description: null
+- name: Search_Get
+  api: factiva-content-api
+  method: GET
+  path: /search/refs
+  description: null
+- name: Search_Get
+  api: factiva-content-api
+  method: GET
+  path: /search/realtime
+  description: null
+- name: Search_Get
+  api: factiva-content-api
+  method: GET
+  path: /search/people/{code}
+  description: null
+- name: Search_Get
+  api: factiva-content-api
+  method: GET
+  path: /search/organization/{code}
+  description: null
+- name: Search_Get
+  api: factiva-content-api
+  method: GET
+  path: /search/consumer
+  description: null
+- name: post_search_portfolio
+  api: factiva-content-api
+  method: POST
+  path: /search/portfolio
+  description: Search for content based on portfolio companies
+- name: Search_Post
+  api: factiva-content-api
+  method: POST
+  path: /search/emerging
+  description: Search for the most relevant emerging topics in the last hours
+- name: NewslettersRead
+  api: factiva-newsletters-api
+  method: GET
+  path: /newsletters
+  description: Gets a list of Newsletters
+- name: NewsletterReadById
+  api: factiva-newsletters-api
+  method: GET
+  path: /newsletters/{id}
+  description: Reading a Newsletter by ID
+- name: EditionsRead
+  api: factiva-newsletters-api
+  method: GET
+  path: /newsletters/{id}/editions
+  description: Get all Newsletter Editions
+- name: EditionReadById
+  api: factiva-newsletters-api
+  method: GET
+  path: /newsletters/{id}/editions/{editionId}
+  description: Get a Newsletter's Edition by ID
+- name: GetRealtimeLinkedContentByDrn
+  api: newswires-content-api
+  method: GET
+  path: /content/{drn}
+  description: Retrieves the realtime linked articles by the reference.
+- name: post_content_realtime_search
+  api: newswires-real-time-api
+  method: POST
+  path: /content/realtime/search
+  description: null
+- name: GetContentByRef
+  api: newswires-top-stories-api
+  method: GET
+  path: /content/{ref}
+  description: "Gets a single content by its ref ID –a DowJones Resource Name (DRN).\r\nExamples of ref\
+    \ ID (DRN ID): drn:content.article.BL-PENTAB-3839"
+- name: GetContentCollectionByRef
+  api: newswires-top-stories-api
+  method: GET
+  path: /content-collections/{ref}
+  description: Gets the content of an entitled content-collection by its DRN ID
+- name: GetCollectionIdList
+  api: newswires-top-stories-api
+  method: GET
+  path: /content-collections
+  description: Gets a full list of entitled content-collection IDs
+- name: GetBusinessUnits
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /business-units
+  description: Retrieves all business units
+- name: GetFields
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /third-parties/properties/fields
+  description: Retrieves all fields (optional filter)
+- name: GetGroups
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /groups
+  description: Retrieves all groups (optional paging)
+- name: GetLists
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /lists
+  description: Retrieves all lists
+- name: GetList
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /lists/{id}
+  description: Retrieves a list by id
+- name: GetProcesses
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /third-parties/processes
+  description: Retrieves all processes (optional paging)
+- name: PostThirdParty
+  api: riskcenter-third-party-api-0-1
+  method: POST
+  path: /third-parties
+  description: Creates a new third party
+- name: GetThirdParties
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /third-parties
+  description: Retrieves all third-parties (optional filter)
+- name: PatchThirdParty
+  api: riskcenter-third-party-api-0-1
+  method: PATCH
+  path: /third-parties/{id}
+  description: Updates an existing third party
+- name: DeleteThirdParty
+  api: riskcenter-third-party-api-0-1
+  method: DELETE
+  path: /third-parties/{id}
+  description: Deletes a third party
+- name: GetThirdParty
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /third-parties/{id}
+  description: Retrieves a third party by id
+- name: GetThirdPartyProperties
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /third-parties/{thirdpartyid}/properties
+  description: Retrieves all properties for a third party (optional filter)
+- name: PutThirdPartyProperties
+  api: riskcenter-third-party-api-0-1
+  method: PUT
+  path: /third-parties/{thirdpartyid}/properties/{id}
+  description: Updates a property
+- name: PutBatchThirdPartyProperties
+  api: riskcenter-third-party-api-0-1
+  method: PUT
+  path: /third-parties/{thirdpartyid}/properties/batch-update
+  description: Updates multiple properties
+- name: GetMonitoredEntities
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /third-parties/{thirdpartyid}/monitored-entities
+  description: Retrieves all monitored entities for the given third party (optional paging)
+- name: PostMonitoredEntities
+  api: riskcenter-third-party-api-0-1
+  method: POST
+  path: /third-parties/{thirdpartyid}/monitored-entities
+  description: Adds a new monitored entity
+- name: DeleteMonitoredEntities
+  api: riskcenter-third-party-api-0-1
+  method: DELETE
+  path: /third-parties/{thirdpartyid}/monitored-entities/{id}
+  description: Removes a monitored entity
+- name: GetMonitoredEntitiesIdTypes
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /third-parties/monitored-entities/id-types
+  description: Retrieves all monitored entity id types
+- name: GetMonitoredEntitiesEntityTypes
+  api: riskcenter-third-party-api-0-1
+  method: GET
+  path: /third-parties/monitored-entities/types
+  description: Retrieves all monitored entity types
+- name: GetBusinessUnits
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /business-units
+  description: Retrieves all business units
+- name: GetFields
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /third-parties/properties/fields
+  description: Retrieves all fields (optional filter)
+- name: GetFieldList
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /third-parties/properties/fields/{id}/list
+  description: Get a List relationship for a Field
+- name: get_files_fileId
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /files/{fileId}
+  description: Downloads a file.
+- name: post_files
+  api: riskcenter-third-party-api-0-2
+  method: POST
+  path: /files
+  description: Uploads a file.
+- name: GetGroups
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /groups
+  description: Retrieves all groups (optional paging)
+- name: GetLists
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /lists
+  description: Retrieves all lists
+- name: GetList
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /lists/{id}
+  description: Retrieves a list by id
+- name: GetProcesses
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /third-parties/processes
+  description: Retrieves all processes (optional paging)
+- name: PostThirdParty
+  api: riskcenter-third-party-api-0-2
+  method: POST
+  path: /third-parties
+  description: Creates a new third party
+- name: GetThirdParties
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /third-parties
+  description: Retrieves all third-parties (optional filter)
+- name: PatchThirdParty
+  api: riskcenter-third-party-api-0-2
+  method: PATCH
+  path: /third-parties/{id}
+  description: Updates an existing third party
+- name: DeleteThirdParty
+  api: riskcenter-third-party-api-0-2
+  method: DELETE
+  path: /third-parties/{id}
+  description: Deletes a third party
+- name: GetThirdParty
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /third-parties/{id}
+  description: Retrieves a third party by id
+- name: GetThirdPartyProperties
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /third-parties/{thirdpartyid}/properties
+  description: Retrieves all properties for a third party (optional filter)
+- name: PutThirdPartyProperties
+  api: riskcenter-third-party-api-0-2
+  method: PUT
+  path: /third-parties/{thirdpartyid}/properties/{id}
+  description: Updates a property
+- name: PutBatchThirdPartyProperties
+  api: riskcenter-third-party-api-0-2
+  method: PUT
+  path: /third-parties/{thirdpartyid}/properties/batch-update
+  description: Updates multiple properties
+- name: GetMonitoredEntities
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /third-parties/{thirdpartyid}/monitored-entities
+  description: Retrieves all monitored entities for the given third party (optional paging)
+- name: PostMonitoredEntities
+  api: riskcenter-third-party-api-0-2
+  method: POST
+  path: /third-parties/{thirdpartyid}/monitored-entities
+  description: Adds a new monitored entity
+- name: DeleteMonitoredEntities
+  api: riskcenter-third-party-api-0-2
+  method: DELETE
+  path: /third-parties/{thirdpartyid}/monitored-entities/{id}
+  description: Removes a monitored entity
+- name: GetMonitoredEntitiesIdTypes
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /third-parties/monitored-entities/id-types
+  description: Retrieves all monitored entity id types
+- name: GetMonitoredEntitiesEntityTypes
+  api: riskcenter-third-party-api-0-2
+  method: GET
+  path: /third-parties/monitored-entities/types
+  description: Retrieves all monitored entity types
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

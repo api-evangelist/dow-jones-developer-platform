@@ -1,0 +1,55 @@
+generated: '2026-09-07'
+method: searched
+source: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_analytics_apis-factiva_streams_api-factiva_streams_3_0
+  (200), https://developer.dowjones.com/documents/site-docs-getting_started-api_essentials-getting_a_response
+  (200)
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+asyncapi_published: false
+surface_type: pubsub-streaming
+note: 'Dow Jones publishes NO AsyncAPI document and NO HTTP webhooks. It does operate a real push event
+  surface: Factiva Streams, a publish/subscribe model in which a customer creates a filtered streaming
+  instance over a REST endpoint and then consumes JSON event messages through a Dow Jones streaming client
+  rather than polling. This file records that surface honestly. No `Webhooks` pointer is wired in apis.yml,
+  because Dow Jones does not ship webhooks and asserting one would be a claim it has not made.'
+event_surface:
+  name: Factiva Streams
+  version: '3.1'
+  model: publish/subscribe
+  management_api: https://api.dowjones.com/streams (3.0+; the 2.x paths were https://api.dowjones.com/alpha/streams)
+  version_header: X-API-VERSION on all POST requests to reach 3.0 behaviour
+  message_format: JSON
+  consumption: via a Dow Jones-supplied streaming client application subscribing to the stream subscription
+  client_libraries:
+  - dj-dna-streams-python (GitHub only)
+  - dj-dna-streaming-javascript (GitHub only)
+  - factiva-analytics (PyPI 0.3.0, 2022-11-29)
+  filtering:
+    query_language: SQL-like where / select clauses over Factiva metadata
+    objects:
+    - includes
+    - excludes
+    - includesList
+    - excludesList
+    example_where: language_code = 'en' AND publisher_name = 'The Economist Newspaper Limited (The Economist)'
+    example_select:
+    - document_type
+    - publisher_name
+    - publication_datetime
+    - title
+    - body
+    - copyright
+    - word_count
+  related: Factiva Snapshots — a one-time historical extraction over the same query language
+  docs: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_analytics_apis-factiva_streams_api
+webhooks:
+  published: false
+  note: No callback URL registration and no webhooks/callbacks object in any of the nine harvested OpenAPI
+    documents.
+feeds:
+  note: Dow Jones also ships large file-based feed products (Newswires Feeds, Factiva Select, Risk & Compliance
+    watchlist feeds) delivered over SFTP/cloud storage rather than as an API event surface.
+  docs: https://developer.dowjones.com/documents/site-docs-getting_started-feed_essentials
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

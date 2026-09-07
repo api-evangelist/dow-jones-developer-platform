@@ -1,0 +1,33 @@
+﻿<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:bind="urn:factiva:developer:v3_16:parsers:bind" targetNamespace="urn:factiva:developer:v3_16:parsers:wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/">
+	<import namespace="urn:factiva:developer:v3_16:parsers:bind" location="fdkparsers_bindings.wsdl" />
+	<service name="FactivaDevelopersKit">
+		<documentation>Factiva Developers Kit 3.16</documentation>
+		<port name="CompanyProfileSoap" binding="bind:CompanyProfileSoap">
+			<soap:address location="https://developer.factiva.com/3.16/CompanyProfile/companyprofile.asmx" />
+		</port>
+		<port name="MarketDataSoap" binding="bind:MarketDataSoap">
+			<soap:address location="https://developer.factiva.com/3.16/MarketData/marketdata.asmx" />
+		</port>
+		<port name="MembershipSoap" binding="bind:MembershipSoap">
+			<soap:address location="https://developer.factiva.com/3.16/Membership/membership.asmx" />
+		</port>
+		<port name="NewsstandSoap" binding="bind:NewsstandSoap">
+			<soap:address location="https://developer.factiva.com/3.16/Newsstand/newsstand.asmx" />
+		</port>
+		<port name="RegistrationSoap" binding="bind:RegistrationSoap">
+			<soap:address location="https://developer.factiva.com/3.16/Registration/registration.asmx" />
+		</port>
+		<port name="RetrievalSoap" binding="bind:RetrievalSoap">
+			<soap:address location="https://developer.factiva.com/3.16/Retrieval/retrieval.asmx" />
+		</port>
+		<port name="SearchSoap" binding="bind:SearchSoap">
+			<soap:address location="https://developer.factiva.com/3.16/Search/search.asmx" />
+		</port>
+		<port name="TaxonomySoap" binding="bind:TaxonomySoap">
+			<soap:address location="https://developer.factiva.com/3.16/Taxonomy/taxonomy.asmx" />
+		</port>
+		<port name="TrackSoap" binding="bind:TrackSoap">
+			<soap:address location="https://developer.factiva.com/3.16/Track/track.asmx" />
+		</port>
+	</service>
+</definitions>

@@ -1,0 +1,119 @@
+generated: '2026-09-07'
+method: searched
+source: https://developer.dowjones.com/documents/site-docs-getting_started-sessions_and_authentication
+  (200), https://developer.dowjones.com/documents/site-docs-newswires_apis-oauth-migration-guide (200),
+  https://accounts.dowjones.com/.well-known/openid-configuration (200), plus the securitySchemes of the
+  nine OpenAPI documents in openapi/
+docs: https://developer.dowjones.com/documents/site-docs-getting_started-sessions_and_authentication
+summary:
+  types:
+  - oauth2
+  - openIdConnect
+  - http
+  - apiKey
+  api_key_in:
+  - header
+  primary: OAuth 2.0 bearer token obtained from the Dow Jones Identity Service
+  legacy: A per-account "user-key" header is still accepted on the Factiva Analytics endpoints and is
+    being migrated to OAuth
+identity_service:
+  name: Dow Jones Identity Service
+  issuer: https://sso.accounts.dowjones.com/
+  discovery: https://accounts.dowjones.com/.well-known/openid-configuration
+  token_endpoint: https://accounts.dowjones.com/oauth2/v1/token
+  authorize_endpoint: https://accounts.dowjones.com/oauth2/v1/authorize
+  logout_endpoint: https://accounts.dowjones.com/oauth2/v1/logout
+  eu_token_endpoint: https://eu.accounts.dowjones.com/oauth2/v1/token
+  riskcenter_third_party_token_endpoint: https://auth-thirdparty.riskcenter.dowjones.com/connect/token
+  jwks_uri: https://sso.accounts.dowjones.com/.well-known/jwks.json
+  registration_endpoint: https://sso.accounts.dowjones.com/register
+  grant_types_supported:
+  - authorization_code
+  - implicit
+  - refresh_token
+  - password
+  - client_credentials
+  - urn:ietf:params:oauth:grant-type:jwt-bearer
+  - urn:ietf:params:oauth:grant-type:saml2-bearer
+  code_challenge_methods_supported:
+  - plain
+  - S256
+  token_endpoint_auth_methods_supported:
+  - client_secret_basic
+  - client_secret_post
+  - client_secret_jwt
+  - private_key_jwt
+  - none
+  id_token_signing_alg_values_supported:
+  - HS256
+  - RS256
+  flows_documented:
+  - Service Account Integration (server-to-server)
+  - Authorization Code Grant
+  - Implicit Grant
+token_exchange:
+  note: 'Dow Jones uses a documented TWO-STEP exchange: the refresh token buys an intermediate access
+    token, which is then presented as a jwt-bearer assertion to obtain the bearer token the APIs accept.
+    An agent that stops after step 1 holds a token that will not authenticate any Dow Jones API call.'
+  steps:
+  - step: 1
+    endpoint: POST https://accounts.dowjones.com/oauth2/v1/token
+    grant_type: refresh_token
+    returns: intermediate access_token
+    lifetime_seconds: 432000
+  - step: 2
+    endpoint: POST https://accounts.dowjones.com/oauth2/v1/token
+    grant_type: urn:ietf:params:oauth:grant-type:jwt-bearer
+    assertion: the intermediate token from step 1
+    scope: openid pib
+    returns: FINAL_ACCESS_TOKEN (Bearer)
+    lifetime_seconds: 3600
+  - step: 3
+    usage: 'Authorization: Bearer <FINAL_ACCESS_TOKEN> on every api.dowjones.com request'
+  source: https://developer.dowjones.com/documents/site-docs-newswires_apis-oauth-migration-guide
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/dow-jones-developer-platform-calendar-live-api-openapi.yml
+  - openapi/dow-jones-developer-platform-company-news-radar-api-openapi.yml
+  - openapi/dow-jones-developer-platform-factiva-newsletters-api-openapi.yml
+  - openapi/dow-jones-developer-platform-newswires-content-api-openapi.yml
+  - openapi/dow-jones-developer-platform-newswires-real-time-api-openapi.yml
+  - openapi/dow-jones-developer-platform-newswires-top-stories-api-openapi.yml
+- name: Bearer
+  type: apiKey
+  in: header
+  parameter: Authorization
+  sources:
+  - openapi/dow-jones-developer-platform-factiva-content-api-openapi.yml
+  - openapi/dow-jones-developer-platform-riskcenter-third-party-api-0-1-openapi.yml
+  - openapi/dow-jones-developer-platform-riskcenter-third-party-api-0-2-openapi.yml
+  note: Declared as an apiKey header named Authorization; the description in the RiskCenter specs states
+    the value is "bearer {token}".
+- name: user-key
+  type: apiKey
+  in: header
+  parameter: user-key
+  note: Legacy per-account key still accepted by the Factiva Analytics endpoints (Streams, Snapshots).
+    Documented in API Essentials and being migrated to OAuth per the OAuth Migration Guide, which states
+    both methods are supported during the transition.
+  sources:
+  - https://developer.dowjones.com/documents/site-docs-getting_started-api_essentials-getting_a_response
+- name: FDK session
+  type: soap-session
+  note: The Factiva Developer Kit SOAP services authenticate with PerformLogin / PerformEncryptedIDLogin
+    against the Membership service and carry a session id.
+  sources:
+  - https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_soap
+credential_acquisition:
+  self_serve: false
+  note: Credentials are not self-serve. Dow Jones documents contacting a representative or submitting
+    the trial-request form.
+  url: https://developer.dowjones.com/request-trial/
+  status: 200
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

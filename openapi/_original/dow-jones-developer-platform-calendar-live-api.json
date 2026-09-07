@@ -1,0 +1,4080 @@
+{
+ "openapi": "3.0.1",
+ "info": {
+  "title": "Calendar Live API",
+  "description": "Calendar Live API",
+  "version": "1.1.9"
+ },
+ "servers": [
+  {
+   "url": "https://api.dowjones.com/"
+  }
+ ],
+ "tags": [],
+ "paths": {
+  "/calendar-events/{id}": {
+   "get": {
+    "tags": [
+     "Calendar Events"
+    ],
+    "summary": "Searches for a single event by its unique identifier.",
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "Number that uniquely identifies the event.",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "filter[event_language]",
+      "in": "query",
+      "description": "Translate descriptions to this language if translation is available, otherwise show English version",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "options[show_ecoinfo]",
+      "in": "query",
+      "description": "Include ecoinfo as part of the event result.",
+      "schema": {
+       "type": "boolean",
+       "enum": [
+        true,
+        false
+       ]
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventsModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/calendar-events/search": {
+   "get": {
+    "tags": [
+     "Calendar Events"
+    ],
+    "summary": "Searches for specific events based on the given filter.",
+    "parameters": [
+     {
+      "name": "filter[has_key_events_only]",
+      "in": "query",
+      "description": "Include only macroeconomic events that Dow Jones editors have classified as having a market impact. This categorization is based on news judgement and is updated on news merit.",
+      "schema": {
+       "type": "boolean",
+       "enum": [
+        true,
+        false
+       ]
+      }
+     },
+     {
+      "name": "filter[has_confirmed_events_only]",
+      "in": "query",
+      "description": "Include only events whose date and time have been confirmed.",
+      "schema": {
+       "type": "boolean",
+       "enum": [
+        true,
+        false
+       ]
+      }
+     },
+     {
+      "name": "filter[time_specified]",
+      "in": "query",
+      "description": "Filter events based on time specified",
+      "schema": {
+       "type": "boolean",
+       "enum": [
+        true,
+        false
+       ]
+      }
+     },
+     {
+      "name": "filter[country]",
+      "in": "query",
+      "description": "ORed list of countries associated with the event (e.g. BH-Bahrain, AZ-Azerbaijan). These are countries related to the entity that provides data or sponsorship for the event. Use ISO codes and separate them with new lines when providing multiple codes.",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 2,
+        "type": "string"
+       }
+      }
+     },
+     {
+      "name": "filter[region]",
+      "in": "query",
+      "description": "ORed list of regions associated with the event (e.g. EMEM, EU, G10). These are regions related to the entity that provides data or sponsorship for the event. Use new lines when providing multiple region codes.",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 2,
+        "type": "string"
+       }
+      }
+     },
+     {
+      "name": "filter[event_code]",
+      "in": "query",
+      "description": "Event type: ICC-Corporate events, IEP-Economic and Political events, IDC-Treasury Auctions.",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 0,
+        "type": "string",
+        "enum": [
+         "ICC",
+         "IEP",
+         "IDC"
+        ]
+       }
+      }
+     },
+     {
+      "name": "filter[series_code]",
+      "in": "query",
+      "description": "ORed list of event series codes (e.g. TrdBal-Trade Balance, ImptPx-Import Prices). Series codes enable searching for historical and upcoming repeatable events. Use new lines when providing multiple series codes.",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 2,
+        "type": "string"
+       }
+      }
+     },
+     {
+      "name": "filter[event_class]",
+      "in": "query",
+      "description": "Single classification of the event (e.g. IEP_STAT-Statistics and Economic Indicators, ICC_ANL-Earnings/Analysts Calls and GMs).",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 0,
+        "type": "string",
+        "enum": [
+         "ICC_ANAL",
+         "ICC_ANL",
+         "ICC_BRO",
+         "ICC_DIV",
+         "ICC_EARN",
+         "ICC_EXC",
+         "ICC_IND",
+         "ICC_IPO",
+         "ICC_OTH",
+         "ICC_SPLT",
+         "IEP_CAN",
+         "IEP_CONF",
+         "IEP_DEBT",
+         "IEP_EVT",
+         "IEP_HOL",
+         "IEP_IND",
+         "IEP_POL",
+         "IEP_STAT",
+         "IEP_US",
+         "IDC_ACT",
+         "IDC_ISS"
+        ]
+       }
+      }
+     },
+     {
+      "name": "filter[start_date]",
+      "in": "query",
+      "description": "Earliest date and time of interest, yyyy-MM-dd'T'HH:mm:ss'Z'.",
+      "schema": {
+       "type": "string",
+       "format": "date-time"
+      }
+     },
+     {
+      "name": "filter[end_date]",
+      "in": "query",
+      "description": "Latest date and time of interest, yyyy-MM-dd'T'HH:mm:ss'Z'.",
+      "schema": {
+       "type": "string",
+       "format": "date-time"
+      }
+     },
+     {
+      "name": "filter[ticker]",
+      "in": "query",
+      "description": "ORed list of Newswires codes. Use new lines when providing multiple ticker codes.",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      }
+     },
+     {
+      "name": "filter[isin]",
+      "in": "query",
+      "description": "ORed list of ISINs. Use new lines when providing multiple isin codes.",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 2,
+        "type": "string"
+       }
+      }
+     },
+     {
+      "name": "filter[event_language]",
+      "in": "query",
+      "description": "Translate descriptions to this language if translation is available; otherwise, show English version.",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "maxItems": 1,
+       "minItems": 0,
+       "type": "array",
+       "items": {
+        "minLength": 0,
+        "type": "string",
+        "enum": [
+         "",
+         "zh",
+         "ar",
+         "it",
+         "de",
+         "jp"
+        ]
+       }
+      }
+     },
+     {
+      "name": "options[show_ecoinfo]",
+      "in": "query",
+      "description": "Include ecoinfo as part of the events results.",
+      "schema": {
+       "type": "boolean",
+       "enum": [
+        true,
+        false
+       ]
+      }
+     },
+     {
+      "name": "page[limit]",
+      "in": "query",
+      "description": "Maximum number of results for a single request, max size 1000.",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "page[offset]",
+      "in": "query",
+      "description": "Paging offset, the event ID given serves as a reference point to request additional events (beyond what was returned according to the limit value). The response does not include the reference ID. To page backward to get older events, make the event number negative.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventsModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   },
+   "post": {
+    "tags": [
+     "Calendar Events"
+    ],
+    "summary": "Searches for specific events based on the given filters.",
+    "requestBody": {
+     "description": "Criteria",
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/postParams"
+       }
+      }
+     },
+     "required": false
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventsModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "x-codegen-request-body-name": "Criteria"
+   }
+  },
+  "/taxonomy/calendar-events/countries": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Retrieves the list of available country codes.",
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterCountryModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/countries/{code}": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Searches for the data of an individual country by its ISO code.",
+    "parameters": [
+     {
+      "name": "code",
+      "in": "path",
+      "description": "ISO country code (e.g. IN-India, BR-Brazil).",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterCountryModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/regions": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Retrieves the list of available region codes and the countries each clusters.",
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterRegionModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/regions/{code}": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Searches for the data of an individual region by its code.",
+    "parameters": [
+     {
+      "name": "code",
+      "in": "path",
+      "description": "Region code (e.g. G10, EMEM, EU).",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterRegionModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/languages": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Retrieves the list of available language codes.",
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/languages/{code}": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Searches for the data of an individual language by its code.",
+    "parameters": [
+     {
+      "name": "code",
+      "in": "path",
+      "description": "Language code (e.g. ar-Arabic, de-German).",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/eventcodes": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Retrieves the list of available event type codes.",
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/eventcodes/{code}": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Searches for the data of an individual event type by its code.",
+    "parameters": [
+     {
+      "name": "code",
+      "in": "path",
+      "description": "Event type code: ICC-Corporate events, IEP-Economic and Political events, IDC-Treasury Auctions.",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/seriescodes": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Retrieves the list of available event series codes.",
+    "parameters": [
+     {
+      "name": "filter[event_code]",
+      "in": "query",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 0,
+        "type": "string",
+        "enum": [
+         "ICC",
+         "IEP",
+         "IDC"
+        ]
+       }
+      }
+     },
+     {
+      "name": "filter[country]",
+      "in": "query",
+      "description": "Include only events from these countries (ISO Code)",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 2,
+        "type": "string"
+       }
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/seriescodes/{code}": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Searches for the data of an individual event series by its code.",
+    "parameters": [
+     {
+      "name": "code",
+      "in": "path",
+      "description": "Event series code, which enables searching for historical and upcoming repeatable events (e.g. TrdBal-Trade Balance, ImptPx-Import Prices).",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/eventclass": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Retrieves the list of available event class codes (subclassification of events).",
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/eventclass/{code}": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Searches for the data of an individual event class by its code.",
+    "parameters": [
+     {
+      "name": "code",
+      "in": "path",
+      "description": "Event class code that provides a single classification of the event (e.g. IEP_STAT-Statistics and Economic Indicators, ICC_ANL-Earnings/Analysts Calls and GMs).",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/eventclass/eventcode/{eventcode}": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Searches for the list of event classes by event type code.",
+    "parameters": [
+     {
+      "name": "eventcode",
+      "in": "path",
+      "description": "Event type code: ICC-Corporate events, IEP-Economic and Political events, IDC-Treasury Auctions.",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/currency": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Retrieves the list of available currency codes.",
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-events/currency/{code}": {
+   "get": {
+    "tags": [
+     "Calendar Taxonomy"
+    ],
+    "summary": "Searches for the data of an individual currency by its code.",
+    "parameters": [
+     {
+      "name": "code",
+      "in": "path",
+      "description": "Currency code (e.g. BRE-Brazilian Cruzeiro, BGN-Bulgarian Lev).",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/calendar-events/": {
+   "get": {
+    "tags": [
+     "Calendar Events"
+    ],
+    "summary": "Searches for requested events with options for updated events.",
+    "parameters": [
+     {
+      "name": "filter[id]",
+      "in": "query",
+      "description": "ORed list of event IDs. Separate each event ID with a comma when providing multiple events.",
+      "required": true,
+      "style": "form",
+      "explode": false,
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "integer"
+       }
+      }
+     },
+     {
+      "name": "filter[last_updated_time]",
+      "in": "query",
+      "description": "Search only for events that have been updated since this date and time, (yyyy-MM-dd'T'HH:mm:ss'Z').",
+      "schema": {
+       "type": "string",
+       "format": "date-time"
+      }
+     },
+     {
+      "name": "filter[has_updates]",
+      "in": "query",
+      "description": "Search only for events that have been updated.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "filter[event_language]",
+      "in": "query",
+      "description": "Translate descriptions to this language if translation is available; otherwise, show English version.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "options[show_ecoinfo]",
+      "in": "query",
+      "description": "Include ecoinfo as part of the events results.",
+      "schema": {
+       "type": "boolean",
+       "enum": [
+        true,
+        false
+       ]
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventsModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   },
+   "post": {
+    "tags": [
+     "Calendar Events"
+    ],
+    "summary": "Searches for requested events with options for updated events.",
+    "requestBody": {
+     "description": "Criteria",
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/eventsPostParams"
+       }
+      }
+     },
+     "required": false
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventsModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "x-codegen-request-body-name": "Criteria"
+   }
+  },
+  "/calendar-events": {
+   "get": {
+    "tags": [
+     "Calendar Events"
+    ],
+    "summary": "Searches for requested events with options for updated events.",
+    "parameters": [
+     {
+      "name": "filter[id]",
+      "in": "query",
+      "description": "ORed list of event IDs. Separate each event ID with a comma when providing multiple events.",
+      "required": true,
+      "style": "form",
+      "explode": false,
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "integer"
+       }
+      }
+     },
+     {
+      "name": "filter[last_updated_time]",
+      "in": "query",
+      "description": "Search only for events that have been updated since this date and time, (yyyy-MM-dd'T'HH:mm:ss'Z').",
+      "schema": {
+       "type": "string",
+       "format": "date-time"
+      }
+     },
+     {
+      "name": "filter[has_updates]",
+      "in": "query",
+      "description": "Search only for events that have been updated.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "filter[event_language]",
+      "in": "query",
+      "description": "Translate descriptions to this language if translation is available; otherwise, show English version.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "options[show_ecoinfo]",
+      "in": "query",
+      "description": "Include ecoinfo as part of the events results.",
+      "schema": {
+       "type": "boolean",
+       "enum": [
+        true,
+        false
+       ]
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventsModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   },
+   "post": {
+    "tags": [
+     "Calendar Events"
+    ],
+    "summary": "Searches for requested events with options for updated events",
+    "requestBody": {
+     "description": "Criteria",
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/eventsPostParams"
+       }
+      }
+     },
+     "required": false
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventsModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "x-codegen-request-body-name": "Criteria"
+   }
+  },
+  "/calendar-ipo-events/{ids}": {
+   "get": {
+    "tags": [
+     "IPO Calendar Events"
+    ],
+    "summary": "Searches for IPO events given a comma-separated list of unique identifiers.",
+    "parameters": [
+     {
+      "name": "ids",
+      "in": "path",
+      "description": "Comma-separated list of unique identifiers corresponding to the IPO events you want to retrieve.",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ipoEventsModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/calendar-ipo-events/search": {
+   "get": {
+    "tags": [
+     "IPO Calendar Events"
+    ],
+    "summary": "Searches for specific IPO events based on the given filter.",
+    "parameters": [
+     {
+      "name": "filter[date_type]",
+      "in": "query",
+      "description": "Date type.",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 0,
+        "type": "string",
+        "enum": [
+         "PUBLISH_DATE",
+         "CREATED_DATE",
+         "UPDATED_DATE",
+         "LIST_DATE"
+        ]
+       }
+      }
+     },
+     {
+      "name": "filter[start_date]",
+      "in": "query",
+      "description": "Earliest date and time of interest, yyyy-MM-dd'T'HH:mm:ss'Z'.",
+      "schema": {
+       "type": "string",
+       "format": "date-time"
+      }
+     },
+     {
+      "name": "filter[end_date]",
+      "in": "query",
+      "description": "Latest date and time of interest, yyyy-MM-dd'T'HH:mm:ss'Z'.",
+      "schema": {
+       "type": "string",
+       "format": "date-time"
+      }
+     },
+     {
+      "name": "filter[issuer_country]",
+      "in": "query",
+      "description": "ORed list of issuer countries associated with the IPO event (e.g. BH-Bahrain, AZ-Azerbaijan). These are countries related to the entity that provides data or sponsorship for the  IPO event. Use ISO codes and separate them with new lines when providing multiple codes.",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 2,
+        "type": "string"
+       }
+      }
+     },
+     {
+      "name": "filter[exchange_country]",
+      "in": "query",
+      "description": "ORed list of exchange countries associated with the IPO event (e.g. BH-Bahrain, AZ-Azerbaijan). These are countries related to the entity that provides data or sponsorship for the  IPO event. Use ISO codes and separate them with new lines when providing multiple codes.",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 2,
+        "type": "string"
+       }
+      }
+     },
+     {
+      "name": "filter[exchange]",
+      "in": "query",
+      "description": "ORed list of exchange associated with the IPO event (e.g. BH-Bahrain, AZ-Azerbaijan). Use ISO codes (MIC) and separate them with new lines when providing multiple codes.",
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "minLength": 2,
+        "type": "string"
+       }
+      }
+     },
+     {
+      "name": "page[limit]",
+      "in": "query",
+      "description": "Maximum number of results for a single request, max size 1000.",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "page[offset]",
+      "in": "query",
+      "description": "Paging offset, the IPO event ID given serves as a reference point to request additional events (beyond what was returned according to the limit value). The response does not include the reference ID. To page backward to get older events, make the event number negative.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ipoEventsModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   },
+   "post": {
+    "tags": [
+     "IPO Calendar Events"
+    ],
+    "summary": "Searches for specific IPO events based on the given filters.",
+    "requestBody": {
+     "description": "Criteria",
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ipoPostParams"
+       }
+      }
+     },
+     "required": false
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ipoEventsModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "x-codegen-request-body-name": "Criteria"
+   }
+  },
+  "/taxonomy/calendar-ipo-events/countries": {
+   "get": {
+    "tags": [
+     "IPO Calendar Taxonomy"
+    ],
+    "summary": "Retrieves the list of available country codes.",
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterCountryModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-ipo-events/countries/{code}": {
+   "get": {
+    "tags": [
+     "IPO Calendar Taxonomy"
+    ],
+    "summary": "Searches for the data of an individual country by its ISO code.",
+    "parameters": [
+     {
+      "name": "code",
+      "in": "path",
+      "description": "ISO country code (e.g. IN-India, BR-Brazil).",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterCountryModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-ipo-events/exchanges": {
+   "get": {
+    "tags": [
+     "IPO Calendar Taxonomy"
+    ],
+    "summary": "Retrieves the list of available exchanges.",
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterExchangeModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  },
+  "/taxonomy/calendar-ipo-events/exchanges/{code}": {
+   "get": {
+    "tags": [
+     "IPO Calendar Taxonomy"
+    ],
+    "summary": "Searches for the data of an exchange by its ISO code (MIC).",
+    "parameters": [
+     {
+      "name": "code",
+      "in": "path",
+      "description": "ISO exchange code (e.g. XNYS-New York Stock Exchange, XMEX-Mexican Stock Exchange).",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/eventFilterExchangeModel"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Bad Request: Incorrect Parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized Access.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Not Found: No resource found for the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "500": {
+      "description": "Internal Server Error: Server encountered an unexpected condition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     },
+     "503": {
+      "description": "Service Unavailable: Server is currently unable to handle the request.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ]
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "eventsModel": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/eventDataModel"
+     },
+     "meta": {
+      "type": "object",
+      "properties": {
+       "count": {
+        "type": "integer"
+       },
+       "total_count": {
+        "type": "integer"
+       },
+       "offset": {
+        "type": "object",
+        "properties": {
+         "prev": {
+          "type": "integer"
+         },
+         "next": {
+          "type": "integer"
+         }
+        }
+       },
+       "attribution": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "ipoEventsModel": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/ipoEventDataModel"
+     },
+     "meta": {
+      "type": "object",
+      "properties": {
+       "count": {
+        "type": "integer"
+       },
+       "total_count": {
+        "type": "integer"
+       },
+       "offset": {
+        "type": "object",
+        "properties": {
+         "prev": {
+          "type": "integer"
+         },
+         "next": {
+          "type": "integer"
+         }
+        }
+       },
+       "attribution": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "eventDataModel": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string"
+     },
+     "id": {
+      "type": "integer",
+      "description": "Number that uniquely identifies an event."
+     },
+     "attributes": {
+      "type": "object",
+      "properties": {
+       "is_confirmed": {
+        "type": "boolean",
+        "description": "Whether the event has been confirmed for this date and time"
+       },
+       "is_key_event": {
+        "type": "boolean",
+        "description": "Whether a macroeconomic event has been identified by the Dow Jones News team as having a market impact, based on news judgement and updated on news merit."
+       },
+       "is_updating": {
+        "type": "boolean",
+        "description": "For events that release actual data, whether the data will be updated with new figures. This Updating flag is different from the Elementized flag. The Updating flag is set for all the Elementized events and for any additional events that are manually or otherwise updated with actual figures by Dow Jones."
+       },
+       "last_modified": {
+        "type": "string",
+        "description": "Date and time when the last update occurred."
+       },
+       "date_local": {
+        "type": "string",
+        "description": "Date and time when the event actually takes place in its location, including adjustments for daylight savings time."
+       },
+       "date_gmt": {
+        "type": "string",
+        "description": "The event's date and time in GMT, not considering daylight savings time."
+       },
+       "time_specified": {
+        "type": "boolean"
+       },
+       "scheduled_time": {
+        "type": "string",
+        "description": "Optional. Either a period in which the event is likely to occur or an indication that the time is unknown. The period is relative to the event's local time. Valid values: BMO-Before Market Opening, DMT-During Market Time, AMC-After Market Close, NA-Not Applicable. Specified only when the event's time is not confirmed."
+       },
+       "company_url": {
+        "type": "string",
+        "description": "Optional. URL of the company related to the event. Note: It is Null for economic events."
+       },
+       "venue": {
+        "type": "string",
+        "description": "Optional. Location where the event takes place."
+       },
+       "country": {
+        "type": "object",
+        "properties": {
+         "dj_country": {
+          "type": "string",
+          "description": "Dow Jones Newswires country code that can be used to search and filter Dow Jones news."
+         },
+         "iso_country": {
+          "type": "string",
+          "description": "ISO country code."
+         },
+         "titan_country": {
+          "type": "string",
+          "description": "Calendar Live titan country code is the one primarily used. It is the reference country code for Dow Jones Calendar Live feed implementation via Dow Jones Newswires low latency platform."
+         }
+        },
+        "description": "Country related to the entity that provides data or sponsorship for the event."
+       },
+       "regions": {
+        "type": "array",
+        "description": "Regions related to the entity that provides data or sponsorship for the event.",
+        "items": {
+         "type": "string"
+        }
+       },
+       "tickers": {
+        "type": "array",
+        "description": "Optional. Company ticker symbols. Note: Can also store general Newswires codes.",
+        "items": {
+         "type": "string"
+        }
+       },
+       "isin": {
+        "type": "string",
+        "description": "Optional. Company's International Securities Identification Number (ISIN). For Treasury Auctions, it may store a Committee on Uniform Securities Identification Procedures (CUSIP) code."
+       },
+       "news_code": {
+        "type": "string",
+        "description": "Optional. Newswires code that can be used to link real time news from Dow Jones Newswires."
+       },
+       "organization_name": {
+        "type": "string",
+        "description": "Optional. Name of the entity holding the event."
+       },
+       "period": {
+        "type": "string",
+        "description": "Optional. Time frame covered by the data."
+       },
+       "description": {
+        "type": "string",
+        "description": "Defines the event."
+       },
+       "long_description": {
+        "type": "string",
+        "description": "Detailed definition of the event."
+       },
+       "dj_event_name": {
+        "type": "string",
+        "description": "Dow Jones Newswires formal name of the event. Dow Jones recommends displaying this name when available instead of the description because this name is a concise version of it."
+       },
+       "event_url": {
+        "type": "string",
+        "description": "Optional. URL where the source provides additional event-related information."
+       },
+       "event_code": {
+        "type": "string",
+        "description": "Event's type code. Valid values: ICC-Corporate events, IEP-Economic and Political events, IDC-Treasury Auctions."
+       },
+       "index_codes": {
+        "type": "array",
+        "description": "Optional. Dow Jones Newswires compliant news codes for related tracking indexes, such as Dow Jones Industrial Average.",
+        "items": {
+         "type": "string"
+        }
+       },
+       "series_code": {
+        "type": "string",
+        "description": "Optional. Defines repeatable events. For Economic events, the combination of a series code and a country code uniquely identifies a repeatable event for which Dow Jones provides numeric data."
+       },
+       "event_class": {
+        "type": "string",
+        "description": "Optional. Provides further details about the event type, which category the event belongs to."
+       },
+       "geo_location": {
+        "type": "object",
+        "properties": {
+         "latitude": {
+          "type": "string"
+         },
+         "longitude": {
+          "type": "string"
+         }
+        },
+        "description": "Optional. Longitude and latitude where event occurs."
+       },
+       "social_media": {
+        "type": "array",
+        "description": "Optional. Social media URLs that provide event-related information.",
+        "items": {
+         "type": "object",
+         "properties": {
+          "type": {
+           "type": "string"
+          },
+          "description": {
+           "type": "string"
+          },
+          "scope": {
+           "type": "string"
+          },
+          "link": {
+           "type": "string"
+          }
+         }
+        }
+       },
+       "influencers": {
+        "type": "array",
+        "description": "Optional. Names of persons of economic importance who may be associated with the event. Frequently, it is empty.",
+        "items": {
+         "type": "object",
+         "properties": {
+          "code": {
+           "type": "string"
+          },
+          "name": {
+           "type": "string"
+          }
+         }
+        }
+       },
+       "details": {
+        "type": "array",
+        "description": "Optional. Additional information about the event.",
+        "items": {
+         "$ref": "#/components/schemas/eventDetailModel"
+        }
+       },
+       "ecoinfo": {
+        "$ref": "#/components/schemas/ecoinfo"
+       },
+       "generic_query": {
+        "type": "string"
+       },
+       "dj_query": {
+        "type": "string"
+       }
+      }
+     },
+     "links": {
+      "type": "object",
+      "properties": {
+       "self": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "ipoEventDataModel": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string"
+     },
+     "id": {
+      "type": "integer",
+      "description": "Number that uniquely identifies an event."
+     },
+     "attributes": {
+      "type": "object",
+      "properties": {
+       "ipo_event_id": {
+        "type": "integer"
+       },
+       "provider": {
+        "type": "string"
+       },
+       "status": {
+        "type": "string"
+       },
+       "issuer_name": {
+        "type": "string"
+       },
+       "issuer_country": {
+        "type": "object",
+        "properties": {
+         "dj_region_code": {
+          "type": "string"
+         },
+         "value": {
+          "type": "string"
+         }
+        }
+       },
+       "exchange": {
+        "type": "object",
+        "properties": {
+         "exchange_country": {
+          "type": "string"
+         },
+         "mic": {
+          "type": "string"
+         },
+         "name": {
+          "type": "string"
+         },
+         "value": {
+          "type": "string"
+         }
+        }
+       },
+       "isin": {
+        "type": "string"
+       },
+       "ticker": {
+        "type": "string"
+       },
+       "dj_symbol": {
+        "type": "object",
+        "properties": {
+         "active": {
+          "type": "string"
+         },
+         "value": {
+          "type": "string"
+         }
+        }
+       },
+       "sec_description": {
+        "type": "string"
+       },
+       "par_value": {
+        "type": "object",
+        "properties": {
+         "currency": {
+          "type": "string"
+         },
+         "value": {
+          "type": "number"
+         }
+        }
+       },
+       "sec_type": {
+        "type": "string"
+       },
+       "lot_size": {
+        "type": "string"
+       },
+       "sub_period_from": {
+        "type": "string"
+       },
+       "sub_period_to": {
+        "type": "string"
+       },
+       "min_shares_offered": {
+        "type": "string"
+       },
+       "max_shares_offered": {
+        "type": "string"
+       },
+       "shares_outstanding": {
+        "type": "string"
+       },
+       "share_price_lowest": {
+        "type": "object",
+        "properties": {
+         "currency": {
+          "type": "string"
+         },
+         "value": {
+          "type": "number"
+         }
+        }
+       },
+       "share_price_highest": {
+        "type": "object",
+        "properties": {
+         "currency": {
+          "type": "string"
+         },
+         "value": {
+          "type": "number"
+         }
+        }
+       },
+       "proposed_price": {
+        "type": "object",
+        "properties": {
+         "currency": {
+          "type": "string"
+         },
+         "value": {
+          "type": "number"
+         }
+        }
+       },
+       "initial_price": {
+        "type": "object",
+        "properties": {
+         "currency": {
+          "type": "string"
+         },
+         "value": {
+          "type": "number"
+         }
+        }
+       },
+       "total_offer_size": {
+        "type": "object",
+        "properties": {
+         "currency": {
+          "type": "string"
+         },
+         "value": {
+          "type": "number"
+         }
+        }
+       },
+       "initial_traded_volume": {
+        "type": "number"
+       },
+       "underwriter": {
+        "type": "string"
+       },
+       "deal_type": {
+        "type": "string"
+       },
+       "law_firm": {
+        "type": "string"
+       },
+       "industry": {
+        "type": "string"
+       },
+       "first_trading_date": {
+        "type": "string"
+       },
+       "sec_level": {
+        "type": "string"
+       },
+       "notes": {
+        "type": "string"
+       },
+       "ipo_announce_date": {
+        "type": "string"
+       },
+       "transfer_agent": {
+        "type": "string"
+       },
+       "list_date": {
+        "type": "string"
+       }
+      }
+     },
+     "links": {
+      "type": "object",
+      "properties": {
+       "self": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "eventDetailModel": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Index count of the report."
+     },
+     "description": {
+      "type": "string",
+      "description": "Describes the individual data element reported."
+     },
+     "dj_combo_detail": {
+      "type": "string",
+      "description": "Optional. Concise combination of the name of an economic indicator event and a data element name. This combination is useful for single-line calendar display rather than nested elements below their event name."
+     },
+     "importance": {
+      "type": "string",
+      "description": "Optional. Applied to Economic events by the Dow Jones news team. It represents their assessment of the marketplace importance of the specified data element. Valid values: High (H), Medium (M), and Low (L)."
+     },
+     "expected": {
+      "$ref": "#/components/schemas/detailDataValueModel"
+     },
+     "previous": {
+      "$ref": "#/components/schemas/detailDataValueModel"
+     },
+     "actual": {
+      "$ref": "#/components/schemas/detailDataValueModel"
+     },
+     "prior_revised": {
+      "$ref": "#/components/schemas/detailDataValueModel"
+     },
+     "delta": {
+      "$ref": "#/components/schemas/detailDataValueModel"
+     }
+    }
+   },
+   "detailDataValueModel": {
+    "type": "object",
+    "properties": {
+     "value": {
+      "type": "string",
+      "description": "Value reported"
+     },
+     "last_modified_date_time": {
+      "type": "string",
+      "description": "Date and time when the value was provided."
+     },
+     "unit": {
+      "type": "string",
+      "description": "Optional. Multiplier for the units of the reported value. If the unit attribute is not present, the data value has a scale of one. Valid values: K–Thousands, M–Millions, B–Billions, T–Trillions."
+     },
+     "is_pct": {
+      "type": "boolean",
+      "description": "Optional. Whether the reported value is a percentage. This information is useful to appropriately format the value displayed."
+     },
+     "is_chg": {
+      "type": "boolean",
+      "description": "Optional. Whether the reported value represents a net change. This information is useful to appropriately format the net change displayed. Unlike regular positive values, users may wish to prepend a “+” sign to positive net changes. Valid values indicate: true–The value represents a net change and is not simply a positive value. false–The value simply represents a positive value and is not a net change."
+     },
+     "currency": {
+      "type": "string",
+      "description": "Optional. Where applicable, monetary unit of the reported value. Valid currency codes can be found using the taxonomy currency endpoint."
+     },
+     "source": {
+      "type": "string",
+      "description": "Optional. Source of information. Valid values: Factset, Kantar, and Null (stands for Dow Jones)."
+     }
+    }
+   },
+   "postParams": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "object",
+      "properties": {
+       "id": {
+        "type": "string",
+        "description": "Servive name",
+        "example": "CalendarEvents"
+       },
+       "type": {
+        "type": "string",
+        "description": "Call name",
+        "example": "Search"
+       },
+       "attributes": {
+        "type": "object",
+        "properties": {
+         "filter": {
+          "$ref": "#/components/schemas/searchCriteria"
+         },
+         "options": {
+          "$ref": "#/components/schemas/options"
+         },
+         "page": {
+          "$ref": "#/components/schemas/pagingCriteria"
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "ipoPostParams": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "object",
+      "properties": {
+       "id": {
+        "type": "string",
+        "description": "Service name",
+        "example": "IPOCalendarEvents"
+       },
+       "type": {
+        "type": "string",
+        "description": "Call name",
+        "example": "Search"
+       },
+       "attributes": {
+        "type": "object",
+        "properties": {
+         "filter": {
+          "$ref": "#/components/schemas/ipoSearchCriteria"
+         },
+         "page": {
+          "$ref": "#/components/schemas/pagingCriteria"
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "options": {
+    "type": "object",
+    "properties": {
+     "show_ecoinfo": {
+      "type": "boolean",
+      "description": "Include ecoinfo data as part of event results.",
+      "example": false
+     }
+    }
+   },
+   "searchCriteria": {
+    "type": "object",
+    "properties": {
+     "has_confirmed_events_only": {
+      "type": "boolean",
+      "description": "Include only events whose date and time have been confirmed.",
+      "example": false
+     },
+     "has_key_events_only": {
+      "type": "boolean",
+      "description": "Include only events marked as key events. A key event is a macroeconomic event that has been identified by the Dow Jones News team as having a market impact.",
+      "example": false
+     },
+     "time_specified": {
+      "type": "boolean",
+      "description": "Filter events based on time specified",
+      "example": false
+     },
+     "country": {
+      "type": "array",
+      "description": "ORed list of countries associated with the event (ISO Code). These are countries related to the entity that provides data or sponsorship for the event.",
+      "items": {
+       "type": "string"
+      }
+     },
+     "region": {
+      "type": "array",
+      "description": "ORed list of regions associated with the event (e.g. Asia). These are regions related to the entity that provides data or sponsorship for the event.",
+      "items": {
+       "type": "string"
+      }
+     },
+     "event_code": {
+      "type": "array",
+      "description": "Event type: ICC-Corporate, IEP-Economic and Political, IDC-Treasury Auctions.",
+      "items": {
+       "type": "string",
+       "enum": [
+        "ICC",
+        "IEP",
+        "IDC"
+       ]
+      }
+     },
+     "series_code": {
+      "type": "array",
+      "description": "ORed list of event series codes (e.g. TrdBal-Trade Balance, ImptPx-Import Prices).",
+      "items": {
+       "minLength": 2,
+       "type": "string"
+      }
+     },
+     "event_class": {
+      "type": "array",
+      "description": "Event classification (e.g. IEP_STAT for Statistics and Economic Indicators, ICC_ANL Earnings/Analysts Calls and GMs).",
+      "items": {
+       "type": "string",
+       "enum": [
+        "ICC_ANAL",
+        "ICC_ANL",
+        "ICC_BRO",
+        "ICC_DIV",
+        "ICC_EARN",
+        "ICC_EXC",
+        "ICC_IND",
+        "ICC_IPO",
+        "ICC_OTH",
+        "ICC_SPLT",
+        "IEP_CAN",
+        "IEP_CONF",
+        "IEP_DEBT",
+        "IEP_EVT",
+        "IEP_HOL",
+        "IEP_IND",
+        "IEP_POL",
+        "IEP_STAT",
+        "IEP_US",
+        "IDC_ACT",
+        "IDC_ISS"
+       ]
+      }
+     },
+     "start_date": {
+      "type": "string",
+      "description": "Earliest date and time of interest (yyyy-MM-dd'T'HH:mm:ss'Z').",
+      "format": "date-time",
+      "example": "2017-01-01T00:00:00.000Z"
+     },
+     "end_date": {
+      "type": "string",
+      "description": "Latest date and time of interest (yyyy-MM-dd'T'HH:mm:ss'Z').",
+      "format": "date-time",
+      "example": "2017-02-01T00:00:00.000Z"
+     },
+     "ticker": {
+      "type": "array",
+      "description": "ORed list of Newswires codes.",
+      "items": {
+       "type": "string"
+      }
+     },
+     "isin": {
+      "type": "array",
+      "description": "ORed list of ISINs.",
+      "items": {
+       "type": "string"
+      }
+     },
+     "event_language": {
+      "type": "string",
+      "description": "Translate descriptions to this language if translation is available; otherwise, show English version.",
+      "enum": [
+       "",
+       "zh",
+       "ar",
+       "it",
+       "de",
+       "jp"
+      ]
+     }
+    }
+   },
+   "ipoSearchCriteria": {
+    "type": "object",
+    "properties": {
+     "date_type": {
+      "type": "array",
+      "description": "Date.",
+      "items": {
+       "type": "string",
+       "enum": [
+        "CREATED_DATE",
+        "UPDATED_DATE",
+        "PUBLISH_DATE"
+       ]
+      }
+     },
+     "start_date": {
+      "type": "string",
+      "description": "Earliest date and time of interest (yyyy-MM-dd'T'HH:mm:ss'Z').",
+      "format": "date-time",
+      "example": "2017-01-01T00:00:00.000Z"
+     },
+     "end_date": {
+      "type": "string",
+      "description": "Latest date and time of interest (yyyy-MM-dd'T'HH:mm:ss'Z').",
+      "format": "date-time",
+      "example": "2017-02-01T00:00:00.000Z"
+     },
+     "issuer_country": {
+      "type": "array",
+      "description": "ORed list of Issuer Countries.",
+      "items": {
+       "type": "string"
+      }
+     },
+     "exchange_country": {
+      "type": "array",
+      "description": "ORed list of Exchange Countries.",
+      "items": {
+       "type": "string"
+      }
+     },
+     "exchange": {
+      "type": "array",
+      "description": "ORed list of Exchanges.",
+      "items": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "pagingCriteria": {
+    "type": "object",
+    "properties": {
+     "limit": {
+      "type": "integer",
+      "description": "Maximum number of results for a single request, max size 1000.",
+      "example": 40
+     },
+     "offset": {
+      "type": "integer",
+      "description": "The event ID used serves as a reference point to request additional events (beyond what was returned according to the limit value).  The responses do not include the reference ID.  To page backward to get older events, make the event number negative.",
+      "example": 0
+     }
+    }
+   },
+   "eventFilterModel": {
+    "type": "object",
+    "properties": {
+     "meta": {
+      "required": [
+       "count"
+      ],
+      "type": "object",
+      "properties": {
+       "count": {
+        "type": "integer"
+       }
+      }
+     },
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/eventFilterDataModel"
+      }
+     },
+     "links": {
+      "required": [
+       "self"
+      ],
+      "type": "object",
+      "properties": {
+       "self": {
+        "type": "string"
+       }
+      }
+     },
+     "error": {
+      "$ref": "#/components/schemas/error"
+     }
+    }
+   },
+   "eventFilterCountryModel": {
+    "type": "object",
+    "properties": {
+     "meta": {
+      "required": [
+       "count"
+      ],
+      "type": "object",
+      "properties": {
+       "count": {
+        "type": "integer"
+       }
+      }
+     },
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/eventFilterCountryDataModel"
+      }
+     },
+     "links": {
+      "required": [
+       "self"
+      ],
+      "type": "object",
+      "properties": {
+       "self": {
+        "type": "string"
+       }
+      }
+     },
+     "error": {
+      "$ref": "#/components/schemas/error"
+     }
+    }
+   },
+   "eventFilterExchangeModel": {
+    "type": "object",
+    "properties": {
+     "meta": {
+      "required": [
+       "count"
+      ],
+      "type": "object",
+      "properties": {
+       "count": {
+        "type": "integer"
+       }
+      }
+     },
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/eventFilterExchangeDataModel"
+      }
+     },
+     "links": {
+      "required": [
+       "self"
+      ],
+      "type": "object",
+      "properties": {
+       "self": {
+        "type": "string"
+       }
+      }
+     },
+     "error": {
+      "$ref": "#/components/schemas/error"
+     }
+    }
+   },
+   "eventFilterRegionModel": {
+    "type": "object",
+    "properties": {
+     "meta": {
+      "required": [
+       "count"
+      ],
+      "type": "object",
+      "properties": {
+       "count": {
+        "type": "integer"
+       }
+      }
+     },
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/eventFilterRegionDataModel"
+      }
+     },
+     "links": {
+      "required": [
+       "self"
+      ],
+      "type": "object",
+      "properties": {
+       "self": {
+        "type": "string"
+       }
+      }
+     },
+     "error": {
+      "$ref": "#/components/schemas/error"
+     }
+    }
+   },
+   "eventFilterDataModel": {
+    "required": [
+     "attributes",
+     "id",
+     "type"
+    ],
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string"
+     },
+     "id": {
+      "type": "string"
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/eventFilterDataFilterItemModel"
+     }
+    }
+   },
+   "eventFilterCountryDataModel": {
+    "required": [
+     "attributes",
+     "id",
+     "type"
+    ],
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string"
+     },
+     "id": {
+      "type": "string"
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/eventFilterCountryDataFilterItemModel"
+     }
+    }
+   },
+   "eventFilterExchangeDataModel": {
+    "required": [
+     "attributes",
+     "type"
+    ],
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string"
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/eventFilterExchangeDataFilterItemModel"
+     }
+    }
+   },
+   "eventFilterRegionDataModel": {
+    "required": [
+     "attributes",
+     "id",
+     "type"
+    ],
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string"
+     },
+     "id": {
+      "type": "string"
+     },
+     "attributes": {
+      "$ref": "#/components/schemas/eventFilterRegionDataFilterItemModel"
+     }
+    }
+   },
+   "eventFilterDataFilterItemModel": {
+    "required": [
+     "description"
+    ],
+    "type": "object",
+    "properties": {
+     "code": {
+      "type": "string",
+      "description": ""
+     },
+     "description": {
+      "type": "string",
+      "description": "only included in country item"
+     },
+     "event_code": {
+      "type": "string",
+      "description": ""
+     },
+     "iso_country": {
+      "type": "string",
+      "description": ""
+     },
+     "country_description": {
+      "type": "string",
+      "description": ""
+     },
+     "ecoinfo": {
+      "$ref": "#/components/schemas/ecoinfo"
+     }
+    }
+   },
+   "eventFilterCountryDataFilterItemModel": {
+    "required": [
+     "description"
+    ],
+    "type": "object",
+    "properties": {
+     "dj_code": {
+      "type": "string",
+      "description": "only included in country item"
+     },
+     "iso_code": {
+      "type": "string"
+     },
+     "titan_code": {
+      "type": "string"
+     },
+     "description": {
+      "type": "string",
+      "description": "only included in country item"
+     }
+    }
+   },
+   "eventFilterExchangeDataFilterItemModel": {
+    "type": "object",
+    "properties": {
+     "mic": {
+      "type": "string"
+     },
+     "name": {
+      "type": "string"
+     },
+     "country_code": {
+      "type": "string"
+     },
+     "country_description": {
+      "type": "string"
+     }
+    }
+   },
+   "eventFilterRegionDataFilterItemModel": {
+    "required": [
+     "description"
+    ],
+    "type": "object",
+    "properties": {
+     "code": {
+      "type": "string",
+      "description": ""
+     },
+     "description": {
+      "type": "string",
+      "description": "only included in country item"
+     },
+     "countries": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/eventFilterCountryDataFilterItemModel"
+      }
+     }
+    }
+   },
+   "ecoinfo": {
+    "type": "object",
+    "properties": {
+     "frequency": {
+      "type": "string"
+     },
+     "meaning": {
+      "type": "string"
+     },
+     "definition": {
+      "type": "string"
+     }
+    }
+   },
+   "error": {
+    "type": "object",
+    "properties": {
+     "code": {
+      "type": "integer",
+      "format": "int32"
+     },
+     "message": {
+      "type": "string"
+     },
+     "fields": {
+      "type": "string"
+     }
+    }
+   },
+   "eventsPostParams": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "required": [
+       "attributes",
+       "id",
+       "type"
+      ],
+      "type": "object",
+      "properties": {
+       "id": {
+        "type": "string",
+        "description": "Servive name",
+        "example": "CalendarEvents"
+       },
+       "type": {
+        "type": "string",
+        "description": "Call name",
+        "example": "Events"
+       },
+       "attributes": {
+        "required": [
+         "event_id"
+        ],
+        "type": "object",
+        "properties": {
+         "event_id": {
+          "type": "array",
+          "description": "Number that uniquely identifies an event.",
+          "items": {
+           "type": "string"
+          }
+         },
+         "has_updates": {
+          "type": "boolean",
+          "description": "Search only for events that have been updated."
+         },
+         "last_updated_time": {
+          "type": "string",
+          "description": "Search only for events that have been updated since this date and time, (yyyy-mm-dd'T'hh:mm:ss'Z').",
+          "format": "date-time",
+          "example": "2018-01-01T00:00:00.000Z"
+         },
+         "event_language": {
+          "type": "string",
+          "description": "Translate descriptions to this language if translation is available; otherwise, show English version.",
+          "enum": [
+           "",
+           "zh",
+           "ar",
+           "it",
+           "de",
+           "jp"
+          ]
+         }
+        }
+       },
+       "options": {
+        "$ref": "#/components/schemas/options"
+       }
+      }
+     }
+    }
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "type": "http",
+    "scheme": "bearer",
+    "bearerFormat": "JWT"
+   }
+  }
+ }
+}

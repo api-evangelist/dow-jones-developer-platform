@@ -1,0 +1,41 @@
+generated: '2026-09-07'
+method: searched
+source: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_soap and
+  its FDK interface pages (200), https://developer.dowjones.com/documents/site-docs-newswires_apis-certification_process
+  (200)
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+note: Dow Jones publishes a beta/test PLATFORM for the Factiva Developer Kit, not a test-mode key scheme.
+  There are no test-vs-live key prefixes, no hosted test tokens, no test clocks and no fixture/trigger
+  tooling anywhere in the documentation. Certification runs against the production environment, which
+  makes the beta platform a build-time environment rather than a rehearsal surface for an agent.
+environments:
+- name: FDK beta platform
+  type: test
+  base_url: http://developer.beta.factiva.com
+  applies_to:
+  - Factiva Developer Kit SOAP services
+  statement: When preparing for certification and developing your application, the Target URL should initially
+    point to our test environment/beta platform at http://developer.beta.factiva.com.
+  source: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_soap
+  note: Documented over plain HTTP; the SOAP FDK HTTP protocol itself is deprecated as of 2023-05-25 with
+    HTTPS as the migration path.
+- name: Customer Production Environment
+  type: production
+  base_url: https://api.dowjones.com
+  note: The technical certification process runs against production, checking application transactions
+    against system logs.
+  source: https://developer.dowjones.com/documents/site-docs-newswires_apis-certification_process
+test_credentials:
+  self_serve: false
+  note: Credentials for either environment come from a Dow Jones representative; there is no test key
+    a developer can mint.
+test_data:
+  published: false
+  note: No test cards, sample accounts or fixture datasets are published — the surface is news and screening
+    content, not payments.
+test_clocks:
+  available: false
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

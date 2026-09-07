@@ -1,0 +1,153 @@
+generated: '2026-09-07'
+method: derived
+source: 4xx/5xx responses and error schemas of the nine OpenAPI documents in openapi/_original/, cross-read
+  against https://developer.dowjones.com/documents/site-docs-getting_started-versioning-unsupported_apis
+  (200)
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+format: json-api-errors
+note: 'Dow Jones does not publish a single error reference page; this catalogue is derived from the response
+  definitions the nine harvested contracts actually declare. Two envelopes coexist: a JSON:API-shaped
+  errors[] array across the DNA/Factiva/Newswires contracts, and RFC 7807/9457 ProblemDetails in RiskCenter
+  Third Party Platform API 0.1. No application-level error code registry is published — the code field
+  exists in the envelope but its values are not enumerated.'
+envelopes:
+- name: DNA errors array
+  shape:
+    errors:
+    - code: string — error code
+      title: string — error class summary message
+      status: string — HTTP status code
+      detail: string — error detail for this instance
+      meta:
+        id: string
+        type: string
+  required:
+  - code
+  - status
+  - title
+  schemas:
+  - error
+  - errors
+  - errorMeta
+  apis:
+  - Company News Radar API
+  - Newswires Real-Time API
+  - Newswires Content API
+  - Factiva Content API
+  - Factiva Newsletters API
+  - Calendar Live API
+- name: RFC 7807 / RFC 9457 Problem Details
+  shape:
+    type: string
+    title: string
+    status: integer
+    detail: string
+    instance: string
+    extensions: object
+  schemas:
+  - ProblemDetails
+  apis:
+  - RiskCenter Third Party Platform API 0.1
+  note: Declared as a component schema; the responses themselves are typed as the vendor media type rather
+    than application/problem+json.
+- name: RiskCenter ErrorResponseModel
+  shape:
+    errors:
+    - title: string
+      status: string
+      code: string
+      detail: string
+  schemas:
+  - ErrorModel
+  - ErrorResponseModel
+  - ErrorModelV2
+  - ErrorResponseModelV2
+  apis:
+  - RiskCenter Third Party Platform API 0.1
+  - RiskCenter Third Party Platform API 0.2
+- name: Top Stories JsonApiError / Problem
+  shape:
+    title: string
+    id: string — the requested DRN ID
+    detail: string
+    status: string — enumerated .NET status name
+  schemas:
+  - JsonApiError
+  - Problem
+  apis:
+  - Newswires Top Stories API
+  note: status is a string enum of .NET HttpStatusCode names (badRequest, unauthorized, …) rather than
+    an integer.
+problem_types:
+- status: 400
+  title: Bad Request
+  detail: Incorrect parameters.
+  remediation: Validate the request body/query against the operation schema before retrying.
+  apis:
+  - Calendar Live API
+  - Company News Radar API
+  - Factiva Content API
+  - Factiva Newsletters API
+  - Newswires Content API
+  - Newswires Real-Time API
+  - RiskCenter Third Party Platform API 0.1
+  - RiskCenter Third Party Platform API 0.2
+- status: 401
+  title: Unauthorized
+  detail: Unauthorized access / invalid Authorization.
+  remediation: Bearer tokens expire after 3600 seconds. Re-run the documented two-step exchange (refresh_token,
+    then the jwt-bearer assertion with scope "openid pib") and retry; do not reuse the intermediate token.
+  apis:
+  - Calendar Live API
+  - Company News Radar API
+  - Factiva Content API
+  - Newswires Content API
+  - Newswires Real-Time API
+  - RiskCenter Third Party Platform API 0.1
+  - RiskCenter Third Party Platform API 0.2
+- status: 404
+  title: Not Found
+  detail: No resource found for the request (article, alert, collection, third party or list).
+  remediation: Confirm the DRN/ref/id exists and that the account is entitled to it — entitlement failures
+    surface as 404 on content endpoints.
+  apis:
+  - all nine
+- status: 406
+  title: Not Acceptable
+  detail: The requested API version is no longer supported, or Accept header negotiation failed.
+  remediation: Send a supported version in the Accept custom media type, or omit it to receive the Dow
+    Jones default version.
+  source: https://developer.dowjones.com/documents/site-docs-getting_started-versioning-unsupported_apis
+  apis:
+  - all DNA-versioned resources
+- status: 409
+  title: Conflict
+  detail: The third party or property already exists, or the state transition is not allowed.
+  remediation: Read the current resource before retrying; there is no idempotency key to make the create
+    safe to repeat.
+  apis:
+  - RiskCenter Third Party Platform API 0.1
+  - RiskCenter Third Party Platform API 0.2
+- status: 500
+  title: Internal Server Error
+  detail: Server encountered an unexpected condition.
+  remediation: Retry with backoff; no Retry-After is returned.
+  apis:
+  - Calendar Live API
+  - Company News Radar API
+  - Factiva Content API
+  - Factiva Newsletters API
+  - Newswires Top Stories API
+- status: 503
+  title: Service Unavailable
+  detail: Server is currently unable to handle the request.
+  remediation: Retry with exponential backoff.
+  apis:
+  - Calendar Live API
+  - Company News Radar API
+  - Factiva Content API
+  - Factiva Newsletters API
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

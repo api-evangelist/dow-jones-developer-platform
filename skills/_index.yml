@@ -1,0 +1,67 @@
+generated: '2026-09-07'
+method: generated
+source: grounded in the operationIds and paths of the nine OpenAPI documents in openapi/_original/ and
+  the Dow Jones developer portal documentation corpus fetched 2026-09-07. Dow Jones publishes no skills/
+  or AGENTS.md of its own (searched developer.dowjones.com and the 91-repo dowjones GitHub organization).
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+skill_count: 6
+skills:
+- name: dow-jones-authenticate
+  file: skills/dow-jones-authenticate.md
+  description: The two-step OAuth exchange every other skill depends on.
+  api: Dow Jones Identity Service
+  operations: []
+- name: dow-jones-newswires-realtime-search
+  file: skills/dow-jones-newswires-realtime-search.md
+  description: Search real-time Newswires content by DJN taxonomy expression and retrieve linked articles.
+  api: Dow Jones Newswires Real-Time API
+  operations:
+  - POST /content/realtime/search
+  - GetRealtimeLinkedContentByDrn
+- name: dow-jones-top-stories-sync
+  file: skills/dow-jones-top-stories-sync.md
+  description: Scheduled collection sync inside the published 15-minute polling ceiling.
+  api: Newswires Top Stories API
+  operations:
+  - GetCollectionIdList
+  - GetContentCollectionByRef
+  - GetContentByRef
+- name: dow-jones-calendar-events-search
+  file: skills/dow-jones-calendar-events-search.md
+  description: Resolve calendar taxonomy codes, then search economic, corporate and IPO events.
+  api: Calendar Live API
+  operations:
+  - GET /calendar-events/search
+  - POST /calendar-events/search
+  - GET /calendar-events/{id}
+  - GET /calendar-ipo-events/search
+- name: dow-jones-factiva-newsletters
+  file: skills/dow-jones-factiva-newsletters.md
+  description: Walk newsletters to editions over the JSON:API surface.
+  api: DJ Factiva Newsletters API
+  operations:
+  - NewslettersRead
+  - NewsletterReadById
+  - EditionsRead
+  - EditionReadById
+- name: dow-jones-riskcenter-third-party-onboarding
+  file: skills/dow-jones-riskcenter-third-party-onboarding.md
+  description: The one write flow on this platform — with the no-idempotency and no-undo hazards stated
+    up front.
+  api: RiskCenter Third Party Platform API 0.2
+  operations:
+  - GetBusinessUnits
+  - GetGroups
+  - GetFields
+  - GetThirdParties
+  - PostThirdParty
+  - PutBatchThirdPartyProperties
+  - PostMonitoredEntities
+  - GetThirdParty
+  - PatchThirdParty
+  - DeleteThirdParty
+  - DeleteMonitoredEntities
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

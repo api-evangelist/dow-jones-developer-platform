@@ -1,0 +1,41 @@
+generated: '2026-09-07'
+method: searched
+source: https://www.dowjones.com/iso-certification/ (200), https://www.dowjones.com/dow-jones-risk-compliance-quality-reports/
+  (200), https://www.dowjones.com/security/ (200)
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+trust_center:
+  single_portal: false
+  note: Dow Jones publishes no consolidated trust portal; the compliance evidence is spread across three
+    pages on dowjones.com.
+certifications:
+- name: ISO/IEC 27001
+  status: certified
+  scope: Dow Jones Inc. Information Security Management System covering Risk & Compliance, Factiva and
+    Newsplus
+  auditor: Schellman
+  cycle: 3-year certification with annual surveillance audits
+  evidence: https://www.dowjones.com/iso-certification/
+  certificate: published on the ISO certification page
+- name: ISAE 3000 (Revised) — Sanctions Assurance
+  status: annual independent assurance report
+  scope: design, implementation and operating effectiveness of Dow Jones Risk & Compliance controls over
+    the sanctions platform and data set
+  auditor: PricewaterhouseCoopers LLP
+  availability: to customers on request
+  evidence: https://www.dowjones.com/dow-jones-risk-compliance-quality-reports/
+- name: Dow Jones Risk & Compliance Annual Data Quality Report
+  status: published annually (internally produced)
+  availability: to customers on request
+  evidence: https://www.dowjones.com/dow-jones-risk-compliance-quality-reports/
+not_claimed:
+- SOC 2
+- PCI DSS
+- HIPAA
+- FedRAMP
+not_claimed_note: None of these is claimed on any Dow Jones page found in this pass; absence recorded
+  rather than inferred.
+vulnerability_disclosure: security/dow-jones-developer-platform-vulnerability-disclosure.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

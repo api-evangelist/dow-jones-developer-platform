@@ -1,0 +1,142 @@
+generated: '2026-09-07'
+method: searched
+source: https://developer.dowjones.com/documents/site-docs-getting_started-versioning (200), https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies
+  (200) and its five child pages
+provider: Dow Jones Developer Platform
+providerId: dow-jones-developer-platform
+versioning:
+  style: custom media type in the Accept request header
+  format: application/vnd.<company>.<product>[.<resource>][.v_X.Y][+<suffix>]
+  example: 'Accept: application/vnd.dowjones.dna.content.v_1.2+json'
+  response_header: 'X-DJ-Media-Type: dowjones.dna; resource=<resource>; version=<X.Y>; format=json'
+  wildcards: v_1.* selects the latest minor within major 1
+  default_when_omitted: a Dow Jones-chosen default version that is NOT guaranteed to be the latest
+  unsupported_version_status: 406
+  maturity_levels:
+  - level: alpha
+    naming: v1alpha1
+    support: may be dropped at any time without notice; zero releases of deprecation notice
+  - level: beta
+    naming: v2beta3
+    support: supported for three months or three releases, whichever is longer
+  - level: stable
+    naming: vX (minor changes as v1.3)
+    support: supported for 18 months or three releases, whichever is longer
+  docs: https://developer.dowjones.com/documents/site-docs-getting_started-versioning-api_versioning
+deprecation:
+  policy_published: true
+  docs: https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies
+  factiva_policy: https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies-factiva_deprecation_policy
+  rfc8594:
+    implemented: true
+    headers:
+    - 'Deprecation: version="1.2"'
+    - 'Sunset: Fri, 11 Nov 2020 23:59:59 GMT'
+    - 'Link: <...>; rel="deprecation"'
+    note: Dow Jones documents returning RFC 8594 Sunset plus a Deprecation version attribute and a rel="deprecation"
+      Link on deprecated resource representations.
+    docs: https://developer.dowjones.com/documents/site-docs-getting_started-versioning-deprecated_apis
+  rules:
+  - Rule 1 — a deprecated API is supported for no less than 18 months / three releases (stable), three
+    months / three releases (beta), zero releases (alpha).
+  - Rule 2 — an API version is not deprecated until a replacement at least as stable is released.
+  - Rule 3 — a specific API must be called at least once every 90 days or Dow Jones may deprecate it.
+  announcement_channels:
+  - Factiva Integration Suite deprecation announcement mailing list
+  - Monthly product update, at least six months before end of support (Risk & Compliance)
+  schedules:
+  - suite: Factiva Integration Suite
+    url: https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies-factiva_deprecation_schedule
+    entries:
+    - technology: Widgets Web Library
+      deprecated: '2025-01-16'
+      sunset: '2025-03-16'
+    - technology: SOAP FDK v3.x Phase 2
+      deprecated: '2023-05-25'
+      sunset: '2023-08-23'
+    - technology: SOAP FDK HTTP protocol
+      deprecated: '2023-05-25'
+      sunset: null
+      migration: Use HTTPS
+    - technology: REST HTTP protocol
+      deprecated: '2023-05-25'
+      sunset: null
+      migration: Use HTTPS
+    - technology: Simplified APIs Beta
+      deprecated: '2021-10-05'
+      sunset: '2022-07-01'
+      migration: REST 2.0
+    - technology: All SOAP APIs v1.x
+      deprecated: '2021-05-01'
+      sunset: '2022-07-01'
+      migration: SOAP APIs v3.x
+    - technology: All SOAP APIs v2.x
+      deprecated: '2021-05-01'
+      sunset: '2022-07-01'
+      migration: SOAP APIs v3.x
+    - technology: Factiva Select HTTP protocol
+      deprecated: '2021-10-01'
+      sunset: null
+      migration: Use HTTPS
+    - technology: Factiva Select FTP protocol
+      deprecated: '2021-10-01'
+      sunset: null
+      migration: Use SFTP
+    - technology: SOAP FDK v3.x Phase 1
+      deprecated: '2022-10-29'
+      sunset: '2023-01-27'
+    - technology: REST 1.0 Phase 1
+      deprecated: '2023-03-07'
+      sunset: '2023-06-05'
+    - technology: REST 2.0 Phase 1
+      deprecated: '2023-03-07'
+      sunset: '2023-06-05'
+  - suite: Newswires Integration Suite
+    url: https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies-newswires_deprecation_schedule
+    entries:
+    - technology: Realtime Headlines Services REST 1 / REST 2
+      deprecated: '2022-03-31'
+      sunset: '2022-07-31'
+      migration: Newswires Real-Time API
+  - suite: Risk & Compliance APIs
+    url: https://developer.dowjones.com/documents/site-docs-getting_started-deprecation_and_sunset_policies-risk_and_compliance_apis_deprecation_schedule
+    entries:
+    - technology: Search API v1.0
+      sunset: '2025-07-31'
+      migration: Migrate to v2.5 or greater
+    - technology: Search API v1.1
+      sunset: '2025-11-10'
+      migration: Migrate to v2.5 or greater
+    - technology: Profiles API v1.0
+      sunset: '2025-11-10'
+      migration: Migrate to v2.7 or greater
+  deprecated_operations_in_spec:
+    count: 0
+    note: 'No operation in the nine harvested OpenAPI documents carries deprecated: true. Dow Jones tracks
+      deprecation at the product/version level on the schedule pages instead.'
+status_page:
+  published: false
+  note: No Dow Jones status page found. dowjones.statuspage.io answers 200 but the body is the Atlassian
+    Statuspage marketing site, not a Dow Jones page — a soft-200, so no StatusPage pointer is asserted.
+    status.dowjones.com does not resolve.
+  evidence:
+  - url: https://dowjones.statuspage.io
+    status: 200
+    verdict: soft-200 (Atlassian marketing page)
+  - url: https://status.dowjones.com
+    status: 0
+    verdict: DNS does not resolve
+sla:
+  published: false
+  note: No public SLA document. Support and availability terms are contractual; the developer portal routes
+    to a support ticket form.
+  support: https://developer.dowjones.com/support-ticket-create
+certification:
+  required: true
+  note: Dow Jones requires a technical AND business certification pass against the production environment
+    before an application built on the Newswires or Risk & Compliance APIs may serve users. This is a
+    lifecycle gate, not just documentation.
+  docs: https://developer.dowjones.com/documents/site-docs-newswires_apis-certification_process
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
