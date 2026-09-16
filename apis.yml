@@ -66,11 +66,12 @@ apis:
   - Financial
   - Market Data
   - News
-  description: The Dow Jones Developer Platform is the umbrella developer surface for Dow Jones' news,
-    business intelligence, market data and risk-and-compliance products. It covers three API families
-    — Factiva, Newswires and Risk & Compliance — plus the file-based feed products that sit alongside
-    them, and a shared OAuth 2.0 identity service at accounts.dowjones.com. Individual contracts are registered
-    as separate API entries in this record.
+  description: >-
+    The Dow Jones Developer Platform is the umbrella developer surface for Dow Jones' news, business intelligence,
+    market data and risk-and-compliance products. It covers three API families — Factiva, Newswires and
+    Risk & Compliance — plus the file-based feed products that sit alongside them, and a shared OAuth
+    2.0 identity service at accounts.dowjones.com. Individual contracts are registered as separate API
+    entries in this record.
   properties:
   - type: Documentation
     url: https://developer.dowjones.com/documents/site-docs-getting_started
@@ -79,178 +80,30 @@ apis:
   - type: GettingStarted
     url: https://developer.dowjones.com/documents/site-docs-getting_started-quick_start
   - type: Authentication
-    url: https://developer.dowjones.com/documents/site-docs-getting_started-sessions_and_authentication
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-getting_started-sessions_and_authentication
   - type: Postman
     url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
   - type: X-EventSurface
     url: asyncapi/dow-jones-developer-platform-factiva-streams-events.yml
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dow-jones-developer-platform.png
-- aid: dow-jones-developer-platform:newswires-real-time-api
-  name: Dow Jones Newswires Real-Time API
-  humanURL: https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
-  baseURL: https://api.dowjones.com
-  tags:
-  - News
-  - Market Data
-  - Real Time
-  - Search
-  description: Search Dow Jones Newswires real-time content with DJN taxonomy expressions and retrieve
-    the linked articles by Dow Jones Resource Name. The same endpoints serve the standard Real-Time licence
-    and the Real-Time for GenAI licence, the latter with a controlled delay. Published as OpenAPI 3.0.1
-    with a POST search operation, a single-article retrieval operation, and a companion search-realtime
-    content resource.
-  properties:
-  - type: OpenAPI
-    url: openapi/dow-jones-developer-platform-newswires-real-time-api-openapi.yml
-  - type: OpenAPI
-    url: openapi/dow-jones-developer-platform-newswires-content-api-openapi.yml
-  - type: OpenAPI
-    url: openapi/dow-jones-developer-platform-company-news-radar-api-openapi.yml
-  - type: Overlay
-    url: overlays/dow-jones-developer-platform-newswires-real-time-api-overlay.yaml
-  - type: Overlay
-    url: overlays/dow-jones-developer-platform-newswires-content-api-overlay.yaml
-  - type: Overlay
-    url: overlays/dow-jones-developer-platform-company-news-radar-api-overlay.yaml
-  - type: Documentation
-    url: https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
-  - type: AgentSkill
-    url: skills/dow-jones-newswires-realtime-search.md
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dow-jones-developer-platform.png
-- aid: dow-jones-developer-platform:newswires-top-stories-api
-  name: Dow Jones Newswires Top Stories API
-  humanURL: https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
-  baseURL: https://api.dowjones.com
-  tags:
-  - News
-  - Market Data
-  - Content
-  description: Retrieve the entitled Dow Jones content collections and the articles inside them. This
-    is the one Newswires flow Dow Jones permits an application to run on a schedule rather than on human
-    action, subject to a published 15-minute polling ceiling. Published as OpenAPI 3.0.1 with three operations.
-  properties:
-  - type: OpenAPI
-    url: openapi/dow-jones-developer-platform-newswires-top-stories-api-openapi.yml
-  - type: Overlay
-    url: overlays/dow-jones-developer-platform-newswires-top-stories-api-overlay.yaml
-  - type: Documentation
-    url: https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
-  - type: AgentSkill
-    url: skills/dow-jones-top-stories-sync.md
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dow-jones-developer-platform.png
-- aid: dow-jones-developer-platform:calendar-live-api
-  name: Dow Jones Calendar Live API
-  humanURL: https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
-  baseURL: https://api.dowjones.com
-  tags:
-  - Financial
-  - Market Data
-  - Events
-  - Calendar
-  description: Search and retrieve Dow Jones economic, corporate, treasury and IPO calendar events, with
-    a full set of taxonomy endpoints for the event codes, event classes, series codes, countries, regions,
-    languages, currencies and exchanges the filters accept. Published as OpenAPI 3.0.1 version 1.1.9 with
-    29 operations — the largest single REST contract Dow Jones publishes.
-  properties:
-  - type: OpenAPI
-    url: openapi/dow-jones-developer-platform-calendar-live-api-openapi.yml
-  - type: Overlay
-    url: overlays/dow-jones-developer-platform-calendar-live-api-overlay.yaml
-  - type: Documentation
-    url: https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
-  - type: AgentSkill
-    url: skills/dow-jones-calendar-events-search.md
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dow-jones-developer-platform.png
-- aid: dow-jones-developer-platform:factiva-content-api
-  name: Factiva Content API
-  humanURL: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
-  baseURL: https://api.dowjones.com/content
-  tags:
-  - News
-  - Business Data
-  - Search
-  - Content
-  description: 'The Factiva content workflow surface: full-text and metadata search across the Factiva
-    archive, reference resolution and binary retrieval, alerts, newsletter editions and NewsPlus collections,
-    plus specialised people, organization, consumer, portfolio and emerging-market search resources. Published
-    as Swagger 2.0 with 16 operations against host api.dowjones.com and base path /content.'
-  properties:
-  - type: OpenAPI
-    url: openapi/dow-jones-developer-platform-factiva-content-api-openapi.yml
-  - type: Overlay
-    url: overlays/dow-jones-developer-platform-factiva-content-api-overlay.yaml
-  - type: Documentation
-    url: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
-  - type: Postman
-    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dow-jones-developer-platform.png
-- aid: dow-jones-developer-platform:factiva-newsletters-api
-  name: Factiva Newsletters API
-  humanURL: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
-  baseURL: https://api.dowjones.com
-  tags:
-  - News
-  - Newsletters
-  - Content
-  description: List the newsletters an account is entitled to, read a newsletter's metadata, and walk
-    its editions. Published as OpenAPI 3.0.2 and the only Dow Jones contract that declares the JSON:API
-    media type application/vnd.api+json on every response.
-  properties:
-  - type: OpenAPI
-    url: openapi/dow-jones-developer-platform-factiva-newsletters-api-openapi.yml
-  - type: Overlay
-    url: overlays/dow-jones-developer-platform-factiva-newsletters-api-overlay.yaml
-  - type: Documentation
-    url: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
-  - type: AgentSkill
-    url: skills/dow-jones-factiva-newsletters.md
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dow-jones-developer-platform.png
-- aid: dow-jones-developer-platform:riskcenter-third-party-api
-  name: Dow Jones RiskCenter Third Party Platform API
-  humanURL: https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
-  baseURL: https://api-thirdparty.riskcenter.dowjones.com
-  tags:
-  - Risk and Compliance
-  - Screening
-  - Third Party Risk
-  - Compliance
-  description: 'Manage third parties, their properties and their monitored entities inside Dow Jones RiskCenter
-    — the third-party risk-management product in the Risk & Compliance family. This is the only write
-    surface Dow Jones publishes a contract for: it creates, updates and deletes third parties and monitored
-    entities and uploads files. Two beta versions are published side by side, 0.1 (19 operations) and
-    0.2 (22 operations, adding file upload/download and field-list lookups). It runs on its own host with
-    its own token endpoint at auth-thirdparty.riskcenter.dowjones.com, not on api.dowjones.com.'
-  properties:
-  - type: OpenAPI
-    url: openapi/dow-jones-developer-platform-riskcenter-third-party-api-0-2-openapi.yml
-  - type: OpenAPI
-    url: openapi/dow-jones-developer-platform-riskcenter-third-party-api-0-1-openapi.yml
-  - type: Overlay
-    url: overlays/dow-jones-developer-platform-riskcenter-third-party-api-0-2-overlay.yaml
-  - type: Overlay
-    url: overlays/dow-jones-developer-platform-riskcenter-third-party-api-0-1-overlay.yaml
-  - type: Documentation
-    url: https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
-  - type: AgentSkill
-    url: skills/dow-jones-riskcenter-third-party-onboarding.md
-  - type: Postman
-    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dow-jones-developer-platform.png
+  image: >-
+    https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dow-jones-developer-platform.png
 - aid: dow-jones-developer-platform:factiva-developer-kit
   name: Factiva Developer Kit (SOAP)
-  humanURL: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_soap
+  humanURL: >-
+    https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_soap
   baseURL: https://developer.factiva.com/3.16
   tags:
   - News
   - Business Data
   - SOAP
   - Search
-  description: 'The original Factiva integration surface, in production since 2000 and still published:
-    an XML/SOAP 1.1 web-service suite exposing Search, Retrieval, Taxonomy, Membership, Registration,
-    Newsstand, Track, CompanyProfile and MarketData. Dow Jones serves the WSDL 1.1 contract publicly at
-    developer.factiva.com/3.16/wsdl/, covering 208 operations across nine SOAP ports. Version 3.x is current;
-    SOAP v1.x and v2.x were sunset in July 2022 and parts of 3.x have been retired in two deprecation
-    phases.'
+  description: >-
+    The original Factiva integration surface, in production since 2000 and still published: an XML/SOAP
+    1.1 web-service suite exposing Search, Retrieval, Taxonomy, Membership, Registration, Newsstand, Track,
+    CompanyProfile and MarketData. Dow Jones serves the WSDL 1.1 contract publicly at developer.factiva.com/3.16/wsdl/,
+    covering 208 operations across nine SOAP ports. Version 3.x is current; SOAP v1.x and v2.x were sunset
+    in July 2022 and parts of 3.x have been retired in two deprecation phases.
   properties:
   - type: WSDL
     url: wsdl/dow-jones-developer-platform-factiva-fdk-3-16-objects.wsdl
@@ -261,11 +114,692 @@ apis:
   - type: WSDL
     url: wsdl/dow-jones-developer-platform-factiva-fdk-3-16-parsers-bindings.wsdl
   - type: Documentation
-    url: https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_soap
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_soap
   - type: Sandbox
     url: sandbox/dow-jones-developer-platform-sandbox.yml
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dow-jones-developer-platform.png
+  image: >-
+    https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dow-jones-developer-platform.png
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-businessunit-api
+  name: Dow Jones Developer Platform Business Unit API
+  description: >-
+    The BusinessUnit API from Dow Jones Developer Platform — 1 operation(s) for businessunit.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - BusinessUnit
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-businessunit-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-calendar-events-api
+  name: Dow Jones Developer Platform Calendar Events API
+  description: >-
+    The Calendar Events API from Dow Jones Developer Platform — 4 operation(s) for calendar events.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - Calendar Events
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-calendar-events-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-calendar-taxonomy-api
+  name: Dow Jones Developer Platform Calendar Taxonomy API
+  description: >-
+    The Calendar Taxonomy API from Dow Jones Developer Platform — 15 operation(s) for calendar taxonomy.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - Calendar Taxonomy
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-calendar-taxonomy-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-content-api
+  name: Dow Jones Developer Platform Content API
+  description: The Content API from Dow Jones Developer Platform — 17 operation(s) for content.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-content-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-content-search-api
+  name: Dow Jones Developer Platform Content Search API
+  description: >-
+    The Content Search API from Dow Jones Developer Platform — 1 operation(s) for content search.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - Content Search
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-content-search-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-contentcollections-api
+  name: Dow Jones Developer Platform Content Collections API
+  description: >-
+    The ContentCollections API from Dow Jones Developer Platform — 2 operation(s) for contentcollections.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - ContentCollections
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-contentcollections-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-default-api
+  name: Dow Jones Developer Platform Default API
+  description: Default section
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - Default
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-default-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-editions-api
+  name: Dow Jones Developer Platform Editions API
+  description: The Editions API from Dow Jones Developer Platform — 2 operation(s) for editions.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - Editions
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-editions-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-field-api
+  name: Dow Jones Developer Platform Field API
+  description: The Field API from Dow Jones Developer Platform — 2 operation(s) for field.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - Field
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-field-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-file-api
+  name: Dow Jones Developer Platform File API
+  description: The File API from Dow Jones Developer Platform — 2 operation(s) for file.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - File
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-file-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-group-api
+  name: Dow Jones Developer Platform Group API
+  description: The Group API from Dow Jones Developer Platform — 1 operation(s) for group.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - Group
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-group-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-ipo-calendar-events-api
+  name: Dow Jones Developer Platform IPO Calendar Events API
+  description: >-
+    The IPO Calendar Events API from Dow Jones Developer Platform — 2 operation(s) for ipo calendar events.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - IPO Calendar Events
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-ipo-calendar-events-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-ipo-calendar-taxonomy-api
+  name: Dow Jones Developer Platform IPO Calendar Taxonomy API
+  description: >-
+    The IPO Calendar Taxonomy API from Dow Jones Developer Platform — 4 operation(s) for ipo calendar
+    taxonomy.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - IPO Calendar Taxonomy
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-ipo-calendar-taxonomy-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-list-api
+  name: Dow Jones Developer Platform List API
+  description: The List API from Dow Jones Developer Platform — 2 operation(s) for list.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - List
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-list-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-newsletters-api
+  name: Dow Jones Developer Platform Newsletters API
+  description: The Newsletters API from Dow Jones Developer Platform — 2 operation(s) for newsletters.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - Newsletters
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-newsletters-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-process-api
+  name: Dow Jones Developer Platform Process API
+  description: The Process API from Dow Jones Developer Platform — 1 operation(s) for process.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - Process
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-process-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-thirdparty-api
+  name: Dow Jones Developer Platform Third Party API
+  description: The ThirdParty API from Dow Jones Developer Platform — 2 operation(s) for thirdparty.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - ThirdParty
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-thirdparty-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-thirdpartyproperties-api
+  name: Dow Jones Developer Platform Third Party Properties API
+  description: >-
+    The ThirdPartyProperties API from Dow Jones Developer Platform — 3 operation(s) for thirdpartyproperties.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - ThirdPartyProperties
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-thirdpartyproperties-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-thirdpartyscreening-api
+  name: Dow Jones Developer Platform Third Party Screening API
+  description: >-
+    The ThirdPartyScreening API from Dow Jones Developer Platform — 2 operation(s) for thirdpartyscreening.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - ThirdPartyScreening
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-thirdpartyscreening-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
+- aid: dow-jones-developer-platform:dow-jones-developer-platform-thirdpartyscreeningtypes-api
+  name: Dow Jones Developer Platform Third Party Screening Types API
+  description: >-
+    The ThirdPartyScreeningTypes API from Dow Jones Developer Platform — 2 operation(s) for thirdpartyscreeningtypes.
+  humanURL: https://developer.dowjones.com/
+  baseURL: https://api.dowjones.com
+  tags:
+  - ThirdPartyScreeningTypes
+  properties:
+  - type: OpenAPI
+    url: openapi/dow-jones-developer-platform-thirdpartyscreeningtypes-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_real_time_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_newswires_top_stories_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-newswires_apis-dow_jones_financial_calendars_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-rest_api_reference
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-factiva-products
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-factiva_apis-factiva_workflow_apis_rest-factiva_newsletters_api
+  - type: Documentation
+    url: >-
+      https://developer.dowjones.com/documents/site-docs-risk_and_compliance_apis-third_party_api
+  - type: Postman
+    url: https://www.postman.com/dj-cse/workspace/devportal-r-c-products
 common:
+- type: Overlay
+  url: overlays/dow-jones-developer-platform-newswires-real-time-api-overlay.yaml
+- type: Overlay
+  url: overlays/dow-jones-developer-platform-newswires-content-api-overlay.yaml
+- type: Overlay
+  url: overlays/dow-jones-developer-platform-company-news-radar-api-overlay.yaml
+- type: AgentSkill
+  url: skills/dow-jones-newswires-realtime-search.md
+- type: Overlay
+  url: overlays/dow-jones-developer-platform-newswires-top-stories-api-overlay.yaml
+- type: AgentSkill
+  url: skills/dow-jones-top-stories-sync.md
+- type: Overlay
+  url: overlays/dow-jones-developer-platform-calendar-live-api-overlay.yaml
+- type: AgentSkill
+  url: skills/dow-jones-calendar-events-search.md
+- type: Overlay
+  url: overlays/dow-jones-developer-platform-factiva-content-api-overlay.yaml
+- type: Overlay
+  url: overlays/dow-jones-developer-platform-factiva-newsletters-api-overlay.yaml
+- type: AgentSkill
+  url: skills/dow-jones-factiva-newsletters.md
+- type: Overlay
+  url: overlays/dow-jones-developer-platform-riskcenter-third-party-api-0-2-overlay.yaml
+- type: Overlay
+  url: overlays/dow-jones-developer-platform-riskcenter-third-party-api-0-1-overlay.yaml
+- type: AgentSkill
+  url: skills/dow-jones-riskcenter-third-party-onboarding.md
 - type: Website
   url: https://www.dowjones.com
 - type: DeveloperPortal
