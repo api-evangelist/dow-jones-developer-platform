@@ -256,7 +256,8 @@ apis:
   description: Default section
   humanURL: https://developer.dowjones.com/
   baseURL: https://api.dowjones.com
-  tags:
+  tags: []
+  tags_raw:
   - Default
   properties:
   - type: OpenAPI
@@ -548,6 +549,8 @@ apis:
   humanURL: https://developer.dowjones.com/
   baseURL: https://api.dowjones.com
   tags:
+  - Processes
+  tags_raw:
   - Process
   properties:
   - type: OpenAPI
