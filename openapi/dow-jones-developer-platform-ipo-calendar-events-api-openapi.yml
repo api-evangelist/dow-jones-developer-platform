@@ -1,0 +1,470 @@
+openapi: 3.2.0
+info:
+  title: Calendar Live IPO Calendar Events API
+  description: Calendar Live API
+  version: 1.1.9
+servers:
+- url: https://api.dowjones.com/
+tags:
+- name: IPO Calendar Events
+paths:
+  /calendar-ipo-events/{ids}:
+    get:
+      tags:
+      - IPO Calendar Events
+      summary: Searches for IPO events given a comma-separated list of unique identifiers
+      parameters:
+      - name: ids
+        in: path
+        description: Comma-separated list of unique identifiers corresponding to the IPO events you want to retrieve.
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ipoEventsModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getCalendarIpoEventsByIds
+      x-operation-id-source: derived
+  /calendar-ipo-events/search:
+    get:
+      tags:
+      - IPO Calendar Events
+      summary: Searches for specific IPO events based on the given filter
+      parameters:
+      - name: filter[date_type]
+        in: query
+        description: Date type.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            minLength: 0
+            type: string
+            enum:
+            - PUBLISH_DATE
+            - CREATED_DATE
+            - UPDATED_DATE
+            - LIST_DATE
+      - name: filter[start_date]
+        in: query
+        description: Earliest date and time of interest, yyyy-MM-dd'T'HH:mm:ss'Z'.
+        schema:
+          type: string
+          format: date-time
+      - name: filter[end_date]
+        in: query
+        description: Latest date and time of interest, yyyy-MM-dd'T'HH:mm:ss'Z'.
+        schema:
+          type: string
+          format: date-time
+      - name: filter[issuer_country]
+        in: query
+        description: ORed list of issuer countries associated with the IPO event (e.g. BH-Bahrain, AZ-Azerbaijan). These are countries related to the entity that provides data or sponsorship for the  IPO event. Use ISO codes and separate them with new lines when providing multiple codes.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            minLength: 2
+            type: string
+      - name: filter[exchange_country]
+        in: query
+        description: ORed list of exchange countries associated with the IPO event (e.g. BH-Bahrain, AZ-Azerbaijan). These are countries related to the entity that provides data or sponsorship for the  IPO event. Use ISO codes and separate them with new lines when providing multiple codes.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            minLength: 2
+            type: string
+      - name: filter[exchange]
+        in: query
+        description: ORed list of exchange associated with the IPO event (e.g. BH-Bahrain, AZ-Azerbaijan). Use ISO codes (MIC) and separate them with new lines when providing multiple codes.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            minLength: 2
+            type: string
+      - name: page[limit]
+        in: query
+        description: Maximum number of results for a single request, max size 1000.
+        schema:
+          type: integer
+      - name: page[offset]
+        in: query
+        description: Paging offset, the IPO event ID given serves as a reference point to request additional events (beyond what was returned according to the limit value). The response does not include the reference ID. To page backward to get older events, make the event number negative.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ipoEventsModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getCalendarIpoEventsSearch
+      x-operation-id-source: derived
+    post:
+      tags:
+      - IPO Calendar Events
+      summary: Searches for specific IPO events based on the given filters
+      requestBody:
+        description: Criteria
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ipoPostParams'
+        required: false
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ipoEventsModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      x-codegen-request-body-name: Criteria
+      operationId: postCalendarIpoEventsSearch
+      x-operation-id-source: derived
+components:
+  schemas:
+    error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        fields:
+          type: string
+    ipoEventDataModel:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: integer
+          description: Number that uniquely identifies an event.
+        attributes:
+          type: object
+          properties:
+            ipo_event_id:
+              type: integer
+            provider:
+              type: string
+            status:
+              type: string
+            issuer_name:
+              type: string
+            issuer_country:
+              type: object
+              properties:
+                dj_region_code:
+                  type: string
+                value:
+                  type: string
+            exchange:
+              type: object
+              properties:
+                exchange_country:
+                  type: string
+                mic:
+                  type: string
+                name:
+                  type: string
+                value:
+                  type: string
+            isin:
+              type: string
+            ticker:
+              type: string
+            dj_symbol:
+              type: object
+              properties:
+                active:
+                  type: string
+                value:
+                  type: string
+            sec_description:
+              type: string
+            par_value:
+              type: object
+              properties:
+                currency:
+                  type: string
+                value:
+                  type: number
+            sec_type:
+              type: string
+            lot_size:
+              type: string
+            sub_period_from:
+              type: string
+            sub_period_to:
+              type: string
+            min_shares_offered:
+              type: string
+            max_shares_offered:
+              type: string
+            shares_outstanding:
+              type: string
+            share_price_lowest:
+              type: object
+              properties:
+                currency:
+                  type: string
+                value:
+                  type: number
+            share_price_highest:
+              type: object
+              properties:
+                currency:
+                  type: string
+                value:
+                  type: number
+            proposed_price:
+              type: object
+              properties:
+                currency:
+                  type: string
+                value:
+                  type: number
+            initial_price:
+              type: object
+              properties:
+                currency:
+                  type: string
+                value:
+                  type: number
+            total_offer_size:
+              type: object
+              properties:
+                currency:
+                  type: string
+                value:
+                  type: number
+            initial_traded_volume:
+              type: number
+            underwriter:
+              type: string
+            deal_type:
+              type: string
+            law_firm:
+              type: string
+            industry:
+              type: string
+            first_trading_date:
+              type: string
+            sec_level:
+              type: string
+            notes:
+              type: string
+            ipo_announce_date:
+              type: string
+            transfer_agent:
+              type: string
+            list_date:
+              type: string
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+    pagingCriteria:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Maximum number of results for a single request, max size 1000.
+          example: 40
+        offset:
+          type: integer
+          description: The event ID used serves as a reference point to request additional events (beyond what was returned according to the limit value).  The responses do not include the reference ID.  To page backward to get older events, make the event number negative.
+          example: 0
+    ipoPostParams:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Service name
+              example: IPOCalendarEvents
+            type:
+              type: string
+              description: Call name
+              example: Search
+            attributes:
+              type: object
+              properties:
+                filter:
+                  $ref: '#/components/schemas/ipoSearchCriteria'
+                page:
+                  $ref: '#/components/schemas/pagingCriteria'
+    ipoSearchCriteria:
+      type: object
+      properties:
+        date_type:
+          type: array
+          description: Date.
+          items:
+            type: string
+            enum:
+            - CREATED_DATE
+            - UPDATED_DATE
+            - PUBLISH_DATE
+        start_date:
+          type: string
+          description: Earliest date and time of interest (yyyy-MM-dd'T'HH:mm:ss'Z').
+          format: date-time
+          example: '2017-01-01T00:00:00.000Z'
+        end_date:
+          type: string
+          description: Latest date and time of interest (yyyy-MM-dd'T'HH:mm:ss'Z').
+          format: date-time
+          example: '2017-02-01T00:00:00.000Z'
+        issuer_country:
+          type: array
+          description: ORed list of Issuer Countries.
+          items:
+            type: string
+        exchange_country:
+          type: array
+          description: ORed list of Exchange Countries.
+          items:
+            type: string
+        exchange:
+          type: array
+          description: ORed list of Exchanges.
+          items:
+            type: string
+    ipoEventsModel:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ipoEventDataModel'
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            total_count:
+              type: integer
+            offset:
+              type: object
+              properties:
+                prev:
+                  type: integer
+                next:
+                  type: integer
+            attribution:
+              type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

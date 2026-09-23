@@ -1,0 +1,30 @@
+# Front Door AI Index — dow-jones-developer-platform — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: dow-jones-developer-platform
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.dowjones.com
+  final_host: www.dowjones.com
+  ownership: shared
+  owner: dow-jones
+  shares_host_with:
+  - dow-jones
+  - factiva
+  inherited_from: null
+  verdict: scored
+  score: null
+  host_score: 9
+  density: null
+  words: 1418
+  tiers:
+    agentic: 0
+    core: 9
+    model: 0
+  ambiguous: 20
+  top_terms:
+    intelligence: 19
+    AI: 7
+    gen ai: 2
+    smart: 1

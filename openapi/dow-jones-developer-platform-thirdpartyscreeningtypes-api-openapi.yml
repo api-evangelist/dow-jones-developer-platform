@@ -1,0 +1,113 @@
+openapi: 3.2.0
+info:
+  title: RiskCenter Third Party Platform API 0.2 Third Party…
+  version: v0.2-beta
+servers:
+- url: https://api-thirdparty.riskcenter.dowjones.com/
+tags:
+- name: ThirdPartyScreeningTypes
+paths:
+  /third-parties/monitored-entities/id-types:
+    get:
+      tags:
+      - ThirdPartyScreeningTypes
+      summary: Retrieves all monitored entity id types
+      operationId: GetMonitoredEntitiesIdTypes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ResponseScreeningIdType'
+        '401':
+          description: Unauthorized
+      security:
+      - oauth2: []
+  /third-parties/monitored-entities/types:
+    get:
+      tags:
+      - ThirdPartyScreeningTypes
+      summary: Retrieves all monitored entity types
+      operationId: GetMonitoredEntitiesEntityTypes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ResponseScreeningType'
+        '401':
+          description: Unauthorized
+      security:
+      - oauth2: []
+components:
+  schemas:
+    ResponseScreeningType:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseDataScreeningType'
+          description: ''
+      additionalProperties: false
+      description: ''
+    IdType:
+      type: object
+      properties:
+        name:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResponseDataScreeningIdType:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+        attributes:
+          $ref: '#/components/schemas/IdType'
+        type:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResponseScreeningIdType:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseDataScreeningIdType'
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResponseDataScreeningType:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+        attributes:
+          $ref: '#/components/schemas/Type'
+        type:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    Type:
+      type: object
+      properties:
+        name:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+  securitySchemes:
+    oauth2:
+      type: apiKey
+      description: 'Standard Authorization header using the Bearer scheme. Example: "bearer {token}"'
+      name: Authorization
+      in: header

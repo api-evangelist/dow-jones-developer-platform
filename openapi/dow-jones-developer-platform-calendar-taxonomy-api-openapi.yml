@@ -1,0 +1,966 @@
+openapi: 3.2.0
+info:
+  title: Calendar Live Calendar Taxonomy API
+  description: Calendar Live API
+  version: 1.1.9
+servers:
+- url: https://api.dowjones.com/
+tags:
+- name: Calendar Taxonomy
+paths:
+  /taxonomy/calendar-events/countries:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Retrieves the list of available country codes
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterCountryModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsCountries
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/countries/{code}:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Searches for the data of an individual country by its ISO code
+      parameters:
+      - name: code
+        in: path
+        description: ISO country code (e.g. IN-India, BR-Brazil).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterCountryModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsCountriesByCode
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/regions:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Retrieves the list of available region codes and the countries each clusters
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterRegionModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsRegions
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/regions/{code}:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Searches for the data of an individual region by its code
+      parameters:
+      - name: code
+        in: path
+        description: Region code (e.g. G10, EMEM, EU).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterRegionModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsRegionsByCode
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/languages:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Retrieves the list of available language codes
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsLanguages
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/languages/{code}:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Searches for the data of an individual language by its code
+      parameters:
+      - name: code
+        in: path
+        description: Language code (e.g. ar-Arabic, de-German).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsLanguagesByCode
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/eventcodes:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Retrieves the list of available event type codes
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsEventcodes
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/eventcodes/{code}:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Searches for the data of an individual event type by its code
+      parameters:
+      - name: code
+        in: path
+        description: 'Event type code: ICC-Corporate events, IEP-Economic and Political events, IDC-Treasury Auctions.'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsEventcodesByCode
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/seriescodes:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Retrieves the list of available event series codes
+      parameters:
+      - name: filter[event_code]
+        in: query
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            minLength: 0
+            type: string
+            enum:
+            - ICC
+            - IEP
+            - IDC
+      - name: filter[country]
+        in: query
+        description: Include only events from these countries (ISO Code)
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            minLength: 2
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsSeriescodes
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/seriescodes/{code}:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Searches for the data of an individual event series by its code
+      parameters:
+      - name: code
+        in: path
+        description: Event series code, which enables searching for historical and upcoming repeatable events (e.g. TrdBal-Trade Balance, ImptPx-Import Prices).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsSeriescodesByCode
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/eventclass:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Retrieves the list of available event class codes (subclassification of events)
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsEventclass
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/eventclass/{code}:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Searches for the data of an individual event class by its code
+      parameters:
+      - name: code
+        in: path
+        description: Event class code that provides a single classification of the event (e.g. IEP_STAT-Statistics and Economic Indicators, ICC_ANL-Earnings/Analysts Calls and GMs).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsEventclassByCode
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/eventclass/eventcode/{eventcode}:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Searches for the list of event classes by event type code
+      parameters:
+      - name: eventcode
+        in: path
+        description: 'Event type code: ICC-Corporate events, IEP-Economic and Political events, IDC-Treasury Auctions.'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsEventclassEventcodeByEventcode
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/currency:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Retrieves the list of available currency codes
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsCurrency
+      x-operation-id-source: derived
+  /taxonomy/calendar-events/currency/{code}:
+    get:
+      tags:
+      - Calendar Taxonomy
+      summary: Searches for the data of an individual currency by its code
+      parameters:
+      - name: code
+        in: path
+        description: Currency code (e.g. BRE-Brazilian Cruzeiro, BGN-Bulgarian Lev).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarEventsCurrencyByCode
+      x-operation-id-source: derived
+components:
+  schemas:
+    eventFilterRegionModel:
+      type: object
+      properties:
+        meta:
+          required:
+          - count
+          type: object
+          properties:
+            count:
+              type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/eventFilterRegionDataModel'
+        links:
+          required:
+          - self
+          type: object
+          properties:
+            self:
+              type: string
+        error:
+          $ref: '#/components/schemas/error'
+    ecoinfo:
+      type: object
+      properties:
+        frequency:
+          type: string
+        meaning:
+          type: string
+        definition:
+          type: string
+    eventFilterModel:
+      type: object
+      properties:
+        meta:
+          required:
+          - count
+          type: object
+          properties:
+            count:
+              type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/eventFilterDataModel'
+        links:
+          required:
+          - self
+          type: object
+          properties:
+            self:
+              type: string
+        error:
+          $ref: '#/components/schemas/error'
+    eventFilterCountryDataFilterItemModel:
+      required:
+      - description
+      type: object
+      properties:
+        dj_code:
+          type: string
+          description: only included in country item
+        iso_code:
+          type: string
+        titan_code:
+          type: string
+        description:
+          type: string
+          description: only included in country item
+    eventFilterRegionDataFilterItemModel:
+      required:
+      - description
+      type: object
+      properties:
+        code:
+          type: string
+          description: ''
+        description:
+          type: string
+          description: only included in country item
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/eventFilterCountryDataFilterItemModel'
+    error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        fields:
+          type: string
+    eventFilterDataFilterItemModel:
+      required:
+      - description
+      type: object
+      properties:
+        code:
+          type: string
+          description: ''
+        description:
+          type: string
+          description: only included in country item
+        event_code:
+          type: string
+          description: ''
+        iso_country:
+          type: string
+          description: ''
+        country_description:
+          type: string
+          description: ''
+        ecoinfo:
+          $ref: '#/components/schemas/ecoinfo'
+    eventFilterRegionDataModel:
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/eventFilterRegionDataFilterItemModel'
+    eventFilterDataModel:
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/eventFilterDataFilterItemModel'
+    eventFilterCountryModel:
+      type: object
+      properties:
+        meta:
+          required:
+          - count
+          type: object
+          properties:
+            count:
+              type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/eventFilterCountryDataModel'
+        links:
+          required:
+          - self
+          type: object
+          properties:
+            self:
+              type: string
+        error:
+          $ref: '#/components/schemas/error'
+    eventFilterCountryDataModel:
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/eventFilterCountryDataFilterItemModel'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

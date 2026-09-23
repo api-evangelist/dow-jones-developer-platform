@@ -1,0 +1,111 @@
+openapi: 3.2.0
+info:
+  title: RiskCenter Third Party Platform API 0.2 Business Unit API
+  version: v0.2-beta
+servers:
+- url: https://api-thirdparty.riskcenter.dowjones.com/
+tags:
+- name: Business Unit
+paths:
+  /business-units:
+    get:
+      tags:
+      - Business Unit
+      summary: Retrieves all business units
+      operationId: GetBusinessUnits
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ResponseBusinessUnit'
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad Request
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    BusinessUnit:
+      type: object
+      properties:
+        name:
+          type: string
+          description: ''
+        parent_id:
+          type:
+          - string
+          - 'null'
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResponseDataBusinessUnit:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+        attributes:
+          $ref: '#/components/schemas/BusinessUnit'
+        type:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    ErrorResponseModelV2:
+      type: object
+      properties:
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ErrorModelV2'
+          description: ''
+      additionalProperties: false
+      description: Updated Error Response Model
+    ErrorModelV2:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: ''
+          format: int32
+        code:
+          type: integer
+          description: ''
+          format: int32
+        title:
+          type:
+          - string
+          - 'null'
+          description: ''
+        detail:
+          type:
+          - string
+          - 'null'
+          description: ''
+      additionalProperties: false
+      description: Updated Error model
+    ResponseBusinessUnit:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseDataBusinessUnit'
+          description: ''
+      additionalProperties: false
+      description: ''
+  securitySchemes:
+    oauth2:
+      type: apiKey
+      description: 'Standard Authorization header using the Bearer scheme. Example: "bearer {token}"'
+      name: Authorization
+      in: header

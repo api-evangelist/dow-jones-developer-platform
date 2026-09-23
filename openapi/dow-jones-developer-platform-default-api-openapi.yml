@@ -1,0 +1,89 @@
+openapi: 3.2.0
+info:
+  version: 2.0.0
+  title: Search realtime Content resource Default API
+  description: You can use this API to perform a search of the realtime Search system, using a Rest Request that provides the same functionality as the PerformContentSearch of the Search SOAP service.
+servers:
+- url: https://api.dowjones.com/search-realtime
+tags:
+- name: Default
+  description: Default section
+paths:
+  /swagger:
+    security:
+    - bearerAuth: []
+    get:
+      tags:
+      - Default
+      summary: Get swagger json
+      description: Use for swagger viewer endpoint
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad Request - Incorrect Parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Not Found - No resource found for the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: Internal Server Error - Server encountered an unexpected condition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: Service Unavailable - Server is currently unable to handle the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      operationId: getSwagger
+      x-operation-id-source: derived
+components:
+  schemas:
+    error:
+      required:
+      - code
+      - status
+      - title
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        title:
+          type: string
+          description: error class summary message
+        status:
+          type: string
+          description: HTTP status code
+        detail:
+          type: string
+          description: error detail about this instance of error
+        meta:
+          $ref: '#/components/schemas/errorMeta'
+    errorMeta:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

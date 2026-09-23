@@ -1,0 +1,322 @@
+openapi: 3.2.0
+info:
+  title: RiskCenter Third Party Platform API 0.2 Third Party…
+  version: v0.2-beta
+servers:
+- url: https://api-thirdparty.riskcenter.dowjones.com/
+tags:
+- name: ThirdPartyProperties
+paths:
+  /third-parties/{thirdpartyid}/properties:
+    get:
+      tags:
+      - ThirdPartyProperties
+      summary: Retrieves all properties for a third party (optional filter)
+      operationId: GetThirdPartyProperties
+      parameters:
+      - name: thirdpartyid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: filter[field_name]
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ResponseProperties'
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad Request
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+        '404':
+          description: Not Found
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+      security:
+      - oauth2: []
+  /third-parties/{thirdpartyid}/properties/{id}:
+    put:
+      tags:
+      - ThirdPartyProperties
+      summary: Updates a property
+      operationId: PutThirdPartyProperties
+      parameters:
+      - name: thirdpartyid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RequestPropertyUpdate'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestPropertyUpdate'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RequestPropertyUpdate'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RequestPropertyUpdate'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ResponseProperty'
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad Request
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+        '409':
+          description: Conflict
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+      security:
+      - oauth2: []
+  /third-parties/{thirdpartyid}/properties/batch-update:
+    put:
+      tags:
+      - ThirdPartyProperties
+      summary: Updates multiple properties
+      operationId: PutBatchThirdPartyProperties
+      parameters:
+      - name: thirdpartyid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RequestPropertyBatchUpdate'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestPropertyBatchUpdate'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RequestPropertyBatchUpdate'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RequestPropertyBatchUpdate'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ResponseProperties'
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad Request
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+        '409':
+          description: Conflict
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    RequestPropertyUpdate:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/RequestDataPropertyUpdate'
+      additionalProperties: false
+      description: ''
+    ResponseDataProperties:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+        attributes:
+          $ref: '#/components/schemas/ThirdPartyProperty'
+        type:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResponseProperties:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseDataProperties'
+          description: ''
+      additionalProperties: false
+      description: ''
+    RequestDataPropertyBatchUpdate:
+      required:
+      - attributes
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+        attributes:
+          $ref: '#/components/schemas/ThirdPartyPropertyUpdate'
+        type:
+          type:
+          - string
+          - 'null'
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResponseProperty:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ResponseDataProperty'
+      additionalProperties: false
+      description: ''
+    ThirdPartyProperty:
+      type: object
+      properties:
+        field_id:
+          type: string
+          description: ''
+        field_name:
+          type:
+          - string
+          - 'null'
+          description: ''
+        value:
+          description: ''
+      additionalProperties: false
+      description: ''
+    ThirdPartyPropertyUpdate:
+      type: object
+      properties:
+        field_id:
+          type: string
+          description: ''
+        field_name:
+          type:
+          - string
+          - 'null'
+          description: ''
+        value:
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResponseDataProperty:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+        attributes:
+          $ref: '#/components/schemas/ThirdPartyProperty'
+        type:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    RequestPropertyBatchUpdate:
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RequestDataPropertyBatchUpdate'
+          description: ''
+      additionalProperties: false
+      description: ''
+    ErrorResponseModelV2:
+      type: object
+      properties:
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ErrorModelV2'
+          description: ''
+      additionalProperties: false
+      description: Updated Error Response Model
+    ErrorModelV2:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: ''
+          format: int32
+        code:
+          type: integer
+          description: ''
+          format: int32
+        title:
+          type:
+          - string
+          - 'null'
+          description: ''
+        detail:
+          type:
+          - string
+          - 'null'
+          description: ''
+      additionalProperties: false
+      description: Updated Error model
+    RequestDataPropertyUpdate:
+      required:
+      - attributes
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+        attributes:
+          $ref: '#/components/schemas/ThirdPartyPropertyUpdate'
+        type:
+          type:
+          - string
+          - 'null'
+          description: ''
+      additionalProperties: false
+      description: ''
+  securitySchemes:
+    oauth2:
+      type: apiKey
+      description: 'Standard Authorization header using the Bearer scheme. Example: "bearer {token}"'
+      name: Authorization
+      in: header

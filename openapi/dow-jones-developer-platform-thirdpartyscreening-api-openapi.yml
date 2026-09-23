@@ -1,0 +1,370 @@
+openapi: 3.2.0
+info:
+  title: RiskCenter Third Party Platform API 0.2 Third Party…
+  version: v0.2-beta
+servers:
+- url: https://api-thirdparty.riskcenter.dowjones.com/
+tags:
+- name: ThirdPartyScreening
+paths:
+  /third-parties/{thirdpartyid}/monitored-entities:
+    get:
+      tags:
+      - ThirdPartyScreening
+      summary: Retrieves all monitored entities for the given third party (optional paging)
+      operationId: GetMonitoredEntities
+      parameters:
+      - name: thirdpartyid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page[limit]
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: page[context]
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ResponseThirdPartyScreeningEntities'
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad Request
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+        '404':
+          description: Not Found
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+      security:
+      - oauth2: []
+    post:
+      tags:
+      - ThirdPartyScreening
+      summary: Adds a new monitored entity
+      operationId: PostMonitoredEntities
+      parameters:
+      - name: thirdpartyid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RequestThirdPartyScreeningCreate'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestThirdPartyScreeningCreate'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RequestThirdPartyScreeningCreate'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RequestThirdPartyScreeningCreate'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ResponseThirdPartyScreeningEntity'
+        '400':
+          description: Bad Request
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+        '401':
+          description: Unauthorized
+      security:
+      - oauth2: []
+  /third-parties/{thirdpartyid}/monitored-entities/{id}:
+    delete:
+      tags:
+      - ThirdPartyScreening
+      summary: Removes a monitored entity
+      operationId: DeleteMonitoredEntities
+      parameters:
+      - name: thirdpartyid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+      security:
+      - oauth2: []
+components:
+  schemas:
+    ResponseMeta:
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/PagingMeta'
+      additionalProperties: false
+      description: ''
+    ResponseDataThirdPartyScreeningEntities:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+        attributes:
+          $ref: '#/components/schemas/ThirdPartyScreeningEntity'
+        type:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResponseLinks:
+      type: object
+      properties:
+        next:
+          type: string
+          description: ''
+        self:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    ThirdPartyScreeningEntity:
+      type: object
+      properties:
+        name:
+          type: string
+          description: ''
+        categories:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: ''
+        record_type:
+          type: string
+          description: ''
+        monitored_entity_type_id:
+          type: string
+          description: ''
+        added:
+          type: string
+          description: ''
+          format: date-time
+        updated:
+          type: string
+          description: ''
+          format: date-time
+        match_results:
+          $ref: '#/components/schemas/ScreeningMatchResults'
+        status:
+          type: string
+          description: ''
+        identification_details:
+          $ref: '#/components/schemas/ScreeningIdentificationDetails'
+        year_of_birth:
+          type:
+          - integer
+          - 'null'
+          description: ''
+          format: int32
+      additionalProperties: false
+      description: ''
+    ResponseThirdPartyScreeningEntities:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseDataThirdPartyScreeningEntities'
+          description: ''
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      additionalProperties: false
+      description: ''
+    RequestDataThirdPartyScreeningCreate:
+      required:
+      - attributes
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ThirdPartyScreeningEntityCreate'
+        type:
+          type:
+          - string
+          - 'null'
+          description: ''
+      additionalProperties: false
+      description: ''
+    ErrorModelV2:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: ''
+          format: int32
+        code:
+          type: integer
+          description: ''
+          format: int32
+        title:
+          type:
+          - string
+          - 'null'
+          description: ''
+        detail:
+          type:
+          - string
+          - 'null'
+          description: ''
+      additionalProperties: false
+      description: Updated Error model
+    ThirdPartyScreeningEntityCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: ''
+        country:
+          type:
+          - string
+          - 'null'
+          description: ''
+        record_type:
+          type: string
+          description: ''
+        monitored_entity_type_id:
+          type: string
+          description: ''
+        identification_details:
+          $ref: '#/components/schemas/ScreeningIdentificationDetails'
+        year_of_birth:
+          type:
+          - integer
+          - 'null'
+          description: ''
+          format: int32
+      additionalProperties: false
+      description: ''
+    ErrorResponseModelV2:
+      type: object
+      properties:
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ErrorModelV2'
+          description: ''
+      additionalProperties: false
+      description: Updated Error Response Model
+    ScreeningMatchResults:
+      type: object
+      properties:
+        pending_review:
+          type: integer
+          description: ''
+          format: int32
+        confirmed_match:
+          type: integer
+          description: ''
+          format: int32
+        under_investigation:
+          type: integer
+          description: ''
+          format: int32
+        cleared_with_updates:
+          type: integer
+          description: ''
+          format: int32
+        cleared_without_updates:
+          type: integer
+          description: ''
+          format: int32
+      additionalProperties: false
+      description: ''
+    ResponseThirdPartyScreeningEntity:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ResponseDataThirdPartyScreeningEntity'
+      additionalProperties: false
+      description: ''
+    ResponseDataThirdPartyScreeningEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+        attributes:
+          $ref: '#/components/schemas/ThirdPartyScreeningEntity'
+        type:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    PagingMeta:
+      type: object
+      properties:
+        context:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    RequestThirdPartyScreeningCreate:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/RequestDataThirdPartyScreeningCreate'
+      additionalProperties: false
+      description: ''
+    ScreeningIdentificationDetails:
+      type: object
+      properties:
+        type:
+          type: integer
+          description: ''
+          format: int32
+        value:
+          type:
+          - string
+          - 'null'
+          description: ''
+      additionalProperties: false
+      description: ''
+  securitySchemes:
+    oauth2:
+      type: apiKey
+      description: 'Standard Authorization header using the Bearer scheme. Example: "bearer {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,370 @@
+openapi: 3.2.0
+info:
+  title: RiskCenter Third Party Platform API 0.2 Field API
+  version: v0.2-beta
+servers:
+- url: https://api-thirdparty.riskcenter.dowjones.com/
+tags:
+- name: Field
+paths:
+  /third-parties/properties/fields:
+    get:
+      tags:
+      - Field
+      summary: Retrieves all fields (optional filter)
+      operationId: GetFields
+      parameters:
+      - name: filter[name]
+        in: query
+        schema:
+          type: string
+      - name: filter[is_key_risk]
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ResponseField'
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad Request
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+      security:
+      - oauth2: []
+  /third-parties/properties/fields/{id}/list:
+    get:
+      tags:
+      - Field
+      summary: Get a List relationship for a Field
+      operationId: GetFieldList
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: language
+        in: query
+        schema:
+          type: string
+          default: en-us
+      responses:
+        '200':
+          description: Success
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ResponseList'
+        '404':
+          description: Not Found
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+        '400':
+          description: Bad Request
+          content:
+            application/vnd.dowjones.dna.risk-third-parties.v_0.2-beta+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModelV2'
+        '401':
+          description: Unauthorized
+      security:
+      - oauth2: []
+components:
+  schemas:
+    RelationshipLinks:
+      type: object
+      properties:
+        self:
+          type: string
+          description: ''
+        related:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    FieldList:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: ''
+        value_column:
+          type:
+          - integer
+          - 'null'
+          description: ''
+          format: int32
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FieldListItem'
+          description: Adhoc list items.
+      additionalProperties: false
+      description: ''
+    Field:
+      type: object
+      properties:
+        table_definition:
+          $ref: '#/components/schemas/TableDefinition'
+        name:
+          type: string
+          description: ''
+        category:
+          type: string
+          description: ''
+        description:
+          type:
+          - string
+          - 'null'
+          description: ''
+        is_key_risk:
+          type: boolean
+          description: ''
+        is_red_flag:
+          type: boolean
+          description: ''
+        is_scored:
+          type: boolean
+          description: ''
+        is_read_only:
+          type: boolean
+          description: ''
+        schema:
+          type: string
+          description: ''
+        list:
+          $ref: '#/components/schemas/FieldList'
+        regex:
+          type:
+          - string
+          - 'null'
+          description: ''
+        input_mask:
+          type:
+          - string
+          - 'null'
+          description: ''
+      additionalProperties: false
+      description: ''
+    ListRow:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+        data:
+          type: array
+          items: {}
+          description: ''
+      additionalProperties: false
+      description: ''
+    RelationshipData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: ''
+        id:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResonseDataFieldRelationships:
+      type: object
+      properties:
+        list:
+          $ref: '#/components/schemas/ReponseRelationship'
+      additionalProperties: false
+      description: ''
+    ResponseDataField:
+      type: object
+      properties:
+        relationships:
+          $ref: '#/components/schemas/ResonseDataFieldRelationships'
+        attributes:
+          $ref: '#/components/schemas/Field'
+        id:
+          type: string
+          description: ''
+        type:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    FieldListItem:
+      type: object
+      properties:
+        value:
+          description: ''
+        text:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResponseField:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseDataField'
+          description: ''
+        links:
+          $ref: '#/components/schemas/ResponseLinks'
+      additionalProperties: false
+      description: ''
+    ReponseRelationship:
+      type: object
+      properties:
+        links:
+          $ref: '#/components/schemas/RelationshipLinks'
+        data:
+          $ref: '#/components/schemas/RelationshipData'
+      additionalProperties: false
+      description: ''
+    ResponseList:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ResponseDataList'
+      additionalProperties: false
+      description: ''
+    List:
+      type: object
+      properties:
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListRow'
+          description: ''
+        columns:
+          type: array
+          items:
+            type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResponseDataList:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+        attributes:
+          $ref: '#/components/schemas/List'
+        type:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+    ErrorResponseModelV2:
+      type: object
+      properties:
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ErrorModelV2'
+          description: ''
+      additionalProperties: false
+      description: Updated Error Response Model
+    Column:
+      type: object
+      properties:
+        title:
+          type:
+          - string
+          - 'null'
+          description: ''
+        schema:
+          type:
+          - string
+          - 'null'
+          description: ''
+        list:
+          $ref: '#/components/schemas/FieldList'
+        regex:
+          type:
+          - string
+          - 'null'
+          description: ''
+        input_mask:
+          type:
+          - string
+          - 'null'
+          description: ''
+        multi_line:
+          type: boolean
+          description: ''
+        required:
+          type: boolean
+          description: ''
+      additionalProperties: false
+      description: ''
+    ErrorModelV2:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: ''
+          format: int32
+        code:
+          type: integer
+          description: ''
+          format: int32
+        title:
+          type:
+          - string
+          - 'null'
+          description: ''
+        detail:
+          type:
+          - string
+          - 'null'
+          description: ''
+      additionalProperties: false
+      description: Updated Error model
+    TableDefinition:
+      type: object
+      properties:
+        columns:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Column'
+          description: ''
+      additionalProperties: false
+      description: ''
+    ResponseLinks:
+      type: object
+      properties:
+        next:
+          type: string
+          description: ''
+        self:
+          type: string
+          description: ''
+      additionalProperties: false
+      description: ''
+  securitySchemes:
+    oauth2:
+      type: apiKey
+      description: 'Standard Authorization header using the Bearer scheme. Example: "bearer {token}"'
+      name: Authorization
+      in: header

@@ -1,0 +1,320 @@
+openapi: 3.2.0
+info:
+  title: Calendar Live IPO Calendar Taxonomy API
+  description: Calendar Live API
+  version: 1.1.9
+servers:
+- url: https://api.dowjones.com/
+tags:
+- name: IPO Calendar Taxonomy
+paths:
+  /taxonomy/calendar-ipo-events/countries:
+    get:
+      tags:
+      - IPO Calendar Taxonomy
+      summary: Retrieves the list of available country codes
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterCountryModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarIpoEventsCountries
+      x-operation-id-source: derived
+  /taxonomy/calendar-ipo-events/countries/{code}:
+    get:
+      tags:
+      - IPO Calendar Taxonomy
+      summary: Searches for the data of an individual country by its ISO code
+      parameters:
+      - name: code
+        in: path
+        description: ISO country code (e.g. IN-India, BR-Brazil).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterCountryModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarIpoEventsCountriesByCode
+      x-operation-id-source: derived
+  /taxonomy/calendar-ipo-events/exchanges:
+    get:
+      tags:
+      - IPO Calendar Taxonomy
+      summary: Retrieves the list of available exchanges
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterExchangeModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarIpoEventsExchanges
+      x-operation-id-source: derived
+  /taxonomy/calendar-ipo-events/exchanges/{code}:
+    get:
+      tags:
+      - IPO Calendar Taxonomy
+      summary: Searches for the data of an exchange by its ISO code (MIC)
+      parameters:
+      - name: code
+        in: path
+        description: ISO exchange code (e.g. XNYS-New York Stock Exchange, XMEX-Mexican Stock Exchange).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventFilterExchangeModel'
+        '400':
+          description: 'Bad Request: Incorrect Parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized Access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: 'Not Found: No resource found for the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: 'Internal Server Error: Server encountered an unexpected condition.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '503':
+          description: 'Service Unavailable: Server is currently unable to handle the request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      security:
+      - bearerAuth: []
+      operationId: getTaxonomyCalendarIpoEventsExchangesByCode
+      x-operation-id-source: derived
+components:
+  schemas:
+    eventFilterExchangeDataModel:
+      required:
+      - attributes
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/eventFilterExchangeDataFilterItemModel'
+    eventFilterCountryDataFilterItemModel:
+      required:
+      - description
+      type: object
+      properties:
+        dj_code:
+          type: string
+          description: only included in country item
+        iso_code:
+          type: string
+        titan_code:
+          type: string
+        description:
+          type: string
+          description: only included in country item
+    error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        fields:
+          type: string
+    eventFilterExchangeModel:
+      type: object
+      properties:
+        meta:
+          required:
+          - count
+          type: object
+          properties:
+            count:
+              type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/eventFilterExchangeDataModel'
+        links:
+          required:
+          - self
+          type: object
+          properties:
+            self:
+              type: string
+        error:
+          $ref: '#/components/schemas/error'
+    eventFilterCountryModel:
+      type: object
+      properties:
+        meta:
+          required:
+          - count
+          type: object
+          properties:
+            count:
+              type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/eventFilterCountryDataModel'
+        links:
+          required:
+          - self
+          type: object
+          properties:
+            self:
+              type: string
+        error:
+          $ref: '#/components/schemas/error'
+    eventFilterExchangeDataFilterItemModel:
+      type: object
+      properties:
+        mic:
+          type: string
+        name:
+          type: string
+        country_code:
+          type: string
+        country_description:
+          type: string
+    eventFilterCountryDataModel:
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/eventFilterCountryDataFilterItemModel'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
